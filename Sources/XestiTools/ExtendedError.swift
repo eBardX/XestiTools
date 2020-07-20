@@ -1,13 +1,17 @@
 // © 2018–2020 J. G. Pusey (see LICENSE.md)
 
+import ArgumentParser
 import XestiText
 
 public protocol ExtendedError: Error, CustomStringConvertible {
+    var exitCode: ExitCode { get }
     var hints: [String] { get }
     var hintsPrefix: String { get }
     var message: String { get }
     var messagePrefix: String { get }
 }
+
+// MARK: -
 
 public extension ExtendedError {
 
@@ -32,15 +36,23 @@ public extension ExtendedError {
         return text
     }
 
+    var exitCode: ExitCode {
+        .failure
+    }
+
     var hints: [String] {
-        return []
+        []
     }
 
     var hintsPrefix: String {
-        return "     - "
+        "     - "
+    }
+
+    var localizedDescription: String {
+        description
     }
 
     var messagePrefix: String {
-        return "Error: "
+        "Error: "
     }
 }

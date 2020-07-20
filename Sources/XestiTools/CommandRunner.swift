@@ -10,8 +10,21 @@ public struct CommandRunner<Command: ParsableCommand> {
 
     public static func run() {
         DispatchQueue.global().async {
-            Command.main()
-            Command.exit()
+            do {
+                var command = try Command.parseAsRoot()
+
+                try command.run()
+            } catch {
+                guard
+                    let extError = error as? ExtendedError
+                    else { Command.exit(withError: error) }
+
+                qprintError("\(extError.messagePrefix)\(extError)")
+
+                Darwin.exit(extError.exitCode.rawValue)
+            }
+
+            Darwin.exit(ExitCode.success.rawValue)
         }
 
         CFRunLoopRun()
