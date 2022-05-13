@@ -4,6 +4,6 @@ import Foundation
 
 public extension String {
     var localized: String {
-        return NSLocalizedString(self, comment: "")
+        NSLocalizedString(self, comment: "")    // swiftlint:disable:this nslocalizedstring_key
     }
 }

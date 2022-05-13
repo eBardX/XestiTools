@@ -23,32 +23,32 @@ public extension Platform {
     // MARK: Public Type Properties
 
     static var current: Platform {
-        #if os(Android)
+#if os(Android)
         return .android
-        #elseif os(Cygwin)
+#elseif os(Cygwin)
         return .cygwin
-        #elseif os(FreeBSD)
+#elseif os(FreeBSD)
         return .freeBSD
-        #elseif os(Haiku)
+#elseif os(Haiku)
         return .haiku
-        #elseif os(iOS)
+#elseif os(iOS)
         return .iOS
-        #elseif os(Linux)
+#elseif os(Linux)
         return .linux
-        #elseif os(macOS) || os(OSX)
+#elseif os(macOS) || os(OSX)
         return .macOS
-        #elseif os(PS4)
+#elseif os(PS4)
         return .ps4
-        #elseif os(tvOS)
+#elseif os(tvOS)
         return .tvOS
-        #elseif os(WASI)
+#elseif os(WASI)
         return .wasi
-        #elseif os(watchOS)
+#elseif os(watchOS)
         return .watchOS
-        #elseif os(Windows)
+#elseif os(Windows)
         return .windows
-        #else
+#else
         return .unknown
-        #endif
+#endif
     }
 }

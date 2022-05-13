@@ -9,10 +9,10 @@ open class BashScriptTask: SubprocessTask {
     public init(scriptPath: Path,
                 arguments: [String],
                 currentDirectoryPath: Path? = nil) {
-        var command = BashScriptTask._quote(scriptPath.absolute.rawValue)
+        var command = Self._quote(scriptPath.absolute.rawValue)
 
         command.append(" ")
-        command.append(arguments.map(BashScriptTask._quote).joined(separator: " "))
+        command.append(arguments.map(Self._quote).joined(separator: " "))
 
         super.init(executablePath: Path("/bin/bash"),
                    arguments: ["-c", command],

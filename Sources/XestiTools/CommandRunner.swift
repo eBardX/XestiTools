@@ -4,7 +4,7 @@ import ArgumentParser
 import CoreFoundation
 import Dispatch
 
-public struct CommandRunner<Command: ParsableCommand> {
+public enum CommandRunner<Command: ParsableCommand> {
 
     // MARK: Public Type Methods
 
@@ -15,9 +15,8 @@ public struct CommandRunner<Command: ParsableCommand> {
 
                 try command.run()
             } catch {
-                guard
-                    let extError = error as? ExtendedError
-                    else { Command.exit(withError: error) }
+                guard let extError = error as? ExtendedError
+                else { Command.exit(withError: error) }
 
                 qprintError("\(extError.messagePrefix)\(extError)")
 

@@ -21,12 +21,11 @@ public final class RegexMatcher {
         let searchRange = NSRange(location: 0,
                                   length: searchString.length)
 
-        guard
-            let result = regex.firstMatch(in: string,
-                                          range: searchRange),
-            result.range == searchRange,
-            result.resultType == .regularExpression
-            else { return nil }
+        guard let result = regex.firstMatch(in: string,
+                                            range: searchRange),
+              result.range == searchRange,
+              result.resultType == .regularExpression
+        else { return nil }
 
         var ranges: [NSRange] = []
 
@@ -35,10 +34,9 @@ public final class RegexMatcher {
         }
 
         return ranges.map { range in
-            guard
-                range.location != NSNotFound,
-                range.length > 0
-                else { return "" }
+            guard range.location != NSNotFound,
+                  range.length > 0
+            else { return "" }
 
             return searchString.substring(with: range)
         }
