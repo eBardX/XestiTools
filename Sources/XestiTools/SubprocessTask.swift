@@ -1,5 +1,6 @@
-// © 2018–2022 J. G. Pusey (see LICENSE.md)
+// © 2018–2023 J. G. Pusey (see LICENSE.md)
 
+#if os(macOS)
 import Foundation
 import XestiPath
 
@@ -84,3 +85,4 @@ open class SubprocessTask: Task {
 
     private let process: Process
 }
+#endif

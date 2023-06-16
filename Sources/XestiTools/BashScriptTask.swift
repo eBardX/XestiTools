@@ -1,5 +1,6 @@
-// © 2020–2022 J. G. Pusey (see LICENSE.md)
+// © 2020–2023 J. G. Pusey (see LICENSE.md)
 
+#if os(macOS)
 import XestiPath
 
 open class BashScriptTask: SubprocessTask {
@@ -31,3 +32,4 @@ open class BashScriptTask: SubprocessTask {
         return result
     }
 }
+#endif
