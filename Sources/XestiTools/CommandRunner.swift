@@ -15,7 +15,7 @@ public enum CommandRunner<Command: ParsableCommand> {
 
                 try command.run()
             } catch {
-                guard let extError = error as? ExtendedError
+                guard let extError = error as? (any ExtendedError)
                 else { Command.exit(withError: error) }
 
                 qprintError("\(extError.messagePrefix)\(extError)")

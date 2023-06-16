@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/eBardX/XestiPath.git",
       "state" : {
-        "revision" : "a509d3d68d1a31f2e3ebada2f04a69bf3cb59029",
-        "version" : "1.2.1"
+        "revision" : "bd5f27613ce29ffa8045b7848c6cc7404f938d69",
+        "version" : "1.2.2"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/eBardX/XestiText.git",
       "state" : {
-        "revision" : "f818b5aaa400a6237a91379aeb9263c203aba4af",
-        "version" : "1.2.2"
+        "revision" : "7935a28e2f7a2a3c342b57f0005236c9d0743620",
+        "version" : "1.2.3"
       }
     }
   ],
