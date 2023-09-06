@@ -58,7 +58,7 @@ public class XMLReader: NSObject {
     }
 
     private func _flushText() {
-        let text = pendingText.normalizedWhitespace
+        let text = pendingText.normalizedXMLWhitespace()
 
         pendingText = ""
 
@@ -89,29 +89,29 @@ public class XMLReader: NSObject {
 
 // MARK: - Public Extension
 
-public extension XMLReader {
-    typealias ReadResult = Result<XMLNode, XMLError>
+extension XMLReader {
+    public typealias ReadResult = Result<XMLNode, XMLError>
 
     // MARK: Public Initializers
 
-    convenience init?(contentsOf url: URL) {
+    public convenience init?(contentsOf url: URL) {
         guard let parser = XMLParser(contentsOf: url)
         else { return nil }
 
         self.init(parser: parser)
     }
 
-    convenience init(data: Data) {
+    public convenience init(data: Data) {
         self.init(parser: XMLParser(data: data))
     }
 
-    convenience init(stream: InputStream) {
+    public convenience init(stream: InputStream) {
         self.init(parser: XMLParser(stream: stream))
     }
 
     // MARK: Public Instance Methods
 
-    func read() -> ReadResult {
+    public func read() -> ReadResult {
         if parser.parse(),
            let result = result {
             return .success(result)

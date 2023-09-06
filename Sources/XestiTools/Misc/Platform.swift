@@ -1,4 +1,4 @@
-// © 2020–2022 J. G. Pusey (see LICENSE.md)
+// © 2020–2023 J. G. Pusey (see LICENSE.md)
 
 public enum Platform: String {
     case android = "Android"
@@ -18,11 +18,11 @@ public enum Platform: String {
 
 // MARK: -
 
-public extension Platform {
+extension Platform {
 
     // MARK: Public Type Properties
 
-    static var current: Platform {
+    public static var current: Platform {
 #if os(Android)
         return .android
 #elseif os(Cygwin)

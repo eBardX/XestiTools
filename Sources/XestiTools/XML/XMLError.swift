@@ -1,5 +1,5 @@
-// © 2022 J. G. Pusey (see LICENSE.md)
+// © 2022–2023 J. G. Pusey (see LICENSE.md)
 
-public enum XMLError: Error {
-    case parseFailed(Error?)
+public enum XMLError: Swift.Error {
+    case parseFailed(Swift.Error?)
 }

@@ -2,17 +2,17 @@
 
 public indirect enum XMLNode {
     case attribute(String, String)
-    case element(String, String?, [XMLNode])
+    case element(String, String?, [Self])
     case text(String)
 }
 
 // MARK: - Public Extension
 
-public extension XMLNode {
+extension XMLNode {
 
     // MARK: Public Instance Properties
 
-    var children: [XMLNode]? {
+    public var children: [XMLNode]? {
         switch self {
         case let .element(_, _, children):
             return children
@@ -22,7 +22,7 @@ public extension XMLNode {
         }
     }
 
-    var isAttribute: Bool {
+    public var isAttribute: Bool {
         switch self {
         case .attribute:
             return true
@@ -32,7 +32,7 @@ public extension XMLNode {
         }
     }
 
-    var isElement: Bool {
+    public var isElement: Bool {
         switch self {
         case .element:
             return true
@@ -42,7 +42,7 @@ public extension XMLNode {
         }
     }
 
-    var isText: Bool {
+    public var isText: Bool {
         switch self {
         case .text:
             return true
@@ -52,7 +52,7 @@ public extension XMLNode {
         }
     }
 
-    var name: String? {
+    public var name: String? {
         switch self {
         case let .attribute(name, _),
             let .element(name, _, _):
@@ -63,7 +63,7 @@ public extension XMLNode {
         }
     }
 
-    var uri: String? {
+    public var uri: String? {
         switch self {
         case let .element(_, uri, _):
             return uri
@@ -73,7 +73,7 @@ public extension XMLNode {
         }
     }
 
-    var value: String? {
+    public var value: String? {
         switch self {
         case let .attribute(_, value),
             let .text(value):
@@ -86,29 +86,29 @@ public extension XMLNode {
 
     // MARK: Public Instance Methods
 
-    func allAttributes() -> [XMLNode] {
+    public func allAttributes() -> [XMLNode] {
         children?.filter { $0.isAttribute } ?? []
     }
 
-    func allChildElements() -> [XMLNode] {
+    public func allChildElements() -> [XMLNode] {
         children?.filter { $0.isElement } ?? []
     }
 
-    func allChildElements(_ name: String,
-                          _ uri: String? = nil) -> [XMLNode] {
+    public func allChildElements(_ name: String,
+                                 _ uri: String? = nil) -> [XMLNode] {
         children?.filter { $0.isElement(name, uri) } ?? []
     }
 
-    func firstAttribute(_ name: String) -> XMLNode? {
+    public func firstAttribute(_ name: String) -> XMLNode? {
         children?.first { $0.isAttribute(name) }
     }
 
-    func firstChildElement(_ name: String,
-                           _ uri: String? = nil) -> XMLNode? {
+    public func firstChildElement(_ name: String,
+                                  _ uri: String? = nil) -> XMLNode? {
         children?.first { $0.isElement(name, uri) }
     }
 
-    func isAttribute(_ name: String) -> Bool {
+    public func isAttribute(_ name: String) -> Bool {
         switch self {
         case let .attribute(aname, _):
             return aname == name
@@ -118,8 +118,8 @@ public extension XMLNode {
         }
     }
 
-    func isElement(_ name: String,
-                   _ uri: String? = nil) -> Bool {
+    public func isElement(_ name: String,
+                          _ uri: String? = nil) -> Bool {
         switch self {
         case let .element(ename, euri, _):
             return ename == name && euri == uri
@@ -129,8 +129,8 @@ public extension XMLNode {
         }
     }
 
-    func valueOfAttribute(_ name: String,
-                          allowsEmpty: Bool = false) -> String? {
+    public func valueOfAttribute(_ name: String,
+                                 allowsEmpty: Bool = false) -> String? {
         guard let attribute = firstAttribute(name),
               let value = attribute.value,
               allowsEmpty || !value.isEmpty
@@ -139,10 +139,10 @@ public extension XMLNode {
         return value
     }
 
-    func valueOfChildElement(_ name: String,
-                             _ uri: String? = nil,
-                             allowsEmpty: Bool = false,
-                             recursive: Bool = false) -> String? {
+    public func valueOfChildElement(_ name: String,
+                                    _ uri: String? = nil,
+                                    allowsEmpty: Bool = false,
+                                    recursive: Bool = false) -> String? {
         guard let element = firstChildElement(name, uri),
               let value = element._valueOfElement(recursive),
               allowsEmpty || !value.isEmpty
@@ -151,8 +151,8 @@ public extension XMLNode {
         return value
     }
 
-    func valueOfElement(allowsEmpty: Bool = false,
-                        recursive: Bool = false) -> String? {
+    public func valueOfElement(allowsEmpty: Bool = false,
+                               recursive: Bool = false) -> String? {
         guard let value = _valueOfElement(recursive),
               allowsEmpty || !value.isEmpty
         else { return nil }
@@ -175,7 +175,6 @@ public extension XMLNode {
 
             default:
                 break
-
             }
         }
     }

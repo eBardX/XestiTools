@@ -1,9 +1,9 @@
-// © 2018–2022 J. G. Pusey (see LICENSE.md)
+// © 2018–2023 J. G. Pusey (see LICENSE.md)
 
 import ArgumentParser
 import XestiText
 
-public protocol ExtendedError: Error, CustomStringConvertible {
+public protocol ExtendedError: Swift.Error, CustomStringConvertible {
     var exitCode: ExitCode { get }
     var hints: [String] { get }
     var hintsPrefix: String { get }
@@ -13,11 +13,11 @@ public protocol ExtendedError: Error, CustomStringConvertible {
 
 // MARK: -
 
-public extension ExtendedError {
+extension ExtendedError {
 
     // MARK: Public Instance Properties
 
-    var description: String {
+    public var description: String {
         let totalWidth = Format.terminalWidth()
 
         var text = Format.hangIndent(prefix: messagePrefix,
@@ -36,23 +36,23 @@ public extension ExtendedError {
         return text
     }
 
-    var exitCode: ExitCode {
+    public var exitCode: ExitCode {
         .failure
     }
 
-    var hints: [String] {
+    public var hints: [String] {
         []
     }
 
-    var hintsPrefix: String {
+    public var hintsPrefix: String {
         "     - "
     }
 
-    var localizedDescription: String {
+    public var localizedDescription: String {
         description
     }
 
-    var messagePrefix: String {
+    public var messagePrefix: String {
         "Error: "
     }
 }

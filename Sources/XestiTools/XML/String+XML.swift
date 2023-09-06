@@ -1,13 +1,18 @@
-// © 2022 J. G. Pusey (see LICENSE.md)
+// © 2022–2023 J. G. Pusey (see LICENSE.md)
 
-public extension String {
+extension String {
     //
     // A representation of the string with whitespace normalized by stripping
     // leading and trailing whitespace and replacing sequences of whitespace
     // characters by single space. If only whitespace exists, return empty
     // string.
     //
-    var normalizedWhitespace: String {
+    @available(*, deprecated, renamed: "normalizedXMLWhitespace()")
+    public var normalizedWhitespace: String {
+        normalizedXMLWhitespace()
+    }
+
+    public func normalizedXMLWhitespace() -> String {
         guard !isEmpty
         else { return "" }
 
@@ -15,7 +20,7 @@ public extension String {
         var whitespace = true
 
         for inChar in self {
-            if !inChar.isWhitespace {
+            if !inChar.isXMLWhitespace {
                 outChars.append(inChar)
 
                 whitespace = false
