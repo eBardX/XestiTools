@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-argument-parser.git",
       "state" : {
-        "revision" : "fee6933f37fde9a5e12a1e4aeaa93fe60116ff2a",
-        "version" : "1.2.2"
+        "revision" : "8f4d2753f0e4778c76d5f05ad16c74f707390531",
+        "version" : "1.2.3"
       }
     },
     {
@@ -14,8 +14,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/eBardX/XestiPath.git",
       "state" : {
-        "revision" : "bd5f27613ce29ffa8045b7848c6cc7404f938d69",
-        "version" : "1.2.2"
+        "revision" : "87b61fe2d2d3026886b6c27e3715008a87cd5873",
+        "version" : "1.2.3"
       }
     },
     {
@@ -23,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/eBardX/XestiText.git",
       "state" : {
-        "revision" : "7935a28e2f7a2a3c342b57f0005236c9d0743620",
-        "version" : "1.2.3"
+        "revision" : "2221c792d5f6b290f3ae13d281a28534ff0469cd",
+        "version" : "1.2.4"
       }
     }
   ],
