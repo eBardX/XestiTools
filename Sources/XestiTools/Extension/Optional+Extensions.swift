@@ -12,3 +12,13 @@ extension Optional {
         return unwrapped
     }
 }
+
+extension Optional where Wrapped: Equatable {
+    public func nilIfEqual(to value: Wrapped) -> Wrapped? {
+        guard let unwrapped = self,
+              unwrapped != value
+        else { return nil }
+
+        return unwrapped
+    }
+}

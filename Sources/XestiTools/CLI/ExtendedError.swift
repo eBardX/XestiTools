@@ -3,7 +3,7 @@
 import ArgumentParser
 import XestiText
 
-public protocol ExtendedError: Swift.Error, CustomStringConvertible {
+public protocol ExtendedError: EnhancedError, CustomStringConvertible {
     var exitCode: ExitCode { get }
     var hints: [String] { get }
     var hintsPrefix: String { get }
