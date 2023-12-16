@@ -3,14 +3,23 @@
 import Foundation
 
 public protocol EnhancedError: Error {
-    var cause: (any EnhancedError)? { get }
-    var message: String { get }
     var category: Category? { get }
+    var cause: (any EnhancedError)? { get }
+    var dictionaryRepresentation: [String: Any] { get }
+    var message: String { get }
 }
 
 // MARK: -
 
 extension EnhancedError {
+    public var category: Category? {
+        nil
+    }
+
+    public var cause: (any EnhancedError)? {
+        nil
+    }
+
     public var dictionaryRepresentation: [String: Any] {
         var dict: [String: Any] = [:]
 
@@ -38,10 +47,6 @@ extension EnhancedError {
 // MARK: -
 
 extension NSError: EnhancedError {
-    public var category: Category? {
-        nil
-    }
-
     public var cause: (any EnhancedError)? {
         userInfo[NSUnderlyingErrorKey] as? (any EnhancedError)
     }
