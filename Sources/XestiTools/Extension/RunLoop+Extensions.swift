@@ -57,10 +57,6 @@ extension RunLoop {
 // MARK: -
 
 extension RunLoop.Error: EnhancedError {
-    public var cause: (any EnhancedError)? {
-        nil
-    }
-    
     public var message: String {
         switch self {
         case let .timedOut(msg):

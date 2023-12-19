@@ -9,7 +9,7 @@ public protocol EnhancedError: Error {
     var message: String { get }
 }
 
-// MARK: -
+// MARK: - (defaults)
 
 extension EnhancedError {
     public var category: Category? {
