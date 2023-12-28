@@ -1,21 +1,20 @@
 // © 2020–2023 J. G. Pusey (see LICENSE.md)
 
-#if os(macOS)
-import XestiPath
+import System
 
 open class BashScriptTask: SubprocessTask {
 
     // MARK: Public Initializers
 
-    public init(scriptPath: Path,
+    public init(scriptPath: FilePath,
                 arguments: [String],
-                currentDirectoryPath: Path? = nil) {
-        var command = Self._quote(scriptPath.absolute.rawValue)
+                currentDirectoryPath: FilePath? = nil) {
+        var command = Self._quote(scriptPath.absolute().string)
 
         command.append(" ")
         command.append(arguments.map(Self._quote).joined(separator: " "))
 
-        super.init(executablePath: Path("/bin/bash"),
+        super.init(executablePath: FilePath("/bin/bash"),
                    arguments: ["-c", command],
                    currentDirectoryPath: currentDirectoryPath)
     }
@@ -32,4 +31,3 @@ open class BashScriptTask: SubprocessTask {
         return result
     }
 }
-#endif

@@ -1,30 +1,29 @@
 // © 2018–2023 J. G. Pusey (see LICENSE.md)
 
-#if os(macOS)
 import Foundation
-import XestiPath
+import System
 
 open class SubprocessTask: Task {
 
     // MARK: Public Initializers
 
-    public init(executablePath: Path,
+    public init(executablePath: FilePath,
                 arguments: [String] = [],
-                currentDirectoryPath: Path? = nil,
+                currentDirectoryPath: FilePath? = nil,
                 environment: [String: String]? = nil) {
         self.process = Process()
 
         self.process.arguments = arguments
 
         if let cdPath = currentDirectoryPath {
-            process.currentDirectoryURL = cdPath.absolute.fileURL
+            process.currentDirectoryURL = cdPath.absolute().fileURL
         }
 
         if let env = environment {
             self.process.environment = env
         }
 
-        self.process.executableURL = executablePath.absolute.fileURL
+        self.process.executableURL = executablePath.absolute().fileURL
     }
 
     // MARK: Public Instance Methods
@@ -85,4 +84,3 @@ open class SubprocessTask: Task {
 
     private let process: Process
 }
-#endif

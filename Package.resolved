@@ -10,15 +10,6 @@
       }
     },
     {
-      "identity" : "xestipath",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/eBardX/XestiPath.git",
-      "state" : {
-        "revision" : "87b61fe2d2d3026886b6c27e3715008a87cd5873",
-        "version" : "1.2.3"
-      }
-    },
-    {
       "identity" : "xestitext",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/eBardX/XestiText.git",
