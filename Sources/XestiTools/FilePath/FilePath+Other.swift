@@ -49,7 +49,7 @@ extension FilePath {
             return expandedPath.standardizing()
         }
 
-        return (FilePath.currentDirectory + self).standardizing()
+        return FilePath.currentDirectory.pushing(self).standardizing()
     }
 
     public func kind() -> Kind {
@@ -57,7 +57,7 @@ extension FilePath {
     }
 
     public func match(pattern: String) -> [FilePath] {
-        FilePath.match(pattern: (self + FilePath(pattern)).string)
+        FilePath.match(pattern: pushing(FilePath(pattern)).string)
     }
 
     public func readData(options: Data.ReadingOptions = []) throws -> Data {

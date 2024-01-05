@@ -1,18 +1,15 @@
-// © 2023 J. G. Pusey (see LICENSE.md)
+// © 2024 J. G. Pusey (see LICENSE.md)
 
 import Foundation
 import System
 
 extension FilePath {
 
-    // MARK: Public Type Methods
-
-    public static func + (lhs: FilePath,
-                          rhs: FilePath) -> FilePath {
-        lhs.pushing(rhs)
-    }
-
     // MARK: Public Instance Properties
+
+    public var baseName: String {
+        (string as NSString).lastPathComponent
+    }
 
     public var fileURL: URL {
         URL(self)!  // swiftlint:disable:this force_unwrapping
@@ -45,6 +42,27 @@ extension FilePath {
 
     public mutating func expandTilde() {
         self = expandingTilde()
+    }
+
+    public mutating func removeExtension() {
+        self = removingExtension()
+    }
+
+    public func removingExtension() -> FilePath {
+        FilePath((string as NSString).deletingPathExtension)
+    }
+
+    public mutating func replaceExtension(with ext: String) {
+        self = replacingExtension(with: ext)
+    }
+
+    public func replacingExtension(with ext: String) -> FilePath {
+        let stripped = (string as NSString).deletingPathExtension
+
+        guard let result = (stripped as NSString).appendingPathExtension(ext)
+        else { return self }
+
+        return FilePath(result)
     }
 
     public mutating func resolveSymbolicLinks() {

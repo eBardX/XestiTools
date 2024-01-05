@@ -62,7 +62,7 @@ extension FilePath {
             return dstPath
         }
 
-        return appending("..") + dstPath
+        return appending("..").pushing(dstPath)
     }
 
     public func displayName() -> String {
