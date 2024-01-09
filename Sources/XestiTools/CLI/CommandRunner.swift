@@ -1,4 +1,4 @@
-// © 2020–2022 J. G. Pusey (see LICENSE.md)
+// © 2020–2024 J. G. Pusey (see LICENSE.md)
 
 import ArgumentParser
 import CoreFoundation
@@ -8,7 +8,7 @@ public enum CommandRunner<Command: ParsableCommand> {
 
     // MARK: Public Type Methods
 
-    public static func run() {
+    public static func run(useGCD: Bool = false) {
         DispatchQueue.global().async {
             do {
                 var command = try Command.parseAsRoot()
@@ -26,6 +26,10 @@ public enum CommandRunner<Command: ParsableCommand> {
             Darwin.exit(ExitCode.success.rawValue)
         }
 
-        CFRunLoopRun()
+        if useGCD {
+            dispatchMain()
+        } else {
+            CFRunLoopRun()
+        }
     }
 }
