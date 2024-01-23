@@ -1,4 +1,4 @@
-// © 2022–2023 J. G. Pusey (see LICENSE.md)
+// © 2022–2024 John Gary Pusey (see LICENSE.md)
 
 extension Character {
     //
@@ -6,11 +6,6 @@ extension Character {
     // more space (#x20), carriage return (#xD), line feed (#xA), or tab (#x9)
     // characters.
     //
-    @available(*, deprecated, renamed: "isXMLWhitespace")
-    public var isWhitespace: Bool {
-        isXMLWhitespace
-    }
-
     public var isXMLWhitespace: Bool {
         switch self {
         case "\n", "\r", "\t", " ":

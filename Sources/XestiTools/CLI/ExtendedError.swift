@@ -1,4 +1,4 @@
-// © 2018–2023 J. G. Pusey (see LICENSE.md)
+// © 2018–2024 John Gary Pusey (see LICENSE.md)
 
 import ArgumentParser
 import XestiText
@@ -11,7 +11,7 @@ public protocol ExtendedError: EnhancedError, CustomStringConvertible {
     var messagePrefix: String { get }
 }
 
-// MARK: -
+// MARK: - (defaults)
 
 extension ExtendedError {
 

@@ -1,4 +1,4 @@
-// © 2023 J. G. Pusey (see LICENSE.md)
+// © 2023–2024 John Gary Pusey (see LICENSE.md)
 
 import Foundation
 
@@ -41,17 +41,5 @@ extension EnhancedError {
         dict["cause"] = cause?.dictionaryRepresentation
 
         return dict
-    }
-}
-
-// MARK: -
-
-extension NSError: EnhancedError {
-    public var cause: (any EnhancedError)? {
-        userInfo[NSUnderlyingErrorKey] as? (any EnhancedError)
-    }
-
-    public var message: String {
-        localizedDescription
     }
 }

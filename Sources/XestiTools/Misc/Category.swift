@@ -1,16 +1,8 @@
-// © 2023 J. G. Pusey (see LICENSE.md)
+// © 2023–2024 John Gary Pusey (see LICENSE.md)
 
 public struct Category: StringRepresentable {
 
-    // MARK: Public Type Properties
-
-    public static var invalidMessage = "category must not be empty"
-
-    // MARK: Public Type Methods
-
-    public static func isValid(_ stringValue: String) -> Bool {
-        !stringValue.isEmpty
-    }
+    // MARK: Public Initializers
 
     public init(_ stringValue: String) {
         precondition(Self.isValid(stringValue),
@@ -21,5 +13,5 @@ public struct Category: StringRepresentable {
 
     // MARK: Public Instance Properties
 
-    public var stringValue: String
+    public let stringValue: String
 }

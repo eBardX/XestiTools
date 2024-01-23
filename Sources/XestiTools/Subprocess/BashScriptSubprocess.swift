@@ -1,14 +1,17 @@
-// © 2020–2023 J. G. Pusey (see LICENSE.md)
+// © 2020–2024 John Gary Pusey (see LICENSE.md)
 
+#if os(macOS)
 import System
 
-open class BashScriptTask: SubprocessTask {
+open class BashScriptSubprocess: Subprocess {
 
     // MARK: Public Initializers
 
     public init(scriptPath: FilePath,
-                arguments: [String],
-                currentDirectoryPath: FilePath? = nil) {
+                arguments: [String] = [],
+                currentDirectoryPath: FilePath? = nil,
+                environment: [String: String]? = nil,
+                standardIO: StandardIO = .init()) {
         var command = Self._quote(scriptPath.absolute().string)
 
         command.append(" ")
@@ -16,7 +19,9 @@ open class BashScriptTask: SubprocessTask {
 
         super.init(executablePath: FilePath("/bin/bash"),
                    arguments: ["-c", command],
-                   currentDirectoryPath: currentDirectoryPath)
+                   currentDirectoryPath: currentDirectoryPath,
+                   environment: environment,
+                   standardIO: standardIO)
     }
 
     // MARK: Private Type Methods
@@ -31,3 +36,4 @@ open class BashScriptTask: SubprocessTask {
         return result
     }
 }
+#endif

@@ -1,18 +1,20 @@
-// © 2022 J. G. Pusey (see LICENSE.md)
+// © 2022–2024 John Gary Pusey (see LICENSE.md)
 
-public indirect enum XMLNode {
-    case attribute(String, String)
-    case element(String, String?, [Self])
-    case text(String)
+extension XML {
+    public enum Node {
+        case attribute(String, String)
+        case element(String, String?, [Self])
+        case text(String)
+    }
 }
 
-// MARK: - Public Extension
+// MARK: -
 
-extension XMLNode {
+extension XML.Node {
 
     // MARK: Public Instance Properties
 
-    public var children: [XMLNode]? {
+    public var children: [XML.Node]? {
         switch self {
         case let .element(_, _, children):
             return children
@@ -86,25 +88,25 @@ extension XMLNode {
 
     // MARK: Public Instance Methods
 
-    public func allAttributes() -> [XMLNode] {
+    public func allAttributes() -> [XML.Node] {
         children?.filter { $0.isAttribute } ?? []
     }
 
-    public func allChildElements() -> [XMLNode] {
+    public func allChildElements() -> [XML.Node] {
         children?.filter { $0.isElement } ?? []
     }
 
     public func allChildElements(_ name: String,
-                                 _ uri: String? = nil) -> [XMLNode] {
+                                 _ uri: String? = nil) -> [XML.Node] {
         children?.filter { $0.isElement(name, uri) } ?? []
     }
 
-    public func firstAttribute(_ name: String) -> XMLNode? {
+    public func firstAttribute(_ name: String) -> XML.Node? {
         children?.first { $0.isAttribute(name) }
     }
 
     public func firstChildElement(_ name: String,
-                                  _ uri: String? = nil) -> XMLNode? {
+                                  _ uri: String? = nil) -> XML.Node? {
         children?.first { $0.isElement(name, uri) }
     }
 
@@ -182,7 +184,7 @@ extension XMLNode {
 
 // MARK: - CustomStringConvertible
 
-extension XMLNode: CustomStringConvertible {
+extension XML.Node: CustomStringConvertible {
     public var description: String {
         switch self {
         case let .attribute(name, value):

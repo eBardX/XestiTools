@@ -1,4 +1,4 @@
-// © 2018–2023 J. G. Pusey (see LICENSE.md)
+// © 2023–2024 John Gary Pusey (see LICENSE.md)
 
 extension Optional {
     public func require(hint: @autoclosure () -> String? = nil,

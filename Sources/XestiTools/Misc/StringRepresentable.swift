@@ -18,6 +18,14 @@ public protocol StringRepresentable: Codable,
 // MARK: - (defaults)
 
 extension StringRepresentable {
+    public static var invalidMessage: String {
+        "string value must not be empty"
+    }
+
+    public static func isValid(_ stringValue: String) -> Bool {
+        !stringValue.isEmpty
+    }
+
     public init?(stringValue: String) {
         guard Self.isValid(stringValue)
         else { return nil }

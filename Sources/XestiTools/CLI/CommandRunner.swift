@@ -1,14 +1,13 @@
-// © 2020–2024 J. G. Pusey (see LICENSE.md)
+// © 2020–2024 John Gary Pusey (see LICENSE.md)
 
 import ArgumentParser
 import CoreFoundation
-import Dispatch
 
 public enum CommandRunner<Command: ParsableCommand> {
 
     // MARK: Public Type Methods
 
-    public static func run(useGCD: Bool = false) {
+    public static func run() {
         DispatchQueue.global().async {
             do {
                 var command = try Command.parseAsRoot()
@@ -18,7 +17,7 @@ public enum CommandRunner<Command: ParsableCommand> {
                 guard let extError = error as? (any ExtendedError)
                 else { Command.exit(withError: error) }
 
-                qprintError("\(extError.messagePrefix)\(extError)")
+                StandardIO().writeError("\(extError.messagePrefix)\(extError)")
 
                 Darwin.exit(extError.exitCode.rawValue)
             }
@@ -26,10 +25,6 @@ public enum CommandRunner<Command: ParsableCommand> {
             Darwin.exit(ExitCode.success.rawValue)
         }
 
-        if useGCD {
-            dispatchMain()
-        } else {
-            CFRunLoopRun()
-        }
+        CFRunLoopRun()
     }
 }

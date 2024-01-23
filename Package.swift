@@ -1,6 +1,6 @@
 // swift-tools-version:5.9
 
-// © 2018–2023 J. G. Pusey (see LICENSE.md)
+// © 2018–2024 John Gary Pusey (see LICENSE.md)
 
 import PackageDescription
 
@@ -11,8 +11,8 @@ let swiftSettings: [SwiftSetting] = [.enableUpcomingFeature("BareSlashRegexLiter
                                      .enableUpcomingFeature("ImplicitOpenExistentials")]
 
 let package = Package(name: "XestiTools",
-                      platforms: [.iOS(.v14),
-                                  .macOS(.v12)],
+                      platforms: [.iOS(.v17),
+                                  .macOS(.v13)],
                       products: [.library(name: "XestiTools",
                                           targets: ["XestiTools"])],
                       dependencies: [.package(url: "https://github.com/apple/swift-argument-parser.git",

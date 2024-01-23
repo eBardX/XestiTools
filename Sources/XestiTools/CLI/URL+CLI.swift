@@ -1,4 +1,4 @@
-// © 2020–2022 J. G. Pusey (see LICENSE.md)
+// © 2020–2024 John Gary Pusey (see LICENSE.md)
 
 import ArgumentParser
 import Foundation

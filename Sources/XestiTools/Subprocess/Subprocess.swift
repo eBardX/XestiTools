@@ -1,16 +1,22 @@
-// © 2018–2023 J. G. Pusey (see LICENSE.md)
+// © 2018–2024 John Gary Pusey (see LICENSE.md)
 
+#if os(macOS)
 import Foundation
 import System
 
-open class SubprocessTask: Task {
+open class Subprocess {
+
+    // MARK: Public Nested Types
+
+    public typealias Result = (status: Int, output: Data, error: Data)
 
     // MARK: Public Initializers
 
     public init(executablePath: FilePath,
                 arguments: [String] = [],
                 currentDirectoryPath: FilePath? = nil,
-                environment: [String: String]? = nil) {
+                environment: [String: String]? = nil,
+                standardIO: StandardIO = .init()) {
         self.process = Process()
 
         self.process.arguments = arguments
@@ -24,13 +30,19 @@ open class SubprocessTask: Task {
         }
 
         self.process.executableURL = executablePath.absolute().fileURL
+        self.process.standardError = standardIO.standardError.value
+        self.process.standardInput = standardIO.standardInput.value
+        self.process.standardOutput = standardIO.standardOutput.value
     }
 
     // MARK: Public Instance Methods
 
-    @discardableResult
-    public func run(outputDataHandler: DataHandler? = nil,
-                    errorDataHandler: DataHandler? = nil) throws -> Task.Result {
+    public func execute() throws {
+        process.launch()
+        process.waitUntilExit()
+    }
+
+    public func run() throws -> Result {
         let dataQueue = DispatchQueue(label: "com.xesticode.SubprocessTask.dataQueue",
                                       qos: .userInteractive,
                                       target: .global(qos: .userInteractive))
@@ -51,8 +63,6 @@ open class SubprocessTask: Task {
 
             dataQueue.async {
                 outputData.append(data)
-
-                outputDataHandler?(data)
             }
         }
 
@@ -61,8 +71,6 @@ open class SubprocessTask: Task {
 
             dataQueue.async {
                 errorData.append(data)
-
-                errorDataHandler?(data)
             }
         }
 
@@ -84,3 +92,4 @@ open class SubprocessTask: Task {
 
     private let process: Process
 }
+#endif
