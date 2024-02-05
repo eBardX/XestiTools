@@ -9,11 +9,13 @@ public struct StandardIO {
 
     public init(standardInput: FileOrPipe = .file(.standardInput),
                 standardOutput: FileOrPipe = .file(.standardOutput),
-                standardError: FileOrPipe = .file(.standardError)) {
+                standardError: FileOrPipe = .file(.standardError),
+                timestampFormatter: Formatter? = nil) {
         self.standardError = standardError
         self.standardInput = standardInput
         self.standardOutput = standardOutput
         self.syncQueue = Self._makeSyncQueue()
+        self.timestampFormatter = timestampFormatter
     }
 
     // MARK: Public Instance Properties
@@ -21,6 +23,7 @@ public struct StandardIO {
     public let standardError: FileOrPipe
     public let standardInput: FileOrPipe
     public let standardOutput: FileOrPipe
+    public let timestampFormatter: Formatter?
 
     // MARK: Public Instance Methods
 
@@ -40,7 +43,7 @@ public struct StandardIO {
 
     public func writeError(_ message: String,
                            _ terminator: String = "\n") {
-        guard let data = "\(message)\(terminator)".data(using: .utf8)
+        guard let data = _format(message, terminator)
         else { return }
 
         syncQueue.async {
@@ -54,7 +57,7 @@ public struct StandardIO {
 
     public func writeOutput(_ message: String,
                             _ terminator: String = "\n") {
-        guard let data = "\(message)\(terminator)".data(using: .utf8)
+        guard let data = _format(message, terminator)
         else { return }
 
         syncQueue.async {
@@ -82,4 +85,16 @@ public struct StandardIO {
     // MARK: Private Instance Properties
 
     private let syncQueue: DispatchQueue
+
+    // MARK: Private Instance Methods
+
+    private func _format(_ message: String,
+                         _ terminator: String) -> Data? {
+        if let formatter = timestampFormatter,
+           let timestamp = formatter.string(for: Date()) {
+            return "\(String(describing: timestamp)) \(message)\(terminator)".data(using: .utf8)
+        }
+
+        return "\(message)\(terminator)".data(using: .utf8)
+    }
 }
