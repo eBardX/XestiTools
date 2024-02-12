@@ -3,7 +3,11 @@
 import Foundation
 
 extension XML {
-    public class Reader: NSObject {
+    public class Reader<E: Element, A: Attribute>: NSObject, XMLParserDelegate {
+
+        // MARK: Public Nested Types
+
+        public typealias Node = XML.Node<E, A>
 
         // MARK: Private Initializers
 
@@ -20,12 +24,12 @@ extension XML {
 
         private let parser: XMLParser
 
-        private var pendingChildren: [XML.Node] = []
+        private var pendingChildren: [Node] = []
         private var pendingName: String = ""
         private var pendingText: String = ""
         private var pendingURI: String?
-        private var result: XML.Node?
-        private var savedContexts: [(String, String?, [XML.Node])] = []
+        private var result: Node?
+        private var savedContexts: [(String, String?, [Node])] = []
 
         // MARK: Private Instance Methods
 
@@ -41,9 +45,8 @@ extension XML {
 
             _flushText()
 
-            let element = XML.Node.element(name,
-                                           uri,
-                                           pendingChildren)
+            let element: Node = .element(E(name, uri)!,
+                                         pendingChildren)
 
             if let context = savedContexts.popLast() {
                 (pendingName, pendingURI, pendingChildren) = context
@@ -83,16 +86,62 @@ extension XML {
             pendingURI = uri
 
             for (name, value) in attributes {
-                pendingChildren.append(.attribute(name, value))
+                pendingChildren.append(.attribute(A(name)!, value))
             }
         }
+
+        // MARK: XMLParserDelegate Instance Methods
+
+        public func parser(_ parser: XMLParser,
+                           didEndElement elementName: String,
+                           namespaceURI: String?,
+                           qualifiedName qName: String?) {
+            _endElement(elementName,
+                        namespaceURI)
+        }
+
+        public func parser(_ parser: XMLParser,
+                           didStartElement elementName: String,
+                           namespaceURI: String?,
+                           qualifiedName qName: String?,
+                           attributes attributeDict: [String: String]) {
+            _startElement(elementName,
+                          namespaceURI,
+                          attributeDict)
+        }
+
+        public func parser(_ parser: XMLParser,
+                           foundCDATA CDATABlock: Data) {
+            guard
+                let string = String(data: CDATABlock,
+                                    encoding: .utf8)
+            else { return }
+
+            _appendText(string)
+        }
+
+        public func parser(_ parser: XMLParser,
+                           foundCharacters string: String) {
+            _appendText(string)
+        }
+
+        public func parser(_ parser: XMLParser,
+                           foundIgnorableWhitespace whitespaceString: String) {
+            // _appendText(whitespaceString)
+        }
+
+        // public func parserDidEndDocument(_ parser: XMLParser) {
+        // }
+
+        // public func parserDidStartDocument(_ parser: XMLParser) {
+        // }
     }
 }
 
 // MARK: -
 
 extension XML.Reader {
-    public typealias ReadResult = Result<XML.Node, XML.Error>
+    public typealias ReadResult = Result<Node, XML.Error>
 
     // MARK: Public Initializers
 
@@ -121,55 +170,4 @@ extension XML.Reader {
             return .failure(.parseFailure(parser.parserError as (any EnhancedError)?))
         }
     }
-}
-
-// MARK: - XMLParserDelegate
-
-extension XML.Reader: XMLParserDelegate {
-
-    // MARK: Public Instance Methods
-
-    public func parser(_ parser: XMLParser,
-                       didEndElement elementName: String,
-                       namespaceURI: String?,
-                       qualifiedName qName: String?) {
-        _endElement(elementName,
-                    namespaceURI)
-    }
-
-    public func parser(_ parser: XMLParser,
-                       didStartElement elementName: String,
-                       namespaceURI: String?,
-                       qualifiedName qName: String?,
-                       attributes attributeDict: [String: String]) {
-        _startElement(elementName,
-                      namespaceURI,
-                      attributeDict)
-    }
-
-    public func parser(_ parser: XMLParser,
-                       foundCDATA CDATABlock: Data) {
-        guard
-            let string = String(data: CDATABlock,
-                                encoding: .utf8)
-        else { return }
-
-        _appendText(string)
-    }
-
-    public func parser(_ parser: XMLParser,
-                       foundCharacters string: String) {
-        _appendText(string)
-    }
-
-    public func parser(_ parser: XMLParser,
-                       foundIgnorableWhitespace whitespaceString: String) {
-        // _appendText(whitespaceString)
-    }
-
-    // public func parserDidEndDocument(_ parser: XMLParser) {
-    // }
-
-    // public func parserDidStartDocument(_ parser: XMLParser) {
-    // }
 }
