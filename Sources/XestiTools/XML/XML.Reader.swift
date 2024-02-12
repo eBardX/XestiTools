@@ -5,10 +5,6 @@ import Foundation
 extension XML {
     public class Reader<E: Element, A: Attribute>: NSObject, XMLParserDelegate {
 
-        // MARK: Public Nested Types
-
-        public typealias Node = XML.Node<E, A>
-
         // MARK: Private Initializers
 
         private init(parser: XMLParser) {
@@ -24,12 +20,12 @@ extension XML {
 
         private let parser: XMLParser
 
-        private var pendingChildren: [Node] = []
+        private var pendingChildren: [ReaderNode] = []
         private var pendingName: String = ""
         private var pendingText: String = ""
         private var pendingURI: String?
-        private var result: Node?
-        private var savedContexts: [(String, String?, [Node])] = []
+        private var result: ReaderNode?
+        private var savedContexts: [(String, String?, [ReaderNode])] = []
 
         // MARK: Private Instance Methods
 
@@ -45,8 +41,8 @@ extension XML {
 
             _flushText()
 
-            let element: Node = .element(E(name, uri)!,
-                                         pendingChildren)
+            let element: ReaderNode = .element(E(name, uri)!,
+                                               pendingChildren)
 
             if let context = savedContexts.popLast() {
                 (pendingName, pendingURI, pendingChildren) = context
@@ -141,7 +137,12 @@ extension XML {
 // MARK: -
 
 extension XML.Reader {
-    public typealias ReadResult = Result<Node, XML.Error>
+
+    // MARK: Public Nested Types
+
+    public typealias ReaderNode = XML.Node<E, A>
+
+    public typealias ReaderResult = Result<ReaderNode, XML.Error>
 
     // MARK: Public Initializers
 
@@ -162,7 +163,7 @@ extension XML.Reader {
 
     // MARK: Public Instance Methods
 
-    public func read() -> ReadResult {
+    public func read() -> ReaderResult {
         if parser.parse(),
            let result = result {
             return .success(result)

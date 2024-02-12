@@ -1,6 +1,6 @@
 // © 2024 John Gary Pusey (see LICENSE.md)
 
-public struct XML {
+public enum XML {
 
     // MARK: Public Nested Types
 
