@@ -102,6 +102,29 @@ extension XML.Node {
         children?.filter { $0.isElement(elem) } ?? []
     }
 
+    public func findNode(where predicate: (Self) throws -> Bool) rethrows -> Self? {
+        if try predicate(self) {
+            return self
+        }
+
+        guard let children
+        else { return nil }
+
+        for child in children {
+            if let node = try child.findNode(where: predicate) {
+                return node
+            }
+        }
+
+        return nil
+    }
+
+    public func matches(_ elem: E,
+                        _ attr: A,
+                        _ value: String) -> Bool {
+        isElement(elem) && valueOfAttribute(attr) == value
+    }
+
     public func firstAttribute(_ attr: A) -> Self? {
         children?.first { $0.isAttribute(attr) }
     }

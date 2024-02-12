@@ -21,11 +21,10 @@ extension XML {
         private let parser: XMLParser
 
         private var pendingChildren: [ReaderNode] = []
-        private var pendingName: String = ""
+        private var pendingElement: E?
         private var pendingText: String = ""
-        private var pendingURI: String?
         private var result: ReaderNode?
-        private var savedContexts: [(String, String?, [ReaderNode])] = []
+        private var savedContexts: [(E, [ReaderNode])] = []
 
         // MARK: Private Instance Methods
 
@@ -35,23 +34,22 @@ extension XML {
 
         private func _endElement(_ name: String,
                                  _ uri: String?) {
-            guard pendingName == name,
-                  pendingURI == uri
+            guard let elem = pendingElement,
+                  elem.name == name,
+                  elem.uri == uri
             else { return }
 
             _flushText()
 
-            let element: ReaderNode = .element(E(name, uri)!,
-                                               pendingChildren)
+            let element: ReaderNode = .element(elem, pendingChildren)
 
             if let context = savedContexts.popLast() {
-                (pendingName, pendingURI, pendingChildren) = context
+                (pendingElement, pendingChildren) = context
 
                 pendingChildren.append(element)
             } else {
                 pendingChildren = []
-                pendingName = name
-                pendingURI = uri
+                pendingElement = nil
 
                 result = element
             }
@@ -73,16 +71,23 @@ extension XML {
                                    _ attributes: [String: String]) {
             _flushText()
 
-            if !pendingName.isEmpty {
-                savedContexts.append((pendingName, pendingURI, pendingChildren))
-            }
+            if let elem = E(name, uri) {
+                if let pendElem = pendingElement {
+                    savedContexts.append((pendElem, pendingChildren))
+                }
 
-            pendingChildren = []
-            pendingName = name
-            pendingURI = uri
+                pendingChildren = []
+                pendingElement = elem
 
-            for (name, value) in attributes {
-                pendingChildren.append(.attribute(A(name)!, value))
+                for (name, value) in attributes {
+                    if let attr = A(name) {
+                        pendingChildren.append(.attribute(attr, value))
+                    } else {
+                        parser.abortParsing()
+                    }
+                }
+            } else {
+                parser.abortParsing()
             }
         }
 
@@ -206,8 +211,7 @@ extension XML.Reader {
 
     // MARK: Public Nested Types
 
-    public typealias ReaderNode = XML.Node<E, A>
-
+    public typealias ReaderNode   = XML.Node<E, A>
     public typealias ReaderResult = Result<ReaderNode, XML.Error>
 
     // MARK: Public Initializers

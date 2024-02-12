@@ -5,6 +5,5 @@ public enum XML {
     // MARK: Public Nested Types
 
     public typealias Attribute = XMLAttribute
-
-    public typealias Element = XMLElement
+    public typealias Element   = XMLElement
 }
