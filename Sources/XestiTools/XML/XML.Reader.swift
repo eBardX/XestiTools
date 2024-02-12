@@ -96,6 +96,10 @@ extension XML {
                         namespaceURI)
         }
 
+        // public func parser(_ parser: XMLParser,
+        //                    didEndMappingPrefix prefix: String) {
+        // }
+
         public func parser(_ parser: XMLParser,
                            didStartElement elementName: String,
                            namespaceURI: String?,
@@ -105,6 +109,18 @@ extension XML {
                           namespaceURI,
                           attributeDict)
         }
+
+        // public func parser(_ parser: XMLParser,
+        //                    didStartMappingPrefix prefix: String,
+        //                    toURI namespaceURI: String) {
+        // }
+
+        // public func parser(_ parser: XMLParser,
+        //                    foundAttributeDeclarationWithName attributeName: String,
+        //                    forElement elementName: String,
+        //                    type: String?,
+        //                    defaultValue: String?) {
+        // }
 
         public func parser(_ parser: XMLParser,
                            foundCDATA CDATABlock: Data) {
@@ -121,10 +137,60 @@ extension XML {
             _appendText(string)
         }
 
+        // public func parser(_ parser: XMLParser,
+        //                    foundComment comment: String) {
+        // }
+
+        // public func parser(_ parser: XMLParser,
+        //                    foundElementDeclarationWithName elementName: String,
+        //                    model: String) {
+        // }
+
+        // public func parser(_ parser: XMLParser,
+        //                    foundExternalEntityDeclarationWithName name: String,
+        //                    publicID: String?,
+        //                    systemID: String?) {
+        // }
+
         public func parser(_ parser: XMLParser,
                            foundIgnorableWhitespace whitespaceString: String) {
             // _appendText(whitespaceString)
         }
+
+        // public func parser(_ parser: XMLParser,
+        //                    foundInternalEntityDeclarationWithName name: String,
+        //                    value: String?) {
+        // }
+
+        // public func parser(_ parser: XMLParser,
+        //                    foundNotationDeclarationWithName name: String,
+        //                    publicID: String?,
+        //                    systemID: String?) {
+        // }
+
+        // public func parser(_ parser: XMLParser,
+        //                    foundProcessingInstructionWithTarget target: String,
+        //                    data: String?) {
+
+        // public func parser(_ parser: XMLParser,
+        //                    foundUnparsedEntityDeclarationWithName name: String,
+        //                    publicID: String?,
+        //                    systemID: String?,
+        //                    notationName: String?) {
+        // }
+
+        // public func parser(_ parser: XMLParser,
+        //                    parseErrorOccurred parseError: Error) {
+        // }
+
+        // public func parser(_ parser: XMLParser,
+        //                    resolveExternalEntityName name: String,
+        //                    systemID: String?) -> Data? {
+        // }
+
+        // public func parser(_ parser: XMLParser,
+        //                    validationErrorOccurred validationError: Error) {
+        // }
 
         // public func parserDidEndDocument(_ parser: XMLParser) {
         // }
