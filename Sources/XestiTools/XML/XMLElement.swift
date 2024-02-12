@@ -13,23 +13,23 @@ public protocol XMLElement: Equatable {
 extension XMLElement where Self: RawRepresentable,
                            Self.RawValue == String {
 
-    // MARK: Internal Initializers
+    // MARK: Public Initializers
 
-    internal init?(_ name: String,
-                   _ url: String?) {
+    public init?(_ name: String,
+                 _ url: String?) {
         guard url == nil
         else { return nil }
 
         self.init(rawValue: name)
     }
 
-    // MARK: Internal Instance Properties
+    // MARK: Public Instance Properties
 
-    internal var name: String {
+    public var name: String {
         rawValue
     }
 
-    internal var uri: String? {
+    public var uri: String? {
         nil
     }
 }

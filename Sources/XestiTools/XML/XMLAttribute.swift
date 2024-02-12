@@ -11,15 +11,15 @@ public protocol XMLAttribute: Equatable, Hashable {
 extension XMLAttribute where Self: RawRepresentable,
                              Self.RawValue == String {
 
-    // MARK: Internal Initializers
+    // MARK: Public Initializers
 
-    internal init?(_ name: String) {
+    public init?(_ name: String) {
         self.init(rawValue: name)
     }
 
-    // MARK: Internal Instance Properties
+    // MARK: Public Instance Properties
 
-    internal var name: String {
+    public var name: String {
         rawValue
     }
 }
