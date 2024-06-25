@@ -41,6 +41,16 @@ public struct StandardIO {
         return readLine()
     }
 
+    public func writeError(_ data: Data) {
+        syncQueue.async {
+            do {
+                try standardOutput.fileHandleForWriting.synchronize()
+                try standardError.fileHandleForWriting.write(contentsOf: data)
+            } catch {
+            }
+        }
+    }
+
     public func writeError(_ message: String,
                            _ terminator: String = "\n") {
         guard let data = _format(message, terminator)
@@ -50,6 +60,15 @@ public struct StandardIO {
             do {
                 try standardOutput.fileHandleForWriting.synchronize()
                 try standardError.fileHandleForWriting.write(contentsOf: data)
+            } catch {
+            }
+        }
+    }
+
+    public func writeOutput(_ data: Data) {
+        syncQueue.async {
+            do {
+                try standardOutput.fileHandleForWriting.write(contentsOf: data)
             } catch {
             }
         }
