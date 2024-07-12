@@ -4,6 +4,12 @@ import Darwin
 
 public class AtomicFlag {
 
+    // MARK: Public Initializers
+
+    public init() {
+        self.flag = atomic_flag()
+    }
+
     // MARK: Public Instance Methods
 
     public func clear() {
@@ -16,5 +22,5 @@ public class AtomicFlag {
 
     // MARK: Private Instance Properties
 
-    private var flag = atomic_flag()
+    private var flag: atomic_flag
 }

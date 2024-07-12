@@ -11,7 +11,7 @@ let swiftSettings: [SwiftSetting] = [.enableUpcomingFeature("BareSlashRegexLiter
                                      .enableUpcomingFeature("ImplicitOpenExistentials")]
 
 let package = Package(name: "XestiTools",
-                      platforms: [.iOS(.v17),
+                      platforms: [.iOS(.v15),
                                   .macOS(.v13)],
                       products: [.library(name: "XestiTools",
                                           targets: ["XestiTools"])],

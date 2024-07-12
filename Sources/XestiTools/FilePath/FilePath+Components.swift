@@ -11,9 +11,13 @@ extension FilePath {
         (string as NSString).lastPathComponent
     }
 
-    public var fileURL: URL {
-        URL(filePath: self)!    // swiftlint:disable:this force_unwrapping
-    }
+        public var fileURL: URL {
+            if #available(macOS 13.0, iOS 16.0, *) {
+                URL(filePath: self)!    // swiftlint:disable:this force_unwrapping
+            } else {
+                URL(self)!              // swiftlint:disable:this force_unwrapping
+            }
+        }
 
     // MARK: Public Instance Methods
 
