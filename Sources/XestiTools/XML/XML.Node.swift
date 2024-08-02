@@ -1,9 +1,9 @@
 // © 2022–2024 John Gary Pusey (see LICENSE.md)
 
 extension XML {
-    public enum Node {
-        case attribute(String, String)
-        case element(String, String?, [Self])
+    public enum Node<E: Element, A: Attribute> {
+        case attr(A, String)
+        case elem(E, [Self])
         case text(String)
     }
 }
@@ -14,170 +14,139 @@ extension XML.Node {
 
     // MARK: Public Instance Properties
 
-    public var children: [XML.Node]? {
+    public var attribute: A? {
         switch self {
-        case let .element(_, _, children):
-            return children
+        case let .attr(attr, _):
+            attr
 
         default:
-            return nil
+            nil
+        }
+    }
+
+    public var children: [Self]? {
+        switch self {
+        case let .elem(_, children):
+            children
+
+        default:
+            nil
+        }
+    }
+
+    public var element: E? {
+        switch self {
+        case let .elem(elem, _):
+            elem
+
+        default:
+            nil
         }
     }
 
     public var isAttribute: Bool {
         switch self {
-        case .attribute:
-            return true
+        case .attr:
+            true
 
         default:
-            return false
+            false
         }
     }
 
     public var isElement: Bool {
         switch self {
-        case .element:
-            return true
+        case .elem:
+            true
 
         default:
-            return false
+            false
         }
     }
 
     public var isText: Bool {
         switch self {
         case .text:
-            return true
+            true
 
         default:
-            return false
+            false
         }
     }
 
     public var name: String? {
         switch self {
-        case let .attribute(name, _),
-            let .element(name, _, _):
-            return name
+        case let .attr(attr, _):
+            attr.name
+
+        case let .elem(elem, _):
+            elem.name
 
         default:
-            return nil
+            nil
         }
     }
 
     public var uri: String? {
         switch self {
-        case let .element(_, uri, _):
-            return uri
+        case let .elem(elem, _):
+            elem.uri
 
         default:
-            return nil
+            nil
         }
     }
 
     public var value: String? {
         switch self {
-        case let .attribute(_, value),
+        case let .attr(_, value),
             let .text(value):
-            return value
+            value
 
         default:
-            return nil
+            nil
         }
     }
 
     // MARK: Public Instance Methods
 
-    public func allAttributes() -> [XML.Node] {
+    public func allAttributes() -> [Self] {
         children?.filter { $0.isAttribute } ?? []
     }
 
-    public func allChildElements() -> [XML.Node] {
+    public func allChildElements() -> [Self] {
         children?.filter { $0.isElement } ?? []
     }
 
-    public func allChildElements(_ name: String,
-                                 _ uri: String? = nil) -> [XML.Node] {
-        children?.filter { $0.isElement(name, uri) } ?? []
+    public func allChildElements(_ elem: E) -> [Self] {
+        children?.filter { $0.isElement(elem) } ?? []
     }
 
-    public func firstAttribute(_ name: String) -> XML.Node? {
-        children?.first { $0.isAttribute(name) }
+    public func firstAttribute(_ attr: A) -> Self? {
+        children?.first { $0.isAttribute(attr) }
     }
 
-    public func firstChildElement(_ name: String,
-                                  _ uri: String? = nil) -> XML.Node? {
-        children?.first { $0.isElement(name, uri) }
+    public func firstChildElement(_ elem: E) -> Self? {
+        children?.first { $0.isElement(elem) }
     }
 
-    public func isAttribute(_ name: String) -> Bool {
+    public func isAttribute(_ attr: A) -> Bool {
         switch self {
-        case let .attribute(aname, _):
-            return aname == name
+        case let .attr(candAttr, _):
+            return candAttr == attr
 
         default:
             return false
         }
     }
 
-    public func isElement(_ name: String,
-                          _ uri: String? = nil) -> Bool {
+    public func isElement(_ elem: E) -> Bool {
         switch self {
-        case let .element(ename, euri, _):
-            return ename == name && euri == uri
+        case let .elem(candElem, _):
+            return candElem == elem
 
         default:
             return false
-        }
-    }
-
-    public func valueOfAttribute(_ name: String,
-                                 allowsEmpty: Bool = false) -> String? {
-        guard let attribute = firstAttribute(name),
-              let value = attribute.value,
-              allowsEmpty || !value.isEmpty
-        else { return nil }
-
-        return value
-    }
-
-    public func valueOfChildElement(_ name: String,
-                                    _ uri: String? = nil,
-                                    allowsEmpty: Bool = false,
-                                    recursive: Bool = false) -> String? {
-        guard let element = firstChildElement(name, uri),
-              let value = element._valueOfElement(recursive),
-              allowsEmpty || !value.isEmpty
-        else { return nil }
-
-        return value
-    }
-
-    public func valueOfElement(allowsEmpty: Bool = false,
-                               recursive: Bool = false) -> String? {
-        guard let value = _valueOfElement(recursive),
-              allowsEmpty || !value.isEmpty
-        else { return nil }
-
-        return value
-    }
-
-    // MARK: Private Instance Methods
-
-    private func _valueOfElement(_ recursive: Bool) -> String? {
-        children?.reduce(into: "") { result, node in
-            switch node {
-            case .element:
-                if recursive, let value = node._valueOfElement(recursive) {
-                    result += value
-                }
-
-            case let .text(value):
-                result += value
-
-            default:
-                break
-            }
         }
     }
 }
@@ -187,18 +156,18 @@ extension XML.Node {
 extension XML.Node: CustomStringConvertible {
     public var description: String {
         switch self {
-        case let .attribute(name, value):
-            return "\(name)=\"\(value)\""
+        case let .attr(attr, value):
+            "\(attr.name)=\"\(value)\""
 
-        case let .element(name, _, children):
+        case let .elem(elem, children):
             if children.isEmpty {
-                return "<\(name)>"
+                "<\(elem.name)>"
             } else {
-                return "<\(name)>\(children)"
+                "<\(elem.name)>\(children)"
             }
 
         case let .text(value):
-            return "\"\(value)\""
+            "\"\(value)\""
         }
     }
 }

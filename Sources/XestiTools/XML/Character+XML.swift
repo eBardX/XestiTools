@@ -9,10 +9,10 @@ extension Character {
     public var isXMLWhitespace: Bool {
         switch self {
         case "\n", "\r", "\t", " ":
-            return true
+            true
 
         default:
-            return false
+            false
         }
     }
 }
