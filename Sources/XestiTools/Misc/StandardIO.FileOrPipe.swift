@@ -18,30 +18,30 @@ extension StandardIO.FileOrPipe {
     public var fileHandleForReading: FileHandle {
         switch self {
         case let .file(fh):
-            return fh
+            fh
 
         case let .pipe(p):
-            return p.fileHandleForReading
+            p.fileHandleForReading
         }
     }
 
     public var fileHandleForWriting: FileHandle {
         switch self {
         case let .file(fh):
-            return fh
+            fh
 
         case let .pipe(p):
-            return p.fileHandleForWriting
+            p.fileHandleForWriting
         }
     }
 
     public var value: Any {
         switch self {
         case let .file(fh):
-            return fh
+            fh
 
         case let .pipe(p):
-            return p
+            p
         }
     }
 }

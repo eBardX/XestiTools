@@ -44,25 +44,25 @@ public extension FilePath.Kind {
     var type: FileAttributeType {
         switch self {
         case .blockSpecial:
-            return .typeBlockSpecial
+                .typeBlockSpecial
 
         case .characterSpecial:
-            return .typeCharacterSpecial
+                .typeCharacterSpecial
 
         case .directory:
-            return .typeDirectory
+                .typeDirectory
 
         case .regular:
-            return .typeRegular
+                .typeRegular
 
         case .socket:
-            return .typeSocket
+                .typeSocket
 
         case .symbolicLink:
-            return .typeSymbolicLink
+                .typeSymbolicLink
 
         case .unknown:
-            return .typeUnknown
+                .typeUnknown
         }
     }
 }

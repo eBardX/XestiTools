@@ -8,6 +8,10 @@ public protocol StringRepresentable: Codable,
 
     static func isValid(_ stringValue: String) -> Bool
 
+    static func requireValid(_ stringValue: String,
+                             file: StaticString,
+                             line: UInt) -> String
+
     init?(stringValue: String)
 
     init(_ stringValue: String)
@@ -24,6 +28,17 @@ extension StringRepresentable {
 
     public static func isValid(_ stringValue: String) -> Bool {
         !stringValue.isEmpty
+    }
+
+    public static func requireValid(_ stringValue: String,
+                                    file: StaticString = #file,
+                                    line: UInt = #line) -> String {
+        precondition(isValid(stringValue),
+                     invalidMessage,
+                     file: file,
+                     line: line)
+
+        return stringValue
     }
 
     public init?(stringValue: String) {

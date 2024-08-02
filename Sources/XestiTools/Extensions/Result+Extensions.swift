@@ -21,20 +21,20 @@ extension Result {
     public var failure: Failure? {
         switch self {
         case let .failure(error):
-            return error
+            error
 
         case .success:
-            return nil
+            nil
         }
     }
 
     public var success: Success? {
         switch self {
         case .failure:
-            return nil
+            nil
 
         case let .success(value):
-            return value
+            value
         }
     }
 
