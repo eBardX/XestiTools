@@ -10,6 +10,10 @@ extension String {
         NSLocalizedString(self, comment: "")    // swiftlint:disable:this nslocalizedstring_key
     }
 
+    public var nilIfEmpty: String? {
+        isEmpty ? nil : self
+    }
+
     // MARK: Public Instance Methods
 
     public func matches(pattern: String,
