@@ -41,7 +41,16 @@ extension ExtendedError {
     }
 
     public var hints: [String] {
-        []
+        var tmpError = self as any EnhancedError
+        var tmpHints: [String] = []
+
+        while let tmpCause = tmpError.cause  {
+            tmpHints.append(tmpCause.message)
+
+            tmpError = tmpCause
+        }
+
+        return tmpHints
     }
 
     public var hintsPrefix: String {
