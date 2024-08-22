@@ -95,7 +95,7 @@ extension StringRepresentable where Self: Equatable {
 // MARK: - ExpressibleByStringLiteral
 
 extension StringRepresentable where Self: ExpressibleByStringLiteral {
-   public init(stringLiteral value: String) {
+    public init(stringLiteral value: String) {
         self.init(value)
-   }
+    }
 }
