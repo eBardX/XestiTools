@@ -2,6 +2,7 @@
 
 import Dispatch
 import Foundation
+import System
 
 public struct StandardIO {
 
@@ -39,6 +40,47 @@ public struct StandardIO {
         }
 
         return readLine()
+    }
+
+    public func redirect(standardInput inputPath: FilePath? = nil,
+                         standardOutput outputPath: FilePath? = nil,
+                         standardError errorPath: FilePath? = nil) throws -> Self {
+        var stderr = self.standardError
+        var stdout = self.standardOutput
+        var stdin = self.standardInput
+
+        if let inputPath {
+            let fd = try FileDescriptor.open(inputPath,
+                                             .readOnly,
+                                             options: .nonBlocking,
+                                             retryOnInterrupt: false)
+
+            stdin = Self._makeFileHandle(fd)
+        }
+
+        if let outputPath {
+            let fd = try FileDescriptor.open(outputPath,
+                                             .writeOnly,
+                                             options: [.create, .nonBlocking, .truncate],
+                                             permissions: [.ownerReadWrite, .groupRead, .otherRead],
+                                             retryOnInterrupt: false)
+
+            stdout = Self._makeFileHandle(fd)
+        }
+
+        if let errorPath {
+            let fd = try FileDescriptor.open(errorPath,
+                                             .writeOnly,
+                                             options: [.create, .nonBlocking, .truncate],
+                                             permissions: [.ownerReadWrite, .groupRead, .otherRead],
+                                             retryOnInterrupt: false)
+
+            stderr = Self._makeFileHandle(fd)
+        }
+
+        return .init(standardInput: stdin,
+                     standardOutput: stdout,
+                     standardError: stderr)
     }
 
     public func writeError(_ data: Data) {
@@ -88,6 +130,11 @@ public struct StandardIO {
     }
 
     // MARK: Private Type Methods
+
+    private static func _makeFileHandle(_ fd: FileDescriptor) -> FileOrPipe {
+        .file(.init(fileDescriptor: fd.rawValue,
+                    closeOnDealloc: true))
+    }
 
     private static func _makeSyncQueue() -> DispatchQueue {
         let queue = DispatchQueue(label: "com.xesticode.IOHandles.syncQueue",
