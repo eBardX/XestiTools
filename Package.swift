@@ -1,4 +1,4 @@
-// swift-tools-version:5.9
+// swift-tools-version:5.10
 
 // © 2018–2024 John Gary Pusey (see LICENSE.md)
 
@@ -18,7 +18,7 @@ let package = Package(name: "XestiTools",
                       dependencies: [.package(url: "https://github.com/apple/swift-argument-parser.git",
                                               from: "1.0.0"),
                                      .package(url: "https://github.com/eBardX/XestiText.git",
-                                              from: "1.0.0")],
+                                              from: "2.0.0")],
                       targets: [.target(name: "XestiTools",
                                         dependencies: [.product(name: "ArgumentParser",
                                                                 package: "swift-argument-parser"),
