@@ -1,4 +1,4 @@
-// swift-tools-version:5.10
+// swift-tools-version:5.11
 
 // © 2018–2024 John Gary Pusey (see LICENSE.md)
 
