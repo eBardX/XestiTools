@@ -1,3 +1,5 @@
+// © 2023–2025 John Gary Pusey (see LICENSE.md)
+
 public protocol StringRepresentable: Codable,
                                      Comparable,
                                      CustomStringConvertible,

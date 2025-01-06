@@ -1,3 +1,5 @@
+// © 2024–2025 John Gary Pusey (see LICENSE.md)
+
 import Foundation
 
 extension UUID {
