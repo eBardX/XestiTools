@@ -1,3 +1,6 @@
+// © 2024–2025 John Gary Pusey (see LICENSE.md)
+
+@available(*, deprecated, message: "Use CollectionReader<String>")
 public struct StringReader {
 
     // MARK: Public Initializers

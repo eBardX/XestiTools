@@ -2,6 +2,7 @@
 
 import Foundation
 
+@available(*, deprecated, message: "Use CollectionReader<Data>")
 public struct DataReader {
 
     // MARK: Public Initializers
