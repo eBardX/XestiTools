@@ -1,9 +1,9 @@
-// © 2024 John Gary Pusey (see LICENSE.md)
+// © 2024—2025 John Gary Pusey (see LICENSE.md)
 
 import Foundation
 
 extension StandardIO {
-    public enum FileOrPipe {
+    public enum FileOrPipe: Sendable {
         case file(FileHandle)
         case pipe(Pipe)
     }

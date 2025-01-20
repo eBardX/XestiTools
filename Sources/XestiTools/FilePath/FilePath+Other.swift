@@ -1,4 +1,4 @@
-// © 2023–2024 John Gary Pusey (see LICENSE.md)
+// © 2023–2025 John Gary Pusey (see LICENSE.md)
 
 import Foundation
 import System
@@ -29,7 +29,7 @@ extension FilePath {
 
         return (0..<Int(gt.gl_matchc)).compactMap {
             guard let rawPath = gt.gl_pathv[$0],
-                  let path = String(validatingUTF8: rawPath)
+                  let path = String(validatingCString: rawPath)
             else { return nil }
 
             return FilePath(path)
@@ -92,7 +92,7 @@ extension FilePath {
 
 // MARK: - Comparable
 
-extension FilePath: Comparable {
+extension FilePath: @retroactive Comparable {
     public static func < (lhs: FilePath,
                           rhs: FilePath) -> Bool {
         lhs.string < rhs.string

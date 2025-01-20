@@ -1,4 +1,4 @@
-// © 2018–2024 John Gary Pusey (see LICENSE.md)
+// © 2018–2025 John Gary Pusey (see LICENSE.md)
 
 #if os(macOS)
 import Foundation
@@ -47,8 +47,8 @@ open class Subprocess {
                                       qos: .userInteractive,
                                       target: .global(qos: .userInteractive))
 
-        var outputData = Data()
-        var errorData = Data()
+        nonisolated(unsafe) var outputData = Data()
+        nonisolated(unsafe) var errorData = Data()
 
         let outputPipe = Pipe()
         let errorPipe = Pipe()

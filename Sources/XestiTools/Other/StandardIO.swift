@@ -1,10 +1,10 @@
-// © 2024 John Gary Pusey (see LICENSE.md)
+// © 2024—2025 John Gary Pusey (see LICENSE.md)
 
 import Dispatch
 import Foundation
 import System
 
-public struct StandardIO {
+public struct StandardIO: Sendable {
 
     // MARK: Public Initializers
 
@@ -24,7 +24,7 @@ public struct StandardIO {
     public let standardError: FileOrPipe
     public let standardInput: FileOrPipe
     public let standardOutput: FileOrPipe
-    public let timestampFormatter: Formatter?
+    nonisolated(unsafe) public let timestampFormatter: Formatter?
 
     // MARK: Public Instance Methods
 
@@ -95,8 +95,7 @@ public struct StandardIO {
 
     public func writeError(_ message: String,
                            _ terminator: String = "\n") {
-        guard let data = _format(message, terminator)
-        else { return }
+        let data = _format(message, terminator)
 
         syncQueue.async {
             do {
@@ -118,8 +117,7 @@ public struct StandardIO {
 
     public func writeOutput(_ message: String,
                             _ terminator: String = "\n") {
-        guard let data = _format(message, terminator)
-        else { return }
+        let data = _format(message, terminator)
 
         syncQueue.async {
             do {
@@ -155,12 +153,12 @@ public struct StandardIO {
     // MARK: Private Instance Methods
 
     private func _format(_ message: String,
-                         _ terminator: String) -> Data? {
+                         _ terminator: String) -> Data {
         if let formatter = timestampFormatter,
            let timestamp = formatter.string(for: Date()) {
-            return "\(String(describing: timestamp)) \(message)\(terminator)".data(using: .utf8)
+            return .init("\(String(describing: timestamp)) \(message)\(terminator)".utf8)
         }
 
-        return "\(message)\(terminator)".data(using: .utf8)
+        return .init("\(message)\(terminator)".utf8)
     }
 }
