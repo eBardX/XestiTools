@@ -1,4 +1,4 @@
-// © 2018–2024 John Gary Pusey (see LICENSE.md)
+// © 2018–2025 John Gary Pusey (see LICENSE.md)
 
 import ArgumentParser
 import XestiText
@@ -18,19 +18,19 @@ extension ExtendedError {
     // MARK: Public Instance Properties
 
     public var description: String {
-        let totalWidth = Format.terminalWidth()
+        let totalWidth = Formatter.terminalWidth()
 
-        var text = Format.hangIndent(prefix: messagePrefix,
-                                     text: message,
-                                     totalWidth: totalWidth)
+        var text = Formatter.hangIndent(prefix: messagePrefix,
+                                        text: message,
+                                        totalWidth: totalWidth)
 
         text = String(text.dropFirst(messagePrefix.count))
 
         for hint in hints {
             text += "\n"
-            text += Format.hangIndent(prefix: hintsPrefix,
-                                      text: hint,
-                                      totalWidth: totalWidth)
+            text += Formatter.hangIndent(prefix: hintsPrefix,
+                                         text: hint,
+                                         totalWidth: totalWidth)
         }
 
         return text

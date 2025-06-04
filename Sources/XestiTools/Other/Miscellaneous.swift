@@ -1,4 +1,4 @@
-// © 2018–2024 John Gary Pusey (see LICENSE.md)
+// © 2018–2025 John Gary Pusey (see LICENSE.md)
 
 import Foundation
 
@@ -8,6 +8,11 @@ public func clamp<T: Comparable>(_ vmin: T,
                                  _ value: T,
                                  _ vmax: T) -> T {
     vmin > value ? vmin : vmax < value ? vmax : value
+}
+
+public func liteEscape<S: StringProtocol>(_ value: S) -> String {
+    String(value).escaped(asASCII: true,
+                          unprintableOnly: true)
 }
 
 public func milliseconds(_ value: TimeInterval) -> Milliseconds {

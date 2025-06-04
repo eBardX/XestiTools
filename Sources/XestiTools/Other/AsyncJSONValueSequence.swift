@@ -1,4 +1,4 @@
-// © 2024 John Gary Pusey (see LICENSE.md)
+// © 2024–2025 John Gary Pusey (see LICENSE.md)
 
 import Foundation
 
@@ -15,7 +15,7 @@ public struct AsyncJSONValueSequence<Base: AsyncSequence,
 
         @inlinable
         public mutating func next() async rethrows -> T? {
-            func _yield() throws -> T? {
+            func yield() throws -> T? {
                 defer { buffer.removeAll(keepingCapacity: true) }
 
                 guard !buffer.isEmpty
@@ -28,12 +28,12 @@ public struct AsyncJSONValueSequence<Base: AsyncSequence,
             while let byte = try await byteSource.next() {
                 if byte != 0x0A {
                     buffer.append(byte)
-                } else if let result = try _yield() {
+                } else if let result = try yield() {
                     return result
                 }
             }
 
-            return try _yield()
+            return try yield()
         }
 
         // MARK: Internal Initializers

@@ -1,4 +1,4 @@
-// © 2023–2024 John Gary Pusey (see LICENSE.md)
+// © 2023–2025 John Gary Pusey (see LICENSE.md)
 
 import Foundation
 import System
@@ -24,16 +24,20 @@ extension FilePath {
 
         let flags = GLOB_BRACE | GLOB_MARK | GLOB_TILDE
 
-        guard Darwin.glob(pattern, flags, nil, &gt) == 0
+        guard Darwin.glob(pattern, flags, nil, &gt) == 0,
+              let endIdx = Int(exactly: gt.gl_matchc)
         else { return [] }
 
-        return (0..<Int(gt.gl_matchc)).compactMap {
-            guard let rawPath = gt.gl_pathv[$0],
-                  let path = String(validatingUTF8: rawPath)
-            else { return nil }
+        var paths: [FilePath] = []
 
-            return FilePath(path)
+        for idx in 0..<endIdx {
+            if let rawPath = gt.gl_pathv[idx],
+               let path = String(validatingUTF8: rawPath) {
+                paths.append(FilePath(path))
+            }
         }
+
+        return paths
     }
 
     // MARK: Public Instance Methods
@@ -92,9 +96,15 @@ extension FilePath {
 
 // MARK: - Comparable
 
-extension FilePath: Comparable {
+extension FilePath {
     public static func < (lhs: FilePath,
                           rhs: FilePath) -> Bool {
         lhs.string < rhs.string
     }
 }
+
+#if compiler(>=6)
+extension FilePath: @retroactive Comparable {}
+#else
+extension FilePath: Comparable {}
+#endif

@@ -1,8 +1,8 @@
-// © 2023–2024 John Gary Pusey (see LICENSE.md)
+// © 2023–2025 John Gary Pusey (see LICENSE.md)
 
 import CoreGraphics
 
-extension CGPoint: Comparable {
+extension CGPoint {
     public static func < (lhs: CGPoint,
                           rhs: CGPoint) -> Bool {
         if lhs.x < rhs.x {
@@ -16,3 +16,9 @@ extension CGPoint: Comparable {
         return lhs.y < rhs.y
     }
 }
+
+#if compiler(>=6)
+extension CGPoint: @retroactive Comparable {}
+#else
+extension CGPoint: Comparable {}
+#endif

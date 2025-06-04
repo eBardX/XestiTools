@@ -1,4 +1,4 @@
-// © 2018–2024 John Gary Pusey (see LICENSE.md)
+// © 2018–2025 John Gary Pusey (see LICENSE.md)
 
 import Foundation
 
@@ -15,6 +15,25 @@ extension String {
     }
 
     // MARK: Public Instance Methods
+
+    public func escaped(asASCII forceASCII: Bool,
+                        unprintableOnly: Bool) -> String {
+        func escape(_ chr: Unicode.Scalar) -> String {
+            if unprintableOnly && ["\'", "\"", "\\"].contains(chr) {
+                String(chr)
+            } else {
+                chr.escaped(asASCII: forceASCII)
+            }
+        }
+
+        var result = ""
+
+        for chr in unicodeScalars {
+            result.append(escape(chr))
+        }
+
+        return result
+    }
 
     public func matches(pattern: String,
                         caseInsensitive: Bool = false) -> Bool {
