@@ -1,11 +1,12 @@
-// © 2024 John Gary Pusey (see LICENSE.md)
+// © 2024–2025 John Gary Pusey (see LICENSE.md)
 
 public protocol IntRepresentable: Codable,
                                   Comparable,
                                   CustomStringConvertible,
                                   Equatable,
                                   ExpressibleByIntegerLiteral,
-                                  Hashable {
+                                  Hashable,
+                                  Sendable {
     static var invalidMessage: String { get }
 
     static func isValid(_ intValue: Int) -> Bool

@@ -1,11 +1,11 @@
 // © 2025 John Gary Pusey (see LICENSE.md)
 
-public struct Tokenizer {
+public struct Tokenizer: Sendable {
 
     // MARK: Public Initializers
 
     public init(rules: [Rule],
-                userInfo: [UserInfoKey: Any] = [:],
+                userInfo: [UserInfoKey: any Sendable] = [:],
                 tracing: Verbosity = .silent) {
         self.rules = rules
         self.tracing = tracing
@@ -16,7 +16,7 @@ public struct Tokenizer {
 
     public let rules: [Rule]
     public let tracing: Verbosity
-    public let userInfo: [UserInfoKey: Any]
+    public let userInfo: [UserInfoKey: any Sendable]
 
     // MARK: Public Instance Methods
 

@@ -1,4 +1,4 @@
-// © 2024 John Gary Pusey (see LICENSE.md)
+// © 2024–2025 John Gary Pusey (see LICENSE.md)
 
 import Foundation
 import System
@@ -12,11 +12,7 @@ extension FilePath {
     }
 
     public var fileURL: URL {
-        if #available(macOS 13.0, iOS 16.0, *) {
-            URL(filePath: self)!    // swiftlint:disable:this force_unwrapping
-        } else {
-            URL(self)!              // swiftlint:disable:this force_unwrapping
-        }
+        URL(filePath: self)!    // swiftlint:disable:this force_unwrapping
     }
 
     // MARK: Public Instance Methods
