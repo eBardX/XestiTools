@@ -1,6 +1,6 @@
-// © 2023–2024 John Gary Pusey (see LICENSE.md)
+// © 2023–2025 John Gary Pusey (see LICENSE.md)
 
-import Darwin
+import _Builtin_stdatomic
 
 public class AtomicFlag {
 
