@@ -1,6 +1,6 @@
 // © 2025 John Gary Pusey (see LICENSE.md)
 
-public enum Verbosity: Int {
+public enum Verbosity: Int, Sendable {
     case silent      = 0
     case quiet       = 1
     case verbose     = 2

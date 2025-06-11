@@ -4,7 +4,7 @@ extension Tokenizer {
 
     // MARK: Public Nested Types
 
-    public enum Disposition {
+    public enum Disposition: Sendable {
         case save(Tokenizer.Token.Kind, Tokenizer.Condition?)
         case skip(Tokenizer.Condition?)
     }
