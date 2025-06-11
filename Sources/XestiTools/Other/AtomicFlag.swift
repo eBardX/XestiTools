@@ -1,6 +1,11 @@
 // © 2023–2025 John Gary Pusey (see LICENSE.md)
 
+#if compiler(>=6)
 import _Builtin_stdatomic
+#else
+import Darwin
+#endif
+
 
 public class AtomicFlag {
 
