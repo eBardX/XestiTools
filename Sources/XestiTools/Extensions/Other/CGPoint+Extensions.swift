@@ -3,8 +3,8 @@
 import CoreGraphics
 
 extension CGPoint {
-    public static func < (lhs: CGPoint,
-                          rhs: CGPoint) -> Bool {
+    public static func < (lhs: Self,
+                          rhs: Self) -> Bool {
         if lhs.x < rhs.x {
             return true
         }

@@ -10,7 +10,7 @@ extension CGRect {
         CGPoint(x: midX, y: midY)
     }
 
-    public var integerRounded: CGRect {
+    public var integerRounded: Self {
         let rminX = _fround(minX)
         let rminY = _fround(minY)
         let rmaxX = _fround(maxX)

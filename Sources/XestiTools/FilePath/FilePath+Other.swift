@@ -7,17 +7,17 @@ extension FilePath {
 
     // MARK: Public Type Properties
 
-    public static var temporaryDirectory: FilePath {
-        FilePath(NSTemporaryDirectory())
+    public static var temporaryDirectory: Self {
+        Self(NSTemporaryDirectory())
     }
 
-    public static var uniqueTemporaryDirectory: FilePath {
+    public static var uniqueTemporaryDirectory: Self {
         temporaryDirectory.appending(ProcessInfo.processInfo.globallyUniqueString)
     }
 
     // MARK: Public Type Methods
 
-    public static func match(pattern: String) -> [FilePath] {
+    public static func match(pattern: String) -> [Self] {
         var gt = glob_t()
 
         defer { globfree(&gt) }
@@ -28,12 +28,12 @@ extension FilePath {
               let endIdx = Int(exactly: gt.gl_matchc)
         else { return [] }
 
-        var paths: [FilePath] = []
+        var paths: [Self] = []
 
         for idx in 0..<endIdx {
             if let rawPath = gt.gl_pathv[idx],
                let path = String(validatingUTF8: rawPath) {
-                paths.append(FilePath(path))
+                paths.append(Self(path))
             }
         }
 
@@ -42,7 +42,7 @@ extension FilePath {
 
     // MARK: Public Instance Methods
 
-    public func absolute() -> FilePath {
+    public func absolute() -> Self {
         if isAbsolute {
             return standardizing()
         }
@@ -53,15 +53,15 @@ extension FilePath {
             return expandedPath.standardizing()
         }
 
-        return FilePath.currentDirectory.pushing(self).standardizing()
+        return Self.currentDirectory.pushing(self).standardizing()
     }
 
     public func kind() -> Kind {
         (try? attributes().kind) ?? .unknown
     }
 
-    public func match(pattern: String) -> [FilePath] {
-        FilePath.match(pattern: pushing(FilePath(pattern)).string)
+    public func match(pattern: String) -> [Self] {
+        Self.match(pattern: pushing(Self(pattern)).string)
     }
 
     public func readData(options: Data.ReadingOptions = []) throws -> Data {
@@ -97,8 +97,8 @@ extension FilePath {
 // MARK: - Comparable
 
 extension FilePath {
-    public static func < (lhs: FilePath,
-                          rhs: FilePath) -> Bool {
+    public static func < (lhs: Self,
+                          rhs: Self) -> Bool {
         lhs.string < rhs.string
     }
 }

@@ -25,23 +25,23 @@ extension FilePath {
         self = abbreviatingWithTilde()
     }
 
-    public func abbreviatingWithTilde() -> FilePath {
-        FilePath((string as NSString).abbreviatingWithTildeInPath)
+    public func abbreviatingWithTilde() -> Self {
+        Self((string as NSString).abbreviatingWithTildeInPath)
     }
 
     public mutating func appendExtension(_ ext: String) {
         self = appendingExtension(ext)
     }
 
-    public func appendingExtension(_ ext: String) -> FilePath {
+    public func appendingExtension(_ ext: String) -> Self {
         guard let result = (string as NSString).appendingPathExtension(ext)
         else { return self }
 
-        return FilePath(result)
+        return Self(result)
     }
 
-    public func expandingTilde() -> FilePath {
-        FilePath((string as NSString).expandingTildeInPath)
+    public func expandingTilde() -> Self {
+        Self((string as NSString).expandingTildeInPath)
     }
 
     public mutating func expandTilde() {
@@ -52,36 +52,36 @@ extension FilePath {
         self = removingExtension()
     }
 
-    public func removingExtension() -> FilePath {
-        FilePath((string as NSString).deletingPathExtension)
+    public func removingExtension() -> Self {
+        Self((string as NSString).deletingPathExtension)
     }
 
     public mutating func replaceExtension(with ext: String) {
         self = replacingExtension(with: ext)
     }
 
-    public func replacingExtension(with ext: String) -> FilePath {
+    public func replacingExtension(with ext: String) -> Self {
         let stripped = (string as NSString).deletingPathExtension
 
         guard let result = (stripped as NSString).appendingPathExtension(ext)
         else { return self }
 
-        return FilePath(result)
+        return Self(result)
     }
 
     public mutating func resolveSymbolicLinks() {
         self = resolvingSymbolicLinks()
     }
 
-    public func resolvingSymbolicLinks() -> FilePath {
-        FilePath((string as NSString).resolvingSymlinksInPath)
+    public func resolvingSymbolicLinks() -> Self {
+        Self((string as NSString).resolvingSymlinksInPath)
     }
 
     public mutating func standardize() {
         self = standardizing()
     }
 
-    public func standardizing() -> FilePath {
-        FilePath((string as NSString).standardizingPath)
+    public func standardizing() -> Self {
+        Self((string as NSString).standardizingPath)
     }
 }

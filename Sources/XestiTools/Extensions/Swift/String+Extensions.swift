@@ -6,7 +6,7 @@ extension String {
 
     // MARK: Public Instance Properties
 
-    public var localized: String {
+    public var localized: Self {
         NSLocalizedString(self, comment: "")    // swiftlint:disable:this nslocalizedstring_key
     }
 
@@ -17,8 +17,8 @@ extension String {
     // MARK: Public Instance Methods
 
     public func escaped(asASCII forceASCII: Bool,
-                        unprintableOnly: Bool) -> String {
-        func escape(_ chr: Unicode.Scalar) -> String {
+                        unprintableOnly: Bool) -> Self {
+        func escape(_ chr: Unicode.Scalar) -> Self {
             if unprintableOnly && ["\'", "\"", "\\"].contains(chr) {
                 String(chr)
             } else {
@@ -35,7 +35,7 @@ extension String {
         return result
     }
 
-    public func matches(pattern: String,
+    public func matches(pattern: Self,
                         caseInsensitive: Bool = false) -> Bool {
         if caseInsensitive {
             _matches(Array(self.lowercased()),

@@ -8,7 +8,7 @@ extension FilePath {
 
     // MARK: Public Type Properties
 
-    public static var currentDirectory: FilePath {
+    public static var currentDirectory: Self {
         get { .init(FileManager.default.currentDirectoryPath) }
         set { FileManager.default.changeCurrentDirectoryPath(newValue.string) }
     }
@@ -16,7 +16,7 @@ extension FilePath {
     // MARK: Public Instance Methods
 
     public func attributes() throws -> Attributes {
-        .init(try FileManager.default.attributesOfItem(atPath: string))
+        try .init(FileManager.default.attributesOfItem(atPath: string))
     }
 
     public func componentsToDisplay() -> [String]? {
@@ -24,15 +24,15 @@ extension FilePath {
     }
 
     public func contentsOfDirectory(includingPropertiesForKeys keys: [URLResourceKey]? = nil,
-                                    options: FileManager.DirectoryEnumerationOptions = []) throws -> [FilePath] {
+                                    options: FileManager.DirectoryEnumerationOptions = []) throws -> [Self] {
         try FileManager.default.contentsOfDirectory(at: fileURL,
                                                     includingPropertiesForKeys: keys,
                                                     options: options).map {
-            FilePath($0.path)
+            Self($0.path)
         }
     }
 
-    public func copy(to destination: FilePath) throws {
+    public func copy(to destination: Self) throws {
         try FileManager.default.copyItem(at: fileURL,
                                          to: destination.fileURL)
     }
@@ -51,13 +51,22 @@ extension FilePath {
                                        attributes: attributes?.dictionaryRepresentation)
     }
 
-    public func createSymbolicLink(to destination: FilePath) throws {
+    public func createSymbolicLink(to destination: Self) throws {
         try FileManager.default.createSymbolicLink(at: fileURL,
                                                    withDestinationURL: destination.fileURL)
     }
 
-    public func destinationOfSymbolicLink() throws -> FilePath {
-        let dstPath = FilePath(try FileManager.default.destinationOfSymbolicLink(atPath: string))
+    public func createTemporaryReplacementDirectory() throws -> Self {
+        let url = try FileManager.default.url(for: .itemReplacementDirectory,
+                                              in: .userDomainMask,
+                                              appropriateFor: fileURL,
+                                              create: true)
+
+        return Self(url.path)
+    }
+
+    public func destinationOfSymbolicLink() throws -> Self {
+        let dstPath = try Self(FileManager.default.destinationOfSymbolicLink(atPath: string))
 
         if dstPath.isAbsolute {
             return dstPath
@@ -90,12 +99,12 @@ extension FilePath {
         FileManager.default.isWritableFile(atPath: string)
     }
 
-    public func link(to destination: FilePath) throws {
+    public func link(to destination: Self) throws {
         try FileManager.default.linkItem(at: fileURL,
                                          to: destination.fileURL)
     }
 
-    public func move(to destination: FilePath) throws {
+    public func move(to destination: Self) throws {
         try FileManager.default.moveItem(at: fileURL,
                                          to: destination.fileURL)
     }
@@ -105,10 +114,10 @@ extension FilePath {
     }
 
     @available(*, deprecated, renamed: "replace(with:backupName:usingNewMetaDataOnly:withoutDeletingBackup:)")
-    public func replace(with replacement: FilePath,
-                        backup: FilePath? = nil,
+    public func replace(with replacement: Self,
+                        backup: Self? = nil,
                         usingNewMetaDataOnly: Bool = false,
-                        withoutDeletingBackupItem: Bool = false) throws -> FilePath {
+                        withoutDeletingBackupItem: Bool = false) throws -> Self {
         var options: FileManager.ItemReplacementOptions = []
 
         if usingNewMetaDataOnly {
@@ -127,13 +136,13 @@ extension FilePath {
                                             options: options,
                                             resultingItemURL: &resultURL)
 
-        return FilePath(resultURL?.path ?? "")
+        return Self(resultURL?.path ?? "")
     }
 
-    public func replace(with replacement: FilePath,
+    public func replace(with replacement: Self,
                         backupName: String?,
                         usingNewMetaDataOnly: Bool = false,
-                        withoutDeletingBackup: Bool = false) throws -> FilePath {
+                        withoutDeletingBackup: Bool = false) throws -> Self {
         var options: FileManager.ItemReplacementOptions = []
 
         if usingNewMetaDataOnly {
@@ -149,7 +158,7 @@ extension FilePath {
                                                               backupItemName: backupName,
                                                               options: options)
 
-        return FilePath(resultURL!.path)    // swiftlint:disable:this force_unwrapping
+        return Self(resultURL!.path)    // swiftlint:disable:this force_unwrapping
     }
 
     public func setAttributes(_ attributes: Attributes) throws {
@@ -157,12 +166,12 @@ extension FilePath {
                                               ofItemAtPath: string)
     }
 
-    public func unzip(to destination: FilePath) throws {
+    public func unzip(to destination: Self) throws {
         try FileManager.default.unzipItem(at: fileURL,
                                           to: destination.fileURL)
     }
 
-    public func zip(to destination: FilePath) throws {
+    public func zip(to destination: Self) throws {
         try FileManager.default.zipItem(at: fileURL,
                                         to: destination.fileURL,
                                         compressionMethod: .deflate)
