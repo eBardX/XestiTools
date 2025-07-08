@@ -6,7 +6,6 @@ import _Builtin_stdatomic
 import Darwin
 #endif
 
-
 public class AtomicFlag {
 
     // MARK: Public Initializers

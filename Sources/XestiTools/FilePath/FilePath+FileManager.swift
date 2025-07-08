@@ -2,6 +2,7 @@
 
 import Foundation
 import System
+import ZIPFoundation
 
 extension FilePath {
 
@@ -103,6 +104,7 @@ extension FilePath {
         try FileManager.default.removeItem(at: fileURL)
     }
 
+    @available(*, deprecated, renamed: "replace(with:backupName:usingNewMetaDataOnly:withoutDeletingBackup:)")
     public func replace(with replacement: FilePath,
                         backup: FilePath? = nil,
                         usingNewMetaDataOnly: Bool = false,
@@ -128,8 +130,41 @@ extension FilePath {
         return FilePath(resultURL?.path ?? "")
     }
 
+    public func replace(with replacement: FilePath,
+                        backupName: String?,
+                        usingNewMetaDataOnly: Bool = false,
+                        withoutDeletingBackup: Bool = false) throws -> FilePath {
+        var options: FileManager.ItemReplacementOptions = []
+
+        if usingNewMetaDataOnly {
+            options.formUnion(.usingNewMetadataOnly)
+        }
+
+        if withoutDeletingBackup {
+            options.formUnion(.withoutDeletingBackupItem)
+        }
+
+        let resultURL = try FileManager.default.replaceItemAt(fileURL,
+                                                              withItemAt: replacement.fileURL,
+                                                              backupItemName: backupName,
+                                                              options: options)
+
+        return FilePath(resultURL!.path)    // swiftlint:disable:this force_unwrapping
+    }
+
     public func setAttributes(_ attributes: Attributes) throws {
         try FileManager.default.setAttributes(attributes.dictionaryRepresentation,
                                               ofItemAtPath: string)
+    }
+
+    public func unzip(to destination: FilePath) throws {
+        try FileManager.default.unzipItem(at: fileURL,
+                                          to: destination.fileURL)
+    }
+
+    public func zip(to destination: FilePath) throws {
+        try FileManager.default.zipItem(at: fileURL,
+                                        to: destination.fileURL,
+                                        compressionMethod: .deflate)
     }
 }
