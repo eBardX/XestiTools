@@ -5,7 +5,8 @@ public protocol UIntRepresentable: Codable,
                                    CustomStringConvertible,
                                    Equatable,
                                    ExpressibleByIntegerLiteral,
-                                   Hashable {
+                                   Hashable,
+                                   Sendable {
     static var invalidMessage: String { get }
 
     static func isValid(_ uintValue: UInt) -> Bool

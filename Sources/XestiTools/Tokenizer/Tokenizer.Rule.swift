@@ -6,7 +6,7 @@ extension Tokenizer {
 
     // MARK: Public Nested Types
 
-    public struct Rule {
+    public struct Rule: Sendable {
 
         // MARK: Public Initializers
 
@@ -30,8 +30,9 @@ extension Tokenizer {
         // MARK: Public Instance Properties
 
         public let conditions: Set<Condition>
-        public let regex: Regex<Substring>
         public let uniqueID: String
+
+        nonisolated(unsafe) public let regex: Regex<Substring>
 
         // MARK: Internal Instance Properties
 

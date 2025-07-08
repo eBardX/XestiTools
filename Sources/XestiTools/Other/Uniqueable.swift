@@ -1,3 +1,5 @@
+// © 2025 John Gary Pusey (see LICENSE.md)
+
 import Foundation
 
 public protocol Uniqueable: Codable, Hashable {

@@ -32,8 +32,8 @@ extension FilePath {
 
         for idx in 0..<endIdx {
             if let rawPath = gt.gl_pathv[idx],
-               let path = String(validatingUTF8: rawPath) {
-                paths.append(Self(path))
+               let path = _makeString(from: rawPath) {
+                paths.append(FilePath(path))
             }
         }
 
@@ -107,4 +107,14 @@ extension FilePath {
 extension FilePath: @retroactive Comparable {}
 #else
 extension FilePath: Comparable {}
+#endif
+
+#if compiler(>=6)
+    private func _makeString(from cString: UnsafePointer<CChar>) -> String? {
+        String(validatingCString: cString)
+    }
+#else
+    private func _makeString(from cString: UnsafePointer<CChar>) -> String? {
+        String(validatingUTF8: cString)
+    }
 #endif
