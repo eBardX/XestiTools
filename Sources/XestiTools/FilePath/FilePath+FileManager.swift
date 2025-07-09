@@ -139,6 +139,7 @@ extension FilePath {
         return Self(resultURL?.path ?? "")
     }
 
+    @discardableResult
     public func replace(with replacement: Self,
                         backupName: String?,
                         usingNewMetaDataOnly: Bool = false,
@@ -158,7 +159,7 @@ extension FilePath {
                                                               backupItemName: backupName,
                                                               options: options)
 
-        return Self(resultURL!.path)    // swiftlint:disable:this force_unwrapping
+        return Self(resultURL.require().path)
     }
 
     public func setAttributes(_ attributes: Attributes) throws {
@@ -171,9 +172,11 @@ extension FilePath {
                                           to: destination.fileURL)
     }
 
-    public func zip(to destination: Self) throws {
+    public func zip(to destination: Self,
+                    keepParent: Bool = true) throws {
         try FileManager.default.zipItem(at: fileURL,
                                         to: destination.fileURL,
+                                        shouldKeepParent: keepParent,
                                         compressionMethod: .deflate)
     }
 }
