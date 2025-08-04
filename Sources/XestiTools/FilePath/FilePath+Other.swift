@@ -56,12 +56,24 @@ extension FilePath {
         return Self.currentDirectory.pushing(self).standardizing()
     }
 
+    public func accessDate() -> Date? {
+        _fetchResourceValue(.contentAccessDateKey)
+    }
+
+    public func creationDate() -> Date? {
+        _fetchResourceValue(.creationDateKey)
+    }
+
     public func kind() -> Kind {
         (try? attributes().kind) ?? .unknown
     }
 
     public func match(pattern: String) -> [Self] {
         Self.match(pattern: pushing(Self(pattern)).string)
+    }
+
+    public func modificationDate() -> Date? {
+        _fetchResourceValue(.contentModificationDateKey)
     }
 
     public func readData(options: Data.ReadingOptions = []) throws -> Data {
@@ -91,6 +103,17 @@ extension FilePath {
                           options: Data.WritingOptions = []) throws {
         try data.write(to: fileURL,
                        options: options)
+    }
+
+    // Private Instance Methods
+
+    private func _fetchResourceValue<T>(_ key: URLResourceKey) -> T? {
+        var value: AnyObject?
+
+        try? (fileURL as NSURL).getResourceValue(&value,
+                                                 forKey: key)
+
+        return value as? T
     }
 }
 

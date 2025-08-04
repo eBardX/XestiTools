@@ -1,10 +1,10 @@
-// © 2023–2024 John Gary Pusey (see LICENSE.md)
+// © 2023–2025 John Gary Pusey (see LICENSE.md)
 
 import Foundation
 import System
 
-public extension FilePath {
-    struct Attributes {
+extension FilePath {
+    public struct Attributes {
 
         // MARK: Public Initializers
 
@@ -12,22 +12,22 @@ public extension FilePath {
             self.kind = .unknown
         }
 
-        public init(_ attrs: [FileAttributeKey: Any]) {
-            self.creationDate = attrs[.creationDate] as? Date
-            self.deviceID = attrs[.deviceIdentifier] as? UInt32
-            self.groupOwnerAccountID = attrs[.groupOwnerAccountID] as? UInt32
-            self.groupOwnerAccountName = attrs[.groupOwnerAccountName] as? String
-            self.isAppendOnly = attrs[.appendOnly] as? Bool
-            self.isBusy = attrs[.busy] as? Bool
-            self.isExtensionHidden = attrs[.extensionHidden] as? Bool
-            self.isImmutable = attrs[.immutable] as? Bool
-            self.kind = Kind((attrs[.type] as? FileAttributeType) ?? .typeUnknown)
-            self.modificationDate = attrs[.modificationDate] as? Date
-            self.ownerAccountID = attrs[.ownerAccountID] as? UInt32
-            self.ownerAccountName = attrs[.ownerAccountName] as? String
-            self.posixPermissions = attrs[.posixPermissions] as? Int16
-            self.referenceCount = attrs[.referenceCount] as? UInt32
-            self.size = attrs[.size] as? UInt64
+        public init(_ dict: [FileAttributeKey: Any]) {
+            self.creationDate = dict[.creationDate] as? Date
+            self.deviceID = dict[.deviceIdentifier] as? UInt32
+            self.groupOwnerAccountID = dict[.groupOwnerAccountID] as? UInt32
+            self.groupOwnerAccountName = dict[.groupOwnerAccountName] as? String
+            self.isAppendOnly = dict[.appendOnly] as? Bool
+            self.isBusy = dict[.busy] as? Bool
+            self.isExtensionHidden = dict[.extensionHidden] as? Bool
+            self.isImmutable = dict[.immutable] as? Bool
+            self.kind = Kind((dict[.type] as? FileAttributeType) ?? .typeUnknown)
+            self.modificationDate = dict[.modificationDate] as? Date
+            self.ownerAccountID = dict[.ownerAccountID] as? UInt32
+            self.ownerAccountName = dict[.ownerAccountName] as? String
+            self.posixPermissions = dict[.posixPermissions] as? Int16
+            self.referenceCount = dict[.referenceCount] as? UInt32
+            self.size = dict[.size] as? UInt64
         }
 
         // MARK: Public Instance Properties
@@ -50,67 +50,67 @@ public extension FilePath {
     }
 }
 
-public extension FilePath.Attributes {
+extension FilePath.Attributes {
 
     // MARK: Public Instance Properties
 
-    var dictionaryRepresentation: [FileAttributeKey: Any] {
+    public var dictionaryRepresentation: [FileAttributeKey: Any] {
         var dict: [FileAttributeKey: Any] = [.type: kind.type]
 
-        if let value = creationDate {
-            dict[.creationDate] = value
+        if let creationDate {
+            dict[.creationDate] = creationDate
         }
 
-        if let value = deviceID {
-            dict[.deviceIdentifier] = value
+        if let deviceID {
+            dict[.deviceIdentifier] = deviceID
         }
 
-        if let value = groupOwnerAccountID {
-            dict[.groupOwnerAccountID] = value
+        if let groupOwnerAccountID {
+            dict[.groupOwnerAccountID] = groupOwnerAccountID
         }
 
-        if let value = groupOwnerAccountName {
-            dict[.groupOwnerAccountName] = value
+        if let groupOwnerAccountName {
+            dict[.groupOwnerAccountName] = groupOwnerAccountName
         }
 
-        if let value = isAppendOnly {
-            dict[.appendOnly] = value
+        if let isAppendOnly {
+            dict[.appendOnly] = isAppendOnly
         }
 
-        if let value = isBusy {
-            dict[.busy] = value
+        if let isBusy {
+            dict[.busy] = isBusy
         }
 
-        if let value = isExtensionHidden {
-            dict[.extensionHidden] = value
+        if let isExtensionHidden {
+            dict[.extensionHidden] = isExtensionHidden
         }
 
-        if let value = isImmutable {
-            dict[.immutable] = value
+        if let isImmutable {
+            dict[.immutable] = isImmutable
         }
 
-        if let value = modificationDate {
-            dict[.modificationDate] = value
+        if let modificationDate {
+            dict[.modificationDate] = modificationDate
         }
 
-        if let value = ownerAccountID {
-            dict[.ownerAccountID] = value
+        if let ownerAccountID {
+            dict[.ownerAccountID] = ownerAccountID
         }
 
-        if let value = ownerAccountName {
-            dict[.ownerAccountName] = value
+        if let ownerAccountName {
+            dict[.ownerAccountName] = ownerAccountName
         }
 
-        if let value = posixPermissions {
-            dict[.posixPermissions] = value
+        if let posixPermissions {
+            dict[.posixPermissions] = posixPermissions
         }
 
-        if let value = referenceCount {
-            dict[.referenceCount] = value
+        if let referenceCount {
+            dict[.referenceCount] = referenceCount
         }
 
-        if let value = size {
-            dict[.size] = value
+        if let size {
+            dict[.size] = size
         }
 
         return dict

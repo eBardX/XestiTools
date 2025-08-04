@@ -23,6 +23,11 @@ extension FilePath {
         FileManager.default.componentsToDisplay(forPath: string)
     }
 
+    public func contentsEqual(to other: Self) -> Bool {
+        FileManager.default.contentsEqual(atPath: string,
+                                          andPath: other.string)
+    }
+
     public func contentsOfDirectory(includingPropertiesForKeys keys: [URLResourceKey]? = nil,
                                     options: FileManager.DirectoryEnumerationOptions = []) throws -> [Self] {
         try FileManager.default.contentsOfDirectory(at: fileURL,
@@ -30,6 +35,10 @@ extension FilePath {
                                                     options: options).map {
             Self($0.path)
         }
+    }
+
+    public func contentsOfFile() -> Data? {
+        FileManager.default.contents(atPath: string)
     }
 
     public func copy(to destination: Self) throws {

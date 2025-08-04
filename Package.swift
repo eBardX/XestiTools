@@ -4,12 +4,6 @@
 
 import PackageDescription
 
-let swiftSettings: [SwiftSetting] = [.enableUpcomingFeature("BareSlashRegexLiterals"),
-                                     .enableUpcomingFeature("ConciseMagicFile"),
-                                     .enableUpcomingFeature("ExistentialAny"),
-                                     .enableUpcomingFeature("ForwardTrailingClosures"),
-                                     .enableUpcomingFeature("ImplicitOpenExistentials")]
-
 let package = Package(name: "XestiTools",
                       platforms: [.iOS(.v16),
                                   .macOS(.v14)],
@@ -18,7 +12,7 @@ let package = Package(name: "XestiTools",
                       dependencies: [.package(url: "https://github.com/apple/swift-argument-parser.git",
                                               from: "1.5.0"),
                                      .package(url: "https://github.com/eBardX/XestiText.git",
-                                              from: "3.0.0"),
+                                              from: "3.1.0"),
                                      .package(url: "https://github.com/weichsel/ZIPFoundation.git",
                                               from: "0.9.0")],
                       targets: [.target(name: "XestiTools",
@@ -27,9 +21,21 @@ let package = Package(name: "XestiTools",
                                                        .product(name: "XestiText",
                                                                 package: "XestiText"),
                                                        .product(name: "ZIPFoundation",
-                                                                package: "ZIPFoundation")],
-                                        swiftSettings: swiftSettings),
+                                                                package: "ZIPFoundation")]),
                                 .testTarget(name: "XestiToolsTests",
-                                            dependencies: [.target(name: "XestiTools")],
-                                            swiftSettings: swiftSettings)],
-                      swiftLanguageVersions: [.version("5")])
+                                            dependencies: [.target(name: "XestiTools")])],
+                      swiftLanguageVersions: [.v5])
+
+let swiftSettings: [SwiftSetting] = [.enableUpcomingFeature("BareSlashRegexLiterals"),
+                                     .enableUpcomingFeature("ConciseMagicFile"),
+                                     .enableUpcomingFeature("ExistentialAny"),
+                                     .enableUpcomingFeature("ForwardTrailingClosures"),
+                                     .enableUpcomingFeature("ImplicitOpenExistentials")]
+
+for target in package.targets {
+    var settings = target.swiftSettings ?? []
+
+    settings.append(contentsOf: swiftSettings)
+
+    target.swiftSettings = settings
+}
