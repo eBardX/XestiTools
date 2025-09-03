@@ -4,6 +4,10 @@ import Foundation
 
 extension NSNumber {
     public var isBoolean: Bool {
-        type(of: self) == type(of: Self(value: true))
+        objCType == Self.booleanObjCType
     }
+
+    // MARK: Private Type Properties
+
+    private static var booleanObjCType = NSNumber(value: true).objCType
 }
