@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol Uniqueable: Codable, Hashable {
+public protocol Uniqueable<UniqueID>: Codable, Hashable {
     associatedtype UniqueID: Codable, Hashable
 
     var uniqueID: UniqueID { get }
