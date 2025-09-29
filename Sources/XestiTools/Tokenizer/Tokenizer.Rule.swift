@@ -1,7 +1,5 @@
 // © 2025 John Gary Pusey (see LICENSE.md)
 
-import Foundation
-
 extension Tokenizer {
 
     // MARK: Public Nested Types
@@ -24,14 +22,14 @@ extension Tokenizer {
             self.conditions = conditions
             self.disposition = disposition
             self.regex = regex
-            self.uniqueID = UUID().hexString
+            self.ruleID = RuleID()
         }
 
         // MARK: Public Instance Properties
 
         public let conditions: Set<Condition>
         public let regex: Regex<Substring>
-        public let uniqueID: String
+        public let ruleID: RuleID
 
         // MARK: Internal Instance Properties
 
@@ -54,7 +52,7 @@ extension Tokenizer {
 
 extension Tokenizer.Rule: CustomStringConvertible {
     public var description: String {
-        "(\(uniqueID), \(_formatRegex(regex)), \(_formatConditions(conditions)))"
+        "(\(ruleID), \(_formatRegex(regex)), \(_formatConditions(conditions)))"
     }
 }
 
@@ -63,7 +61,7 @@ extension Tokenizer.Rule: CustomStringConvertible {
 extension Tokenizer.Rule: Equatable {
     public static func == (lhs: Self,
                            rhs: Self) -> Bool {
-        lhs.uniqueID == rhs.uniqueID
+        lhs.ruleID == rhs.ruleID
     }
 }
 
@@ -71,7 +69,7 @@ extension Tokenizer.Rule: Equatable {
 
 extension Tokenizer.Rule: Hashable {
     public func hash(into hasher: inout Hasher) {
-        uniqueID.hash(into: &hasher)
+        ruleID.hash(into: &hasher)
     }
 }
 
