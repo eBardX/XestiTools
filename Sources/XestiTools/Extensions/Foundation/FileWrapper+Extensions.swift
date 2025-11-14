@@ -2,6 +2,7 @@
 
 import Foundation
 import System
+import ZIPFoundation
 
 extension FileWrapper {
 
@@ -80,6 +81,10 @@ extension FileWrapper {
         removeFileWrapper(file)
     }
 
+    public func unzip() throws -> FileWrapper {
+        try (regularFileContents ?? Data()).unzip()
+    }
+
     public func updateRegularFile(named name: String,
                                   using data: Data) throws {
         guard isDirectory
@@ -98,6 +103,23 @@ extension FileWrapper {
 
         addRegularFile(withContents: data,
                        preferredFilename: name)
+    }
+
+    public func zip() throws -> FileWrapper {
+        let tmpDirectoryURL = try URL.createTemporaryReplacementDirectory()
+
+        try write(to: tmpDirectoryURL,
+                  options: .atomic,
+                  originalContentsURL: nil)
+
+        let tmpDirectoryPath = FilePath(tmpDirectoryURL)!   // swiftlint:disable:this force_unwrapping
+        let tmpArchivePath = try tmpDirectoryPath.createTemporaryReplacementDirectory().appending("tmp.zip")
+
+        try tmpDirectoryPath.zip(to: tmpArchivePath,
+                                 keepParent: false)
+
+        return try FileWrapper(url: tmpArchivePath.fileURL,
+                               options: .immediate)
     }
 }
 
