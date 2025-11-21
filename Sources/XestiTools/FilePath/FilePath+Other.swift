@@ -32,7 +32,7 @@ extension FilePath {
 
         for idx in 0..<endIdx {
             if let rawPath = gt.gl_pathv[idx],
-               let path = String(validatingUTF8: rawPath) {
+               let path = String(validatingCString: rawPath) {
                 paths.append(Self(path))
             }
         }

@@ -54,7 +54,7 @@ extension RunLoop {
     }
 }
 
-// MARK: -
+// MARK: - EnhancedError
 
 extension RunLoop.Error: EnhancedError {
     public var message: String {

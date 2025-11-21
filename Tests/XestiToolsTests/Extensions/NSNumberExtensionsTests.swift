@@ -1,17 +1,21 @@
-import XCTest
+// © 2025 John Gary Pusey (see LICENSE.md)
+
+import Foundation
+import Testing
 @testable import XestiTools
 
-internal class NSNumberExtensionsTests: XCTestCase {
+struct NSNumberExtensionsTests {
 }
 
 // MARK: -
 
 extension NSNumberExtensionsTests {
-    func test_matches() {
-        XCTAssertTrue(NSNumber(value: false).isBoolean)
-        XCTAssertTrue(NSNumber(value: true).isBoolean)
-        XCTAssertFalse(NSNumber(value: 0).isBoolean)
-        XCTAssertFalse(NSNumber(value: -123_456).isBoolean)
-        XCTAssertFalse(NSNumber(value: 12_345.6789).isBoolean)
+    @Test
+    func matches() {
+        #expect(NSNumber(value: false).isBoolean)
+        #expect(NSNumber(value: true).isBoolean)
+        #expect(!NSNumber(value: 0).isBoolean)
+        #expect(!NSNumber(value: -123_456).isBoolean)
+        #expect(!NSNumber(value: 12_345.6789).isBoolean)
     }
 }

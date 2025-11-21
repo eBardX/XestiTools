@@ -6,7 +6,7 @@ import _Builtin_stdatomic
 import Darwin
 #endif
 
-public class AtomicFlag {
+public struct AtomicFlag {
 
     // MARK: Public Initializers
 
@@ -16,11 +16,11 @@ public class AtomicFlag {
 
     // MARK: Public Instance Methods
 
-    public func clear() {
+    public mutating func clear() {
         atomic_flag_clear(&flag)
     }
 
-    public func testAndSet() -> Bool {
+    public mutating func testAndSet() -> Bool {
         atomic_flag_test_and_set(&flag)
     }
 

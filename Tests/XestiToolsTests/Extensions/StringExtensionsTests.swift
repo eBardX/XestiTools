@@ -1,93 +1,114 @@
-import XCTest
+// © 2024–2025 John Gary Pusey (see LICENSE.md)
+
+import Testing
 @testable import XestiTools
 
-internal class StringExtensionsTests: XCTestCase {
+struct StringExtensionsTests {
 }
 
 // MARK: -
 
 extension StringExtensionsTests {
-    func test_matches() {
-        XCTAssertFalse("aa".matches(pattern: "a"))
-        XCTAssertTrue("aa".matches(pattern: "aa"))
-        XCTAssertFalse("aaa".matches(pattern: "aa"))
-        XCTAssertTrue("aa".matches(pattern: "*"))
-        XCTAssertTrue("aa".matches(pattern: "a*"))
-        XCTAssertTrue("ab".matches(pattern: "?*"))
-        XCTAssertFalse("aab".matches(pattern: "c*a*b"))
+    @Test
+    func location() {
+        let value = "Every good boy deserves favor."
+        let expectedLocationStart: String.Location = (1, 1)
+        let expectedLocationEnd: String.Location = (1, UInt(value.count + 1))
+
+        let actualLocationStart = value.location(of: value.startIndex)
+        let actualLocationEnd = value.location(of: value.endIndex)
+
+        #expect(actualLocationStart?.line == expectedLocationStart.line)
+        #expect(actualLocationStart?.column == expectedLocationStart.column)
+        #expect(actualLocationEnd?.line == expectedLocationEnd.line)
+        #expect(actualLocationEnd?.column == expectedLocationEnd.column)
     }
 
-    func test_matches_ci1() {
-        XCTAssertFalse("aa".matches(pattern: "A"))
-        XCTAssertFalse("aa".matches(pattern: "Aa"))
-        XCTAssertFalse("aaa".matches(pattern: "Aa"))
-        XCTAssertTrue("aa".matches(pattern: "*"))
-        XCTAssertFalse("aa".matches(pattern: "A*"))
-        XCTAssertTrue("ab".matches(pattern: "?*"))
-        XCTAssertFalse("aab".matches(pattern: "c*A*b"))
+    @Test
+    func matches() {
+        #expect(!"aa".matches(pattern: "a"))
+        #expect("aa".matches(pattern: "aa"))
+        #expect(!"aaa".matches(pattern: "aa"))
+        #expect("aa".matches(pattern: "*"))
+        #expect("aa".matches(pattern: "a*"))
+        #expect("ab".matches(pattern: "?*"))
+        #expect(!"aab".matches(pattern: "c*a*b"))
     }
 
-    func test_matches_ci2() {
-        XCTAssertFalse("aa".matches(pattern: "A",
-                                    caseInsensitive: true))
-        XCTAssertTrue("aa".matches(pattern: "Aa",
-                                   caseInsensitive: true))
-        XCTAssertFalse("aaa".matches(pattern: "Aa",
-                                     caseInsensitive: true))
-        XCTAssertTrue("aa".matches(pattern: "*",
-                                   caseInsensitive: true))
-        XCTAssertTrue("aa".matches(pattern: "A*",
-                                   caseInsensitive: true))
-        XCTAssertTrue("ab".matches(pattern: "?*",
-                                   caseInsensitive: true))
-        XCTAssertFalse("aab".matches(pattern: "c*A*b",
-                                     caseInsensitive: true))
+    @Test
+    func matchesCI1() {
+        #expect(!"aa".matches(pattern: "A"))
+        #expect(!"aa".matches(pattern: "Aa"))
+        #expect(!"aaa".matches(pattern: "Aa"))
+        #expect("aa".matches(pattern: "*"))
+        #expect(!"aa".matches(pattern: "A*"))
+        #expect("ab".matches(pattern: "?*"))
+        #expect(!"aab".matches(pattern: "c*A*b"))
     }
 
-    func test_matches_ci3() {
-        XCTAssertFalse("Jon".matches(pattern: "jo?n",
+    @Test
+    func matchesCI2() {
+        #expect(!"aa".matches(pattern: "A",
+                              caseInsensitive: true))
+        #expect("aa".matches(pattern: "Aa",
+                             caseInsensitive: true))
+        #expect(!"aaa".matches(pattern: "Aa",
+                               caseInsensitive: true))
+        #expect("aa".matches(pattern: "*",
+                             caseInsensitive: true))
+        #expect("aa".matches(pattern: "A*",
+                             caseInsensitive: true))
+        #expect("ab".matches(pattern: "?*",
+                             caseInsensitive: true))
+        #expect(!"aab".matches(pattern: "c*A*b",
+                               caseInsensitive: true))
+    }
+
+    @Test
+    func matchesCI3() {
+        #expect(!"Jon".matches(pattern: "jo?n",
+                               caseInsensitive: false))
+        #expect(!"Jon".matches(pattern: "jo*n",
+                               caseInsensitive: false))
+        #expect(!"Jon".matches(pattern: "jo?n",
+                               caseInsensitive: true))
+        #expect("Jon".matches(pattern: "jo*n",
+                              caseInsensitive: true))
+
+        #expect(!"John".matches(pattern: "jo?n",
+                                caseInsensitive: false))
+        #expect(!"John".matches(pattern: "jo*n",
+                                caseInsensitive: false))
+        #expect("John".matches(pattern: "jo?n",
+                               caseInsensitive: true))
+        #expect("John".matches(pattern: "jo*n",
+                               caseInsensitive: true))
+
+        #expect(!"Johnnie".matches(pattern: "jo?n?",
+                                   caseInsensitive: false))
+        #expect(!"Johnnie".matches(pattern: "jo?n*",
+                                   caseInsensitive: false))
+        #expect(!"Johnnie".matches(pattern: "jo?n?",
+                                   caseInsensitive: true))
+        #expect("Johnnie".matches(pattern: "jo?n*",
+                                  caseInsensitive: true))
+
+        #expect(!"Johnathan".matches(pattern: "jo?n",
                                      caseInsensitive: false))
-        XCTAssertFalse("Jon".matches(pattern: "jo*n",
+        #expect(!"Johnathan".matches(pattern: "jo*n",
                                      caseInsensitive: false))
-        XCTAssertFalse("Jon".matches(pattern: "jo?n",
+        #expect(!"Johnathan".matches(pattern: "jo?n",
                                      caseInsensitive: true))
-        XCTAssertTrue("Jon".matches(pattern: "jo*n",
+        #expect("Johnathan".matches(pattern: "jo*n",
                                     caseInsensitive: true))
 
-        XCTAssertFalse("John".matches(pattern: "jo?n",
-                                      caseInsensitive: false))
-        XCTAssertFalse("John".matches(pattern: "jo*n",
-                                      caseInsensitive: false))
-        XCTAssertTrue("John".matches(pattern: "jo?n",
+        #expect(!"Johnathan".matches(pattern: "Jo?n?",
+                                     caseInsensitive: false))
+        #expect("Johnathan".matches(pattern: "Jo?n*",
+                                    caseInsensitive: false))
+        #expect(!"Johnathan".matches(pattern: "Jo?n?",
                                      caseInsensitive: true))
-        XCTAssertTrue("John".matches(pattern: "jo*n",
-                                     caseInsensitive: true))
-
-        XCTAssertFalse("Johnnie".matches(pattern: "jo?n?",
-                                         caseInsensitive: false))
-        XCTAssertFalse("Johnnie".matches(pattern: "jo?n*",
-                                         caseInsensitive: false))
-        XCTAssertFalse("Johnnie".matches(pattern: "jo?n?",
-                                         caseInsensitive: true))
-        XCTAssertTrue("Johnnie".matches(pattern: "jo?n*",
-                                        caseInsensitive: true))
-
-        XCTAssertFalse("Johnathan".matches(pattern: "jo?n",
-                                           caseInsensitive: false))
-        XCTAssertFalse("Johnathan".matches(pattern: "jo*n",
-                                           caseInsensitive: false))
-        XCTAssertFalse("Johnathan".matches(pattern: "jo?n",
-                                           caseInsensitive: true))
-        XCTAssertTrue("Johnathan".matches(pattern: "jo*n",
-                                          caseInsensitive: true))
-
-        XCTAssertFalse("Johnathan".matches(pattern: "Jo?n?",
-                                           caseInsensitive: false))
-        XCTAssertTrue("Johnathan".matches(pattern: "Jo?n*",
-                                          caseInsensitive: false))
-        XCTAssertFalse("Johnathan".matches(pattern: "Jo?n?",
-                                           caseInsensitive: true))
-        XCTAssertTrue("Johnathan".matches(pattern: "Jo?n*",
-                                          caseInsensitive: true))
+        #expect("Johnathan".matches(pattern: "Jo?n*",
+                                    caseInsensitive: true))
     }
 }

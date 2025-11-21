@@ -4,10 +4,40 @@ import Foundation
 
 extension String {
 
+    // MARK: Public Nested Types
+
+    public typealias Location = (line: UInt, column: UInt)
+
     // MARK: Public Instance Properties
 
     public var localized: Self {
         NSLocalizedString(self, comment: "")    // swiftlint:disable:this nslocalizedstring_key
+    }
+
+    public func location(of position: Self.Index) -> Location? {
+        // guard index >= startIndex && index <= endIndex
+        // else { return nil }
+
+        let posRange = NSRange(location: distance(from: startIndex,
+                                                  to: position),
+                               length: 0)
+        let nsString = self as NSString
+        let lineRange = nsString.lineRange(for: posRange)
+
+        var lineNum: UInt = 1
+
+        nsString.enumerateLines { line, stop in
+            if nsString.range(of: line,
+                              range: lineRange).location == lineRange.location {
+                stop.pointee = true
+            } else {
+                lineNum += 1
+            }
+        }
+
+        let colNum = UInt(posRange.location - lineRange.location + 1)
+
+        return (lineNum, colNum)
     }
 
     public var nilIfEmpty: String? {
