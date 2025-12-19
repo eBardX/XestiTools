@@ -52,7 +52,7 @@ extension Tokenizer {
 
 extension Tokenizer.Rule: CustomStringConvertible {
     public var description: String {
-        "(\(ruleID), \(_formatRegex(regex)), \(_formatConditions(conditions)))"
+        "‹\(ruleID)›(\(_formatRegex(regex)), \(_formatConditions(conditions)), \(_formatDisposition(disposition)))"
     }
 }
 
@@ -73,39 +73,20 @@ extension Tokenizer.Rule: Hashable {
     }
 }
 
-// MARK: - (Regex extensions)
+// MARK: - Private Functions
 
-extension Regex {
-    fileprivate var safeLiteralPattern: String? {
-#if compiler(>=6)
-    #if os(iOS)
-        if #available(iOS 18.0, *) {
-            _literalPattern
-        } else {
-            nil
-        }
-    #elseif os(macOS)
-        if #available(macOS 15.0, *) {
-            _literalPattern
-        } else {
-            nil
-        }
-    #else
-        nil
-    #endif
-#else
-        nil
-#endif
-    }
+private func _formatDisposition(_ disposition: Tokenizer.Disposition?) -> String {
+    guard let disposition
+    else { return "dynamic" }
+
+    return disposition.description
 }
-
-// MARK: - (private functions)
 
 private func _formatRegex(_ regex: Regex<Substring>) -> String {
     guard let pattern = regex.safeLiteralPattern
     else { return "unknown" }
 
-    return "/" + pattern + "/"
+    return "/" + liteEscape(pattern) + "/"
 }
 
 private func _formatConditions(_ conditions: Set<Tokenizer.Condition>) -> String {

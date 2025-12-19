@@ -4,17 +4,13 @@ import Foundation
 
 extension String {
 
-    // MARK: Public Nested Types
-
-    public typealias Location = (line: UInt, column: UInt)
-
     // MARK: Public Instance Properties
 
     public var localized: Self {
         NSLocalizedString(self, comment: "")    // swiftlint:disable:this nslocalizedstring_key
     }
 
-    public func location(of position: Self.Index) -> Location? {
+    public func location(of position: Self.Index) -> TextLocation? {
         // guard index >= startIndex && index <= endIndex
         // else { return nil }
 
@@ -37,7 +33,8 @@ extension String {
 
         let colNum = UInt(posRange.location - lineRange.location + 1)
 
-        return (lineNum, colNum)
+        return TextLocation(line: lineNum,
+                            column: colNum)
     }
 
     public var nilIfEmpty: String? {

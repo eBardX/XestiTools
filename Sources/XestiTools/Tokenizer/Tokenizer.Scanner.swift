@@ -4,7 +4,7 @@ extension Tokenizer {
 
     // MARK: Public Nested Types
 
-    public final class Scanner {
+    public struct Scanner {
 
         // MARK: Public Instance Properties
 
@@ -53,7 +53,7 @@ extension Tokenizer.Scanner {
 
     // MARK: Internal Instance Methods
 
-    internal func scanTokens() throws -> [Token] {
+    internal mutating func scanTokens() throws -> [Token] {
         var tokens: [Token] = []
 
         if tokenizer.tracing >= .quiet {
@@ -61,21 +61,22 @@ extension Tokenizer.Scanner {
         }
 
         while currentIndex < input.endIndex {
-            guard let token = try _scanBestToken()
-            else { continue }
+            let token = try _scanBestToken()
 
             if tokenizer.tracing >= .verbose {
                 print("----------")
             }
 
-            tokens.append(token)
+            if let token {
+                tokens.append(token)
+            }
         }
 
         if tokenizer.tracing >= .quiet {
             print("### Resulting tokens:")
 
             for token in tokens {
-                print("=== «\(liteEscape(token.value))» ‹\(token.kind)› ‹\(token.position)›")
+                print("=== \(token.debugDescription)")
             }
 
             print("----------")
@@ -86,24 +87,17 @@ extension Tokenizer.Scanner {
 
     // MARK: Private Instance Methods
 
-    private func _escapedPrefix(of text: Substring,
-                                maxLength: Int = 16) -> String {
-        if text.count > maxLength {
-            liteEscape(text.prefix(maxLength)) + "…"
-        } else {
-            liteEscape(text)
-        }
-    }
-
-    private func _scanBestToken() throws -> Token? {
+    private mutating func _scanBestToken() throws -> Token? {
         let text = input[currentIndex...]
+        let location = text.location
 
         if tokenizer.tracing >= .verbose {
-            print("*** Attempting to match text beginning: «\(_escapedPrefix(of: text))», currentCondition: \(currentCondition)")
+            print("*** Attempting to match text beginning: \(text.escapedPrefix(location: location)), currentCondition: \(currentCondition)")
         }
 
         var matchRule: Tokenizer.Rule?
         var matchIndex = currentIndex
+        var matchValue: Substring?
 
         for rule in tokenizer.rules where rule.isActive(for: currentCondition) {
             if tokenizer.tracing >= .veryVerbose {
@@ -115,28 +109,32 @@ extension Tokenizer.Scanner {
                   match.range.upperBound > matchIndex
             else { continue }
 
+            if tokenizer.tracing >= .veryVerbose {
+                print("--- Updating best match")
+            }
+
             matchIndex = match.range.upperBound
             matchRule = rule
+            matchValue = match.output
         }
 
         guard let rule = matchRule,
+              let value = matchValue,
               matchIndex > currentIndex
-        else { throw Error.unrecognizedToken(text, currentIndex) }
-
-        let value = text[currentIndex..<matchIndex]
+        else { throw Error.unrecognizedToken(text, location) }
 
         currentIndex = matchIndex
 
         let outCondition: Condition?
         let token: Token?
 
-        if let disposition = try rule.action(self,
+        if let disposition = try rule.action(&self,
                                              value,
                                              currentCondition) ?? rule.disposition {
             switch disposition {
             case let .save(kind, cond):
                 outCondition = cond ?? currentCondition
-                token = Token(kind, value)
+                token = Token(kind, value, location)
 
             case let .skip(cond):
                 outCondition = cond ?? currentCondition
@@ -154,9 +152,12 @@ extension Tokenizer.Scanner {
 
         if tokenizer.tracing >= .verbose {
             if let token {
-                print("+++ Saving token: \(token)")
+                print("+++ Saving token: \(token.debugDescription)")
             } else {
-                print("+++ Skipping token: (‹›, «\(liteEscape(value))», ‹\(value.startIndex)›)")
+                let prefix = value.escapedPrefix(maxLength: value.count,
+                                                 location: location)
+
+                print("+++ Skipping token: \(prefix)")
             }
         }
 

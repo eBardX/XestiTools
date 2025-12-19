@@ -21,8 +21,10 @@ public struct Tokenizer {
     // MARK: Public Instance Methods
 
     public func tokenize(input: String) throws -> [Token] {
-        try Scanner(tokenizer: self,
-                    input: input,
-                    userInfo: userInfo).scanTokens()
+        var scanner = Scanner(tokenizer: self,
+                              input: input,
+                              userInfo: userInfo)
+
+        return try scanner.scanTokens()
     }
 }

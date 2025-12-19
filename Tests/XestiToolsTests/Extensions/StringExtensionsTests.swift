@@ -12,8 +12,8 @@ extension StringExtensionsTests {
     @Test
     func location() {
         let value = "Every good boy deserves favor."
-        let expectedLocationStart: String.Location = (1, 1)
-        let expectedLocationEnd: String.Location = (1, UInt(value.count + 1))
+        let expectedLocationStart = TextLocation(1, 1)
+        let expectedLocationEnd = TextLocation(1, UInt(value.count + 1))
 
         let actualLocationStart = value.location(of: value.startIndex)
         let actualLocationEnd = value.location(of: value.endIndex)

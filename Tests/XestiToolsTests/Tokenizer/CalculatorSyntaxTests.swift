@@ -1,7 +1,13 @@
-import XCTest
+// © 2025 John Gary Pusey (see LICENSE.md)
+
+import Testing
 @testable import XestiTools
 
-extension Tokenizer.Token.Kind {
+private typealias Kind  = Token.Kind
+private typealias Rule  = Tokenizer.Rule
+private typealias Token = Tokenizer.Token
+
+extension Kind {
     fileprivate static let float            = Self("float")
     fileprivate static let integer          = Self("integer")
     fileprivate static let leftParenthesis  = Self("leftParenthesis")
@@ -9,71 +15,85 @@ extension Tokenizer.Token.Kind {
     fileprivate static let rightParenthesis = Self("rightParenthesis")
 }
 
-private let rules: [Tokenizer.Rule] = [.init(/[0-9]+.[0-9]+/, .float),
-                                       .init(/[0-9]+/, .integer),
-                                       .init(/\(/, .leftParenthesis),
-                                       .init(/[\-\*\/\+]/, .op),
-                                       .init(/\)/, .rightParenthesis),
-                                       .init(regex: /\s+/,
-                                             disposition: .skip(nil))]
+private let rules: [Rule] = [Rule(/[0-9]+.[0-9]+/, .float),
+                             Rule(/[0-9]+/, .integer),
+                             Rule(/\(/, .leftParenthesis),
+                             Rule(/[\-\*\/\+]/, .op),
+                             Rule(/\)/, .rightParenthesis),
+                             Rule(regex: /\s+/,
+                                  disposition: .skip(nil))]
 
 private let tokenizer = Tokenizer(rules: rules,
-                                  tracing: .quiet)
+                                  tracing: .silent)
 
-final class CalculatorSyntaxTests: XCTestCase {
-    func testIntSum() throws {
-        let tokens = try tokenizer.tokenize(input: "1 + 1")
+struct CalculatorSyntaxTests {
+}
 
-        assertEqualTokens(actual: tokens,
-                          expected: [.init(.integer, "1"),
-                                     .init(.op, "+"),
-                                     .init(.integer, "1")])
-    }
+// MARK: -
 
-    func testFloatSum() throws {
-        let tokens = try tokenizer.tokenize(input: "1.2   +      1.004")
+extension CalculatorSyntaxTests {
+    @Test
+    func complexExpression() throws {
+        let tokens = try tokenizer.tokenize(input: "( 1332.4322  +       1   ) *2 / 44.44 + ((2.3- 2) * 4  )   / 0.3       ")
 
         assertEqualTokens(actual: tokens,
-                          expected: [.init(.float, "1.2"),
-                                     .init(.op, "+"),
-                                     .init(.float, "1.004")])
+                          expected: [makeToken(.leftParenthesis, "("),
+                                     makeToken(.float, "1332.4322"),
+                                     makeToken(.op, "+"),
+                                     makeToken(.integer, "1"),
+                                     makeToken(.rightParenthesis, ")"),
+                                     makeToken(.op, "*"),
+                                     makeToken(.integer, "2"),
+                                     makeToken(.op, "/"),
+                                     makeToken(.float, "44.44"),
+                                     makeToken(.op, "+"),
+                                     makeToken(.leftParenthesis, "("),
+                                     makeToken(.leftParenthesis, "("),
+                                     makeToken(.float, "2.3"),
+                                     makeToken(.op, "-"),
+                                     makeToken(.integer, "2"),
+                                     makeToken(.rightParenthesis, ")"),
+                                     makeToken(.op, "*"),
+                                     makeToken(.integer, "4"),
+                                     makeToken(.rightParenthesis, ")"),
+                                     makeToken(.op, "/"),
+                                     makeToken(.float, "0.3")])
     }
 
-    func testFloatIntSum() throws {
+    @Test
+    func floatIntSum() throws {
         let tokens = try tokenizer.tokenize(input: "   1332.4322  +       1   ")
 
         assertEqualTokens(actual: tokens,
-                          expected: [.init(.float, "1332.4322"),
-                                     .init(.op, "+"),
-                                     .init(.integer, "1")])
+                          expected: [makeToken(.float, "1332.4322"),
+                                     makeToken(.op, "+"),
+                                     makeToken(.integer, "1")])
     }
 
-    func testComplexExpression() throws {
-        let tokens = try tokenizer.tokenize(input: "( 1332.4322  +       1   ) *2 / 44.44 + ((2.3- 2) * 4  )   / 0.3       ")
-
-        print(tokens)
+    @Test
+    func floatSum() throws {
+        let tokens = try tokenizer.tokenize(input: "1.2   +      1.004")
 
         assertEqualTokens(actual: tokens,
-                          expected: [.init(.leftParenthesis, "("),
-                                     .init(.float, "1332.4322"),
-                                     .init(.op, "+"),
-                                     .init(.integer, "1"),
-                                     .init(.rightParenthesis, ")"),
-                                     .init(.op, "*"),
-                                     .init(.integer, "2"),
-                                     .init(.op, "/"),
-                                     .init(.float, "44.44"),
-                                     .init(.op, "+"),
-                                     .init(.leftParenthesis, "("),
-                                     .init(.leftParenthesis, "("),
-                                     .init(.float, "2.3"),
-                                     .init(.op, "-"),
-                                     .init(.integer, "2"),
-                                     .init(.rightParenthesis, ")"),
-                                     .init(.op, "*"),
-                                     .init(.integer, "4"),
-                                     .init(.rightParenthesis, ")"),
-                                     .init(.op, "/"),
-                                     .init(.float, "0.3")])
+                          expected: [makeToken(.float, "1.2"),
+                                     makeToken(.op, "+"),
+                                     makeToken(.float, "1.004")])
     }
+
+    @Test
+    func intSum() throws {
+        let tokens = try tokenizer.tokenize(input: "1 + 1")
+
+        assertEqualTokens(actual: tokens,
+                          expected: [makeToken(.integer, "1"),
+                                     makeToken(.op, "+"),
+                                     makeToken(.integer, "1")])
+    }
+}
+
+// MARK: - Private Functions
+
+private func makeToken(_ kind: Kind,
+                       _ value: String) -> Token {
+    Token(kind, Substring(value), TextLocation(1, 1))
 }

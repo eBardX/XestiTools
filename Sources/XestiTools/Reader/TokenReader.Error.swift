@@ -3,7 +3,7 @@
 extension TokenReader {
     public enum Error {
         case noMoreTokens
-        case unexpectedToken(Substring, String.Index)
+        case unexpectedToken(Token)
     }
 }
 
@@ -15,8 +15,8 @@ extension TokenReader.Error: EnhancedError {
         case .noMoreTokens:
             "No more tokens"
 
-        case let .unexpectedToken(value, position):
-            "Unexpected token: «\(liteEscape(value))», position: ‹\(position)›"
+        case let .unexpectedToken(token):
+            "Unexpected token: \(token)"
         }
     }
 }

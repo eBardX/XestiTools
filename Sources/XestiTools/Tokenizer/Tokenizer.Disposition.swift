@@ -9,3 +9,17 @@ extension Tokenizer {
         case skip(Tokenizer.Condition?)
     }
 }
+
+// MARK: - CustomStringConvertible
+
+extension Tokenizer.Disposition: CustomStringConvertible {
+    public var description: String {
+        switch self {
+        case let .save(kind, condition):
+            "save(\(kind), \(condition ?? "nil"))"
+
+        case let .skip(condition):
+            "skip(\(condition ?? "nil"))"
+        }
+    }
+}

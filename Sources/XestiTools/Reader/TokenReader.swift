@@ -34,7 +34,7 @@ extension TokenReader {
         guard let token = baseReader.read()
         else { throw Error.noMoreTokens }
 
-        throw Error.unexpectedToken(token.value, token.position)
+        throw Error.unexpectedToken(token)
     }
 
     public func nextMatches(_ kind: Kind) -> Bool {
@@ -76,7 +76,7 @@ extension TokenReader {
         else { throw Error.noMoreTokens }
 
         guard kinds.contains(token.kind)
-        else { throw Error.unexpectedToken(token.value, token.position) }
+        else { throw Error.unexpectedToken(token) }
 
         return token
     }

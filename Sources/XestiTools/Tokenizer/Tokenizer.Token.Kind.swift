@@ -17,3 +17,11 @@ extension Tokenizer.Token {
         public let stringValue: String
     }
 }
+
+// MARK: - CustomStringConvertible
+
+extension Tokenizer.Token.Kind: CustomStringConvertible {
+    public var description: String {
+        "‹" + stringValue + "›"
+    }
+}
