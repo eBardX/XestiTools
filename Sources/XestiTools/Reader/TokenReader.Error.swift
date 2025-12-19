@@ -20,3 +20,8 @@ extension TokenReader.Error: EnhancedError {
         }
     }
 }
+
+// MARK: - Sendable
+
+extension TokenReader.Error: Sendable {
+}

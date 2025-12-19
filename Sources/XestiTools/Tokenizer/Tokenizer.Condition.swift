@@ -58,3 +58,8 @@ extension Tokenizer.Condition: CustomStringConvertible {
         }
     }
 }
+
+// MARK: - Sendable
+
+extension Tokenizer.Condition: Sendable {
+}

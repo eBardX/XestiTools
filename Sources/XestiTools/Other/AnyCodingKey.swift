@@ -34,3 +34,8 @@ extension AnyCodingKey: Equatable {
 
 extension AnyCodingKey: Hashable {
 }
+
+// MARK: - Sendable
+
+extension AnyCodingKey: Sendable {
+}

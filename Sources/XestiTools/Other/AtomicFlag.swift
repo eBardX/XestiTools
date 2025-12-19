@@ -28,3 +28,8 @@ public struct AtomicFlag {
 
     private var flag: atomic_flag
 }
+
+// MARK: - Sendable
+
+extension AtomicFlag: Sendable {
+}

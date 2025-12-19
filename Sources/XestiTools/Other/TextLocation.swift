@@ -42,3 +42,8 @@ extension TextLocation: Equatable {
 
 extension TextLocation: Hashable {
 }
+
+// MARK: - Sendable
+
+extension TextLocation: Sendable {
+}

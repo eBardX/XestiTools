@@ -116,3 +116,8 @@ extension FilePath.Attributes {
         return dict
     }
 }
+
+// MARK: - Sendable
+
+extension FilePath.Attributes: Sendable {
+}

@@ -1,7 +1,5 @@
 // © 2025 John Gary Pusey (see LICENSE.md)
 
-import Foundation
-
 extension Substring {
 
     // MARK: Public Nested Types

@@ -64,3 +64,8 @@ extension RunLoop.Error: EnhancedError {
         }
     }
 }
+
+// MARK: - Sendable
+
+extension RunLoop.Error: Sendable {
+}

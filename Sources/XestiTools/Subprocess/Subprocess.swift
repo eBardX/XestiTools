@@ -47,8 +47,8 @@ open class Subprocess {
                                       qos: .userInteractive,
                                       target: .global(qos: .userInteractive))
 
-        var outputData = Data()
-        var errorData = Data()
+        nonisolated(unsafe) var outputData = Data()
+        nonisolated(unsafe) var errorData = Data()
 
         let outputPipe = Pipe()
         let errorPipe = Pipe()

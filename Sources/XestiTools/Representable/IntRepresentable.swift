@@ -5,7 +5,8 @@ public protocol IntRepresentable: Codable,
                                   CustomStringConvertible,
                                   Equatable,
                                   ExpressibleByIntegerLiteral,
-                                  Hashable {
+                                  Hashable,
+                                  Sendable {
     static var invalidMessage: String { get }
 
     static func isValid(_ intValue: Int) -> Bool

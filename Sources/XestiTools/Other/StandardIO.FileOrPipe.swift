@@ -45,3 +45,8 @@ extension StandardIO.FileOrPipe {
         }
     }
 }
+
+// MARK: - Sendable
+
+extension StandardIO.FileOrPipe: Sendable {
+}

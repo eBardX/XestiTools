@@ -20,7 +20,7 @@ extension UUID {
 
 // MARK: -
 
-private struct Octaword {
+private struct Octaword: Sendable {
 
     // MARK: Fileprivate Initializers
 

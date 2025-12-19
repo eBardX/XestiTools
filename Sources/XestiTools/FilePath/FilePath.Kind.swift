@@ -66,3 +66,8 @@ extension FilePath.Kind {
         }
     }
 }
+
+// MARK: - Sendable
+
+extension FilePath.Kind: Sendable {
+}

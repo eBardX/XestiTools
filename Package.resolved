@@ -1,5 +1,5 @@
 {
-  "originHash" : "1dea902799e39c0b87cc67cb0c310cc075cd492d9102eefedfc8a4c5078da09e",
+  "originHash" : "48532bd86d5658f236f846925a1d97582c9cf7e5efa6eaf5667fcf6874187879",
   "pins" : [
     {
       "identity" : "swift-argument-parser",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/eBardX/XestiText.git",
       "state" : {
-        "revision" : "e43f127a329683d846ed8a468961100b9f418fed",
-        "version" : "3.1.2"
+        "revision" : "97ea5c4c1667b44abc5fdaa4455cade807a21437",
+        "version" : "4.0.0"
       }
     },
     {

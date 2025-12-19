@@ -39,3 +39,8 @@ extension Tokenizer.Token: CustomStringConvertible {
         "\(kind)(«\(liteEscape(value))»)"
     }
 }
+
+// MARK: - Sendable
+
+extension Tokenizer.Token: Sendable {
+}

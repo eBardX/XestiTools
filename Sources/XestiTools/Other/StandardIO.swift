@@ -1,7 +1,7 @@
 // © 2024—2025 John Gary Pusey (see LICENSE.md)
 
 import Dispatch
-import Foundation
+@preconcurrency import Foundation
 import System
 
 public struct StandardIO {
@@ -161,4 +161,9 @@ public struct StandardIO {
 
         return .init("\(message)\(terminator)".utf8)
     }
+}
+
+// MARK: - Sendable
+
+extension StandardIO: Sendable {
 }

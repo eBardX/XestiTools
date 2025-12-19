@@ -47,3 +47,8 @@ extension FilePath {
         public let uploadingError: (any Error)?
     }
 }
+
+// MARK: - Sendable
+
+extension FilePath.ICloudInfo: Sendable {
+}

@@ -23,3 +23,8 @@ extension Tokenizer.Disposition: CustomStringConvertible {
         }
     }
 }
+
+// MARK: - Sendable
+
+extension Tokenizer.Disposition: Sendable {
+}

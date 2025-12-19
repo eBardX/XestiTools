@@ -52,3 +52,8 @@ extension Platform {
 #endif
     }
 }
+
+// MARK: - Sendable
+
+extension Platform: Sendable {
+}

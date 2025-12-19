@@ -19,3 +19,8 @@ extension Tokenizer.Error: EnhancedError {
         }
     }
 }
+
+// MARK: - Sendable
+
+extension Tokenizer.Error: Sendable {
+}

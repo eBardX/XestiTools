@@ -30,8 +30,9 @@ extension Tokenizer {
 
         // MARK: Private Type Properties
 
-        private static let validPattern = /R\$[0-9A-Za-z]{22}/
-        private static let validPrefix  = "R$"
+        nonisolated(unsafe) private static let validPattern = /R\$[0-9A-Za-z]{22}/
+
+        private static let validPrefix = "R$"
     }
 }
 

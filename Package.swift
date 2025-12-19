@@ -1,4 +1,4 @@
-// swift-tools-version: 5.10
+// swift-tools-version: 6.2
 
 // © 2018–2025 John Gary Pusey (see LICENSE.md)
 
@@ -12,7 +12,7 @@ let package = Package(name: "XestiTools",
                       dependencies: [.package(url: "https://github.com/apple/swift-argument-parser.git",
                                               .upToNextMajor(from: "1.6.0")),
                                      .package(url: "https://github.com/eBardX/XestiText.git",
-                                              .upToNextMajor(from: "3.1.0")),
+                                              .upToNextMajor(from: "4.0.0")),
                                      .package(url: "https://github.com/weichsel/ZIPFoundation.git",
                                               .upToNextMajor(from: "0.9.0"))],
                       targets: [.target(name: "XestiTools",
@@ -24,13 +24,10 @@ let package = Package(name: "XestiTools",
                                                                 package: "ZIPFoundation")]),
                                 .testTarget(name: "XestiToolsTests",
                                             dependencies: [.target(name: "XestiTools")])],
-                      swiftLanguageVersions: [.v5])
+                      swiftLanguageModes: [.v6])
 
-let swiftSettings: [SwiftSetting] = [.enableUpcomingFeature("BareSlashRegexLiterals"),
-                                     .enableUpcomingFeature("ConciseMagicFile"),
-                                     .enableUpcomingFeature("ExistentialAny"),
-                                     .enableUpcomingFeature("ForwardTrailingClosures"),
-                                     .enableUpcomingFeature("ImplicitOpenExistentials")]
+let swiftSettings: [SwiftSetting] = [.defaultIsolation(nil),
+                                     .enableUpcomingFeature("ExistentialAny")]
 
 for target in package.targets {
     var settings = target.swiftSettings ?? []

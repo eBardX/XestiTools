@@ -24,3 +24,8 @@ extension Verbosity: Equatable {
         lhs.rawValue == rhs.rawValue
     }
 }
+
+// MARK: - Sendable
+
+extension Verbosity: Sendable {
+}

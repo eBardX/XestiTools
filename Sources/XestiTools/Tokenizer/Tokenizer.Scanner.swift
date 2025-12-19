@@ -12,13 +12,13 @@ extension Tokenizer {
 
         public private(set) var currentCondition: Condition
         public private(set) var currentIndex: String.Index
-        public private(set) var userInfo: [UserInfoKey: Any]
+        public private(set) var userInfo: [UserInfoKey: any Sendable]
 
         // MARK: Internal Initializers
 
         internal init(tokenizer: Tokenizer,
                       input: String,
-                      userInfo: [UserInfoKey: Any]) {
+                      userInfo: [UserInfoKey: any Sendable]) {
             self.currentCondition = .initial
             self.currentIndex = input.startIndex
             self.input = input
@@ -46,7 +46,7 @@ extension Tokenizer.Scanner {
 
     // MARK: Public Instance Subscripts
 
-    public subscript(_ key: UserInfoKey) -> Any? {
+    public subscript(_ key: UserInfoKey) -> (any Sendable)? {
         get { userInfo[key] }
         set { userInfo[key] = newValue }
     }

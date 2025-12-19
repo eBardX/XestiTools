@@ -15,16 +15,16 @@ extension Kind {
     fileprivate static let rightParenthesis = Self("rightParenthesis")
 }
 
-private let rules: [Rule] = [Rule(/[0-9]+.[0-9]+/, .float),
-                             Rule(/[0-9]+/, .integer),
-                             Rule(/\(/, .leftParenthesis),
-                             Rule(/[\-\*\/\+]/, .op),
-                             Rule(/\)/, .rightParenthesis),
-                             Rule(regex: /\s+/,
-                                  disposition: .skip(nil))]
+nonisolated(unsafe) private let rules: [Rule] = [Rule(/[0-9]+.[0-9]+/, .float),
+                                                 Rule(/[0-9]+/, .integer),
+                                                 Rule(/\(/, .leftParenthesis),
+                                                 Rule(/[\-\*\/\+]/, .op),
+                                                 Rule(/\)/, .rightParenthesis),
+                                                 Rule(regex: /\s+/,
+                                                      disposition: .skip(nil))]
 
-private let tokenizer = Tokenizer(rules: rules,
-                                  tracing: .silent)
+nonisolated(unsafe) private let tokenizer = Tokenizer(rules: rules,
+                                                      tracing: .silent)
 
 struct CalculatorSyntaxTests {
 }
