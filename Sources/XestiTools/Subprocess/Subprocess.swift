@@ -1,4 +1,4 @@
-// © 2018–2024 John Gary Pusey (see LICENSE.md)
+// © 2018–2026 John Gary Pusey (see LICENSE.md)
 
 #if os(macOS)
 import Foundation
@@ -16,7 +16,7 @@ open class Subprocess {
                 arguments: [String] = [],
                 currentDirectoryPath: FilePath? = nil,
                 environment: [String: String]? = nil,
-                standardIO: StandardIO = .init()) {
+                standardIO: StandardIO = StandardIO()) {
         self.process = Process()
 
         self.process.arguments = arguments
@@ -43,7 +43,7 @@ open class Subprocess {
     }
 
     public func run() throws -> Result {
-        let dataQueue = DispatchQueue(label: "com.xesticode.SubprocessTask.dataQueue",
+        let dataQueue = DispatchQueue(label: "com.xesticode.Subprocess.dataQueue",
                                       qos: .userInteractive,
                                       target: .global(qos: .userInteractive))
 

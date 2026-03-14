@@ -1,4 +1,4 @@
-// © 2023–2025 John Gary Pusey (see LICENSE.md)
+// © 2023–2026 John Gary Pusey (see LICENSE.md)
 
 import Foundation
 import System
@@ -9,18 +9,14 @@ extension FilePath {
     // MARK: Public Type Properties
 
     public static var currentDirectory: Self {
-        get { .init(FileManager.default.currentDirectoryPath) }
+        get { Self(FileManager.default.currentDirectoryPath) }
         set { FileManager.default.changeCurrentDirectoryPath(newValue.string) }
     }
 
     // MARK: Public Instance Methods
 
     public func attributes() throws -> Attributes {
-        try .init(FileManager.default.attributesOfItem(atPath: string))
-    }
-
-    public func componentsToDisplay() -> [String]? {
-        FileManager.default.componentsToDisplay(forPath: string)
+        try Attributes(FileManager.default.attributesOfItem(atPath: string))
     }
 
     public func contentsEqual(to other: Self) -> Bool {
@@ -37,10 +33,6 @@ extension FilePath {
         }
     }
 
-    public func contentsOfFile() -> Data? {
-        FileManager.default.contents(atPath: string)
-    }
-
     public func copy(to destination: Self) throws {
         try FileManager.default.copyItem(at: fileURL,
                                          to: destination.fileURL)
@@ -51,13 +43,6 @@ extension FilePath {
         try FileManager.default.createDirectory(at: fileURL,
                                                 withIntermediateDirectories: createIntermediates,
                                                 attributes: attributes?.dictionaryRepresentation)
-    }
-
-    public func createFile(contents: Data? = nil,
-                           attributes: Attributes? = nil) -> Bool {
-        FileManager.default.createFile(atPath: string,
-                                       contents: contents,
-                                       attributes: attributes?.dictionaryRepresentation)
     }
 
     public func createSymbolicLink(to destination: Self) throws {
@@ -82,10 +67,6 @@ extension FilePath {
         }
 
         return appending("..").pushing(dstPath)
-    }
-
-    public func displayName() -> String {
-        FileManager.default.displayName(atPath: string)
     }
 
     public func exists() -> Bool {
@@ -120,32 +101,6 @@ extension FilePath {
 
     public func remove() throws {
         try FileManager.default.removeItem(at: fileURL)
-    }
-
-    @available(*, deprecated, renamed: "replace(with:backupName:usingNewMetaDataOnly:withoutDeletingBackup:)")
-    public func replace(with replacement: Self,
-                        backup: Self? = nil,
-                        usingNewMetaDataOnly: Bool = false,
-                        withoutDeletingBackupItem: Bool = false) throws -> Self {
-        var options: FileManager.ItemReplacementOptions = []
-
-        if usingNewMetaDataOnly {
-            options.formUnion(.usingNewMetadataOnly)
-        }
-
-        if withoutDeletingBackupItem {
-            options.formUnion(.withoutDeletingBackupItem)
-        }
-
-        var resultURL: NSURL?
-
-        try FileManager.default.replaceItem(at: fileURL,
-                                            withItemAt: replacement.fileURL,
-                                            backupItemName: backup?.string,
-                                            options: options,
-                                            resultingItemURL: &resultURL)
-
-        return Self(resultURL?.path ?? "")
     }
 
     @discardableResult

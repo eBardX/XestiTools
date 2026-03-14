@@ -1,11 +1,15 @@
-// © 2025 John Gary Pusey (see LICENSE.md)
+// © 2025–2026 John Gary Pusey (see LICENSE.md)
 
-public struct SequenceReader<Base: Sequence>: Reader {
+public struct SequenceReader<S: Sequence>: Reader {
+
+    // MARK: Public Nested Types
+
+    public typealias Element = S.Element
 
     // MARK: Public Initializers
 
-    public init(_ base: Base) {
-        self.iterator = base.makeIterator()
+    public init(_ sequence: S) {
+        self.iterator = sequence.makeIterator()
         self.next = iterator.next()
     }
 
@@ -17,11 +21,11 @@ public struct SequenceReader<Base: Sequence>: Reader {
 
     // MARK: Public Instance Methods
 
-    public func peek() -> Base.Element? {
+    public func peek() -> Element? {
         next
     }
 
-    public mutating func read() -> Base.Element? {
+    public mutating func read() -> Element? {
         guard let result = next
         else { return nil }
 
@@ -42,6 +46,6 @@ public struct SequenceReader<Base: Sequence>: Reader {
 
     // MARK: Private Instance Properties
 
-    private var iterator: Base.Iterator
-    private var next: Base.Element?
+    private var iterator: S.Iterator
+    private var next: Element?
 }

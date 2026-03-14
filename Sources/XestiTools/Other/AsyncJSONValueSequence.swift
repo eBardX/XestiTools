@@ -1,4 +1,4 @@
-// © 2024–2025 John Gary Pusey (see LICENSE.md)
+// © 2024–2026 John Gary Pusey (see LICENSE.md)
 
 import Foundation
 
@@ -63,7 +63,7 @@ public struct AsyncJSONValueSequence<Base: AsyncSequence,
     // MARK: Internal Initializers
 
     internal init(base: Base,
-                  decoder: JSONDecoder = .init()) {
+                  decoder: JSONDecoder = JSONDecoder()) {
         self.base = base
         self.decoder = decoder
     }

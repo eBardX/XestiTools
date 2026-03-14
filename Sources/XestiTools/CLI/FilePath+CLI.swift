@@ -1,4 +1,4 @@
-// © 2020–2025 John Gary Pusey (see LICENSE.md)
+// © 2020–2026 John Gary Pusey (see LICENSE.md)
 
 import ArgumentParser
 import System

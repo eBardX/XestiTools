@@ -1,10 +1,10 @@
-// © 2024 John Gary Pusey (see LICENSE.md)
+// © 2024–2026 John Gary Pusey (see LICENSE.md)
 
 import Foundation
 
 extension AsyncSequence where Self.Element == UInt8 {
-    public func jsonValues<T: Decodable>(decoder: JSONDecoder = .init()) -> AsyncJSONValueSequence<Self, T> {
-        .init(base: self,
-              decoder: decoder)
+    public func jsonValues<T: Decodable>(decoder: JSONDecoder = JSONDecoder()) -> AsyncJSONValueSequence<Self, T> {
+        AsyncJSONValueSequence(base: self,
+                               decoder: decoder)
     }
 }

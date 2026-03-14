@@ -1,4 +1,4 @@
-// © 2024 John Gary Pusey (see LICENSE.md)
+// © 2024–2026 John Gary Pusey (see LICENSE.md)
 
 #if os(macOS)
 import System
@@ -10,7 +10,7 @@ public final class ZipSubprocess: Subprocess {
     public init(sourcePath: FilePath,
                 zipPath: FilePath,
                 currentDirectoryPath: FilePath? = nil,
-                standardIO: StandardIO = .init()) {
+                standardIO: StandardIO = StandardIO()) {
         //
         // NOTE: Do NOT attempt to force `sourcePath` to be _absolute_,
         //       that can cause bad shit to happen!

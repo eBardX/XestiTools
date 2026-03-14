@@ -1,4 +1,4 @@
-// © 2025 John Gary Pusey (see LICENSE.md)
+// © 2025–2026 John Gary Pusey (see LICENSE.md)
 
 public enum Verbosity: Int {
     case silent      = 0
@@ -19,10 +19,6 @@ extension Verbosity: Comparable {
 // MARK: - Equatable
 
 extension Verbosity: Equatable {
-    public static func == (lhs: Self,
-                           rhs: Self) -> Bool {
-        lhs.rawValue == rhs.rawValue
-    }
 }
 
 // MARK: - Sendable

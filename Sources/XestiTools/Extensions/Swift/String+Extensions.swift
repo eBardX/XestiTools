@@ -1,4 +1,4 @@
-// © 2018–2025 John Gary Pusey (see LICENSE.md)
+// © 2018–2026 John Gary Pusey (see LICENSE.md)
 
 import Foundation
 
@@ -6,14 +6,26 @@ extension String {
 
     // MARK: Public Instance Properties
 
-    public var localized: Self {
-        NSLocalizedString(self, comment: "")    // swiftlint:disable:this nslocalizedstring_key
+    public var nilIfEmpty: String? {
+        isEmpty ? nil : self
+    }
+
+    // MARK: Public Instance Methods
+
+    public func escaped(asASCII forceASCII: Bool,
+                        unprintableOnly: Bool) -> Self {
+        func escape(_ chr: Unicode.Scalar) -> Self {
+            if unprintableOnly && ["\'", "\"", "\\"].contains(chr) {
+                String(chr)
+            } else {
+                chr.escaped(asASCII: forceASCII)
+            }
+        }
+
+        return unicodeScalars.map { escape($0) }.joined()
     }
 
     public func location(of position: Self.Index) -> TextLocation? {
-        // guard index >= startIndex && index <= endIndex
-        // else { return nil }
-
         let posRange = NSRange(location: distance(from: startIndex,
                                                   to: position),
                                length: 0)
@@ -35,31 +47,6 @@ extension String {
 
         return TextLocation(line: lineNum,
                             column: colNum)
-    }
-
-    public var nilIfEmpty: String? {
-        isEmpty ? nil : self
-    }
-
-    // MARK: Public Instance Methods
-
-    public func escaped(asASCII forceASCII: Bool,
-                        unprintableOnly: Bool) -> Self {
-        func escape(_ chr: Unicode.Scalar) -> Self {
-            if unprintableOnly && ["\'", "\"", "\\"].contains(chr) {
-                String(chr)
-            } else {
-                chr.escaped(asASCII: forceASCII)
-            }
-        }
-
-        var result = ""
-
-        for chr in unicodeScalars {
-            result.append(escape(chr))
-        }
-
-        return result
     }
 
     public func matches(pattern: Self,

@@ -1,9 +1,12 @@
-// © 2023–2025 John Gary Pusey (see LICENSE.md)
+// © 2023–2026 John Gary Pusey (see LICENSE.md)
 
 import Foundation
 import System
 
 extension FilePath {
+
+    // MARK: Public Nested Types
+
     public struct Attributes {
 
         // MARK: Public Initializers

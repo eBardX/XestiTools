@@ -1,4 +1,4 @@
-// © 2023–2025 John Gary Pusey (see LICENSE.md)
+// © 2023–2026 John Gary Pusey (see LICENSE.md)
 
 public protocol StringRepresentable: Codable,
                                      Comparable,
@@ -7,17 +7,11 @@ public protocol StringRepresentable: Codable,
                                      ExpressibleByStringLiteral,
                                      Hashable,
                                      Sendable {
-    static var invalidMessage: String { get }
-
     static func isValid(_ stringValue: String) -> Bool
 
-    static func requireValid(_ stringValue: String,
-                             file: StaticString,
-                             line: UInt) -> String
+    init(_ stringValue: String)
 
     init?(stringValue: String)
-
-    init(_ stringValue: String)
 
     var stringValue: String { get }
 }
@@ -25,30 +19,12 @@ public protocol StringRepresentable: Codable,
 // MARK: - (defaults)
 
 extension StringRepresentable {
-    public static var invalidMessage: String {
-        "string value must not be empty"
-    }
-
     public static func isValid(_ stringValue: String) -> Bool {
         !stringValue.isEmpty
     }
 
-    public static func requireValid(_ stringValue: String,
-                                    file: StaticString = #file,
-                                    line: UInt = #line) -> String {
-        precondition(isValid(stringValue),
-                     invalidMessage,
-                     file: file,
-                     line: line)
-
-        return stringValue
-    }
-
-    public init?(stringValue: String) {
-        guard Self.isValid(stringValue)
-        else { return nil }
-
-        self.init(stringValue)
+    public init(_ stringValue: String) {
+        self.init(stringValue: stringValue)!    // swiftlint:disable:this force_unwrapping
     }
 }
 
@@ -59,7 +35,7 @@ extension StringRepresentable where Self: Codable {
         let container = try decoder.singleValueContainer()
         let stringValue = try container.decode(String.self)
 
-        self.init(stringValue)
+        self.init(stringValue: stringValue)!    // swiftlint:disable:this force_unwrapping
     }
 
     public func encode(to encoder: any Encoder) throws {
@@ -82,7 +58,7 @@ extension StringRepresentable where Self: Comparable {
 
 extension StringRepresentable where Self: CustomStringConvertible {
     public var description: String {
-        stringValue.description
+        String(describing: stringValue)
     }
 }
 
@@ -99,6 +75,6 @@ extension StringRepresentable where Self: Equatable {
 
 extension StringRepresentable where Self: ExpressibleByStringLiteral {
     public init(stringLiteral value: String) {
-        self.init(value)
+        self.init(stringValue: value)!          // swiftlint:disable:this force_unwrapping
     }
 }

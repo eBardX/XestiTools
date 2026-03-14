@@ -1,9 +1,12 @@
-// © 2023–2025 John Gary Pusey (see LICENSE.md)
+// © 2023–2026 John Gary Pusey (see LICENSE.md)
 
 import Foundation
 import System
 
 extension FilePath {
+
+    // MARK: Public Nested Types
+
     public enum Kind {
         case blockSpecial
         case characterSpecial
@@ -16,6 +19,9 @@ extension FilePath {
 }
 
 extension FilePath.Kind {
+
+    // MARK: Public Initializers
+
     public init(_ type: FileAttributeType) {
         switch type {
         case .typeBlockSpecial:
@@ -40,6 +46,8 @@ extension FilePath.Kind {
             self = .unknown
         }
     }
+
+    // MARK: Public Instance Properties
 
     public var type: FileAttributeType {
         switch self {

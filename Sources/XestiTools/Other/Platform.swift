@@ -1,4 +1,4 @@
-// © 2020–2024 John Gary Pusey (see LICENSE.md)
+// © 2020–2026 John Gary Pusey (see LICENSE.md)
 
 public enum Platform: String {
     case android = "Android"

@@ -1,8 +1,11 @@
-// © 2024 John Gary Pusey (see LICENSE.md)
+// © 2024–2026 John Gary Pusey (see LICENSE.md)
 
 import Foundation
 
 extension StandardIO {
+
+    // MARK: Public Nested Types
+
     public enum FileOrPipe {
         case file(FileHandle)
         case pipe(Pipe)

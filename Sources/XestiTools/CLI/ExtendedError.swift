@@ -1,4 +1,4 @@
-// © 2018–2025 John Gary Pusey (see LICENSE.md)
+// © 2018–2026 John Gary Pusey (see LICENSE.md)
 
 import ArgumentParser
 import XestiText
@@ -7,7 +7,6 @@ public protocol ExtendedError: EnhancedError, CustomStringConvertible {
     var exitCode: ExitCode { get }
     var hints: [String] { get }
     var hintsPrefix: String { get }
-    var message: String { get }
     var messagePrefix: String { get }
 }
 
@@ -55,10 +54,6 @@ extension ExtendedError {
 
     public var hintsPrefix: String {
         "     - "
-    }
-
-    public var localizedDescription: String {
-        description
     }
 
     public var messagePrefix: String {

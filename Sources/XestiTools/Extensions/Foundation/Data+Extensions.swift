@@ -1,4 +1,4 @@
-// © 2025 John Gary Pusey (see LICENSE.md)
+// © 2025–2026 John Gary Pusey (see LICENSE.md)
 
 import Foundation
 import ZIPFoundation
@@ -17,7 +17,7 @@ extension Data {
             let entryURL = tmpDirectoryURL.appendingPathComponent(entry.path)
 
             guard entryURL.isContained(in: tmpDirectoryURL)
-            else { throw makeCocoaError(.fileReadInvalidFileName, entryURL.path) }
+            else { throw _makeCocoaError(.fileReadInvalidFileName, entryURL.path) }
 
             guard try archive.extract(entry,
                                       to: entryURL) == entry.checksum
@@ -31,8 +31,8 @@ extension Data {
 
 // MARK: - Private Functions
 
-private func makeCocoaError(_ code: CocoaError.Code,
-                            _ filePath: String? = nil) -> any Error {
+private func _makeCocoaError(_ code: CocoaError.Code,
+                             _ filePath: String? = nil) -> any Error {
     var userInfo: [String: Any] = [:]
 
     userInfo[NSFilePathErrorKey] = filePath

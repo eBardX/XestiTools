@@ -1,4 +1,4 @@
-// © 2023–2024 John Gary Pusey (see LICENSE.md)
+// © 2023–2026 John Gary Pusey (see LICENSE.md)
 
 extension Optional {
     public func require(hint: @autoclosure () -> String? = nil,
@@ -19,6 +19,6 @@ extension Optional where Wrapped: Equatable {
               unwrapped != value
         else { return nil }
 
-        return unwrapped
+        return self
     }
 }

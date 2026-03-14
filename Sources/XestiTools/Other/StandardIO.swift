@@ -1,4 +1,4 @@
-// © 2024—2025 John Gary Pusey (see LICENSE.md)
+// © 2024–2026 John Gary Pusey (see LICENSE.md)
 
 import Dispatch
 @preconcurrency import Foundation
@@ -78,9 +78,9 @@ public struct StandardIO {
             stderr = Self._makeFileHandle(fd)
         }
 
-        return .init(standardInput: stdin,
-                     standardOutput: stdout,
-                     standardError: stderr)
+        return Self(standardInput: stdin,
+                    standardOutput: stdout,
+                    standardError: stderr)
     }
 
     public func writeError(_ data: Data) {
@@ -130,12 +130,12 @@ public struct StandardIO {
     // MARK: Private Type Methods
 
     private static func _makeFileHandle(_ fd: FileDescriptor) -> FileOrPipe {
-        .file(.init(fileDescriptor: fd.rawValue,
-                    closeOnDealloc: true))
+        .file(FileHandle(fileDescriptor: fd.rawValue,
+                         closeOnDealloc: true))
     }
 
     private static func _makeSyncQueue() -> DispatchQueue {
-        let queue = DispatchQueue(label: "com.xesticode.IOHandles.syncQueue",
+        let queue = DispatchQueue(label: "com.xesticode.StandardIO.syncQueue",
                                   qos: .userInteractive,
                                   target: .global(qos: .userInteractive))
 
@@ -156,10 +156,10 @@ public struct StandardIO {
                          _ terminator: String) -> Data {
         if let formatter = timestampFormatter,
            let timestamp = formatter.string(for: Date()) {
-            return .init("\(String(describing: timestamp)) \(message)\(terminator)".utf8)
+            return Data("\(String(describing: timestamp)) \(message)\(terminator)".utf8)
         }
 
-        return .init("\(message)\(terminator)".utf8)
+        return Data("\(message)\(terminator)".utf8)
     }
 }
 

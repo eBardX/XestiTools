@@ -1,4 +1,4 @@
-// © 2024 John Gary Pusey (see LICENSE.md)
+// © 2024–2026 John Gary Pusey (see LICENSE.md)
 
 public protocol IntRepresentable: Codable,
                                   Comparable,
@@ -7,17 +7,11 @@ public protocol IntRepresentable: Codable,
                                   ExpressibleByIntegerLiteral,
                                   Hashable,
                                   Sendable {
-    static var invalidMessage: String { get }
-
     static func isValid(_ intValue: Int) -> Bool
 
-    static func requireValid(_ intValue: Int,
-                             file: StaticString,
-                             line: UInt) -> Int
+    init(_ intValue: Int)
 
     init?(intValue: Int)
-
-    init(_ intValue: Int)
 
     var intValue: Int { get }
 }
@@ -25,30 +19,12 @@ public protocol IntRepresentable: Codable,
 // MARK: - (defaults)
 
 extension IntRepresentable {
-    public static var invalidMessage: String {
-        "int value must be valid"
-    }
-
     public static func isValid(_ intValue: Int) -> Bool {
         true
     }
 
-    public static func requireValid(_ intValue: Int,
-                                    file: StaticString = #file,
-                                    line: UInt = #line) -> Int {
-        precondition(isValid(intValue),
-                     invalidMessage,
-                     file: file,
-                     line: line)
-
-        return intValue
-    }
-
-    public init?(intValue: Int) {
-        guard Self.isValid(intValue)
-        else { return nil }
-
-        self.init(intValue)
+    public init(_ intValue: Int) {
+        self.init(intValue: intValue)!  // swiftlint:disable:this force_unwrapping
     }
 }
 
@@ -59,7 +35,7 @@ extension IntRepresentable where Self: Codable {
         let container = try decoder.singleValueContainer()
         let intValue = try container.decode(Int.self)
 
-        self.init(intValue)
+        self.init(intValue: intValue)!  // swiftlint:disable:this force_unwrapping
     }
 
     public func encode(to encoder: any Encoder) throws {
@@ -82,7 +58,7 @@ extension IntRepresentable where Self: Comparable {
 
 extension IntRepresentable where Self: CustomStringConvertible {
     public var description: String {
-        intValue.description
+        String(describing: intValue)
     }
 }
 
@@ -99,6 +75,6 @@ extension IntRepresentable where Self: Equatable {
 
 extension IntRepresentable where Self: ExpressibleByIntegerLiteral {
     public init(integerLiteral value: Int) {
-        self.init(Int(integerLiteral: value))
+        self.init(intValue: Int(integerLiteral: value))!    // swiftlint:disable:this force_unwrapping
     }
 }

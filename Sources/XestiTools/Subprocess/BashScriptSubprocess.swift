@@ -1,4 +1,4 @@
-// © 2020–2024 John Gary Pusey (see LICENSE.md)
+// © 2020–2026 John Gary Pusey (see LICENSE.md)
 
 #if os(macOS)
 import System
@@ -11,7 +11,7 @@ open class BashScriptSubprocess: Subprocess {
                 arguments: [String] = [],
                 currentDirectoryPath: FilePath? = nil,
                 environment: [String: String]? = nil,
-                standardIO: StandardIO = .init()) {
+                standardIO: StandardIO = StandardIO()) {
         var command = Self._quote(scriptPath.absolute().string)
 
         command.append(" ")

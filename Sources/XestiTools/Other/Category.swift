@@ -1,12 +1,12 @@
-// © 2023–2024 John Gary Pusey (see LICENSE.md)
+// © 2023–2026 John Gary Pusey (see LICENSE.md)
 
 public struct Category: StringRepresentable {
 
     // MARK: Public Initializers
 
-    public init(_ stringValue: String) {
-        precondition(Self.isValid(stringValue),
-                     Self.invalidMessage)
+    public init?(stringValue: String) {
+        guard Self.isValid(stringValue)
+        else { return nil }
 
         self.stringValue = stringValue
     }

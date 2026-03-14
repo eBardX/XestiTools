@@ -1,4 +1,4 @@
-// © 2024 John Gary Pusey (see LICENSE.md)
+// © 2024–2026 John Gary Pusey (see LICENSE.md)
 
 #if os(macOS)
 import System
@@ -10,7 +10,7 @@ public final class UnzipSubprocess: Subprocess {
     public init(zipPath: FilePath,
                 destinationPath: FilePath,
                 currentDirectoryPath: FilePath? = nil,
-                standardIO: StandardIO = .init()) {
+                standardIO: StandardIO = StandardIO()) {
         super.init(executablePath: FilePath("/usr/bin/unzip"),
                    arguments: ["-q",
                                zipPath.absolute().string,

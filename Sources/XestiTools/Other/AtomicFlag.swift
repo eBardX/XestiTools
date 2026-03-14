@@ -1,4 +1,4 @@
-// © 2023–2025 John Gary Pusey (see LICENSE.md)
+// © 2023–2026 John Gary Pusey (see LICENSE.md)
 
 #if compiler(>=6)
 import _Builtin_stdatomic
