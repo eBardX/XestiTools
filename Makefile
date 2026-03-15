@@ -1,4 +1,9 @@
-.PHONY: all build clean lint reset test update
+XESTI_TOOLS_DOCS_DIR?=./docs
+XESTI_TOOLS_PRODUCT?=XestiTools
+
+HOSTING_BASE_PATH=$(XESTI_TOOLS_PRODUCT)
+
+.PHONY: all build clean lint preview publish reset test update
 
 all: clean update build
 
@@ -11,6 +16,25 @@ clean:
 lint:
 	@ swiftlint lint --fix
 	@ swiftlint lint
+
+preview:
+	@ open "http://localhost:8080/documentation/xestitools"
+	@ swift package --disable-sandbox                     \
+					preview-documentation                 \
+					--enable-inherited-docs               \
+					--experimental-documentation-coverage \
+					--product $(XESTI_TOOLS_PRODUCT)
+
+publish:
+	@ swift package --allow-writing-to-directory $(XESTI_TOOLS_DOCS_DIR) \
+					generate-documentation                               \
+					--disable-indexing                                   \
+					--enable-inherited-docs                              \
+					--experimental-documentation-coverage                \
+					--hosting-base-path $(HOSTING_BASE_PATH)             \
+					--output-path $(XESTI_TOOLS_DOCS_DIR)                \
+					--product $(XESTI_TOOLS_PRODUCT)                     \
+					--transform-for-static-hosting
 
 reset:
 	@ swift package reset

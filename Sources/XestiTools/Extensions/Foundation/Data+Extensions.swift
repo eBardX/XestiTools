@@ -7,6 +7,10 @@ extension Data {
 
     // MARK: Public Instance Methods
 
+    /// Unzips the in-memory archive contained in this `Data` instance into a
+    /// temporary destination directory and returns a new file wrapper to it.
+    ///
+    /// - Returns:  A file wrapper locating the destination directory.
     public func unzip() throws -> FileWrapper {
         let tmpDirectoryURL = try URL.createTemporaryReplacementDirectory()
 

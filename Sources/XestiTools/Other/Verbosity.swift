@@ -1,9 +1,17 @@
 // © 2025–2026 John Gary Pusey (see LICENSE.md)
 
+/// A verbosity level (for example, to indicate tracing detail).
 public enum Verbosity: Int {
-    case silent      = 0
-    case quiet       = 1
-    case verbose     = 2
+    /// Silent — nothing or nearly so.
+    case silent = 0
+
+    /// Quiet — only essential information.
+    case quiet = 1
+
+    /// Verbose — loquacious but tolerable.
+    case verbose = 2
+
+    /// Very verbose — serious logorrhea.
     case veryVerbose = 3
 }
 

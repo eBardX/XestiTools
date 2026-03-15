@@ -1,5 +1,15 @@
 // © 2025–2026 John Gary Pusey (see LICENSE.md)
 
+/// A type that can be represented by a unsigned integer value.
+///
+/// With a `UIntRepresentable` type, you can losslessly convert back and forth
+/// between a custom type and a unsigned integer value.
+///
+/// In addition, you can restrict the unsigned integer values that are
+/// considered valid representations of your custom type.
+///
+/// Using the unsigned integer value of a conforming type simplifies conformance
+/// to other protocols, such as `Codable`, `Comparable`, and `Hashable`.
 public protocol UIntRepresentable: Codable,
                                    Comparable,
                                    CustomStringConvertible,
@@ -7,12 +17,54 @@ public protocol UIntRepresentable: Codable,
                                    ExpressibleByIntegerLiteral,
                                    Hashable,
                                    Sendable {
+    /// Determines if a unsigned integer value is a valid representation for
+    /// this type.
+    ///
+    /// The default implementation considers _any_ unsigned integer value to be
+    /// valid.
+    ///
+    /// - Parameter uintValue:  The unsigned integer value to check for
+    ///                         validity.
+    ///
+    /// - Returns:  `true` if the provided unsigned integer value is a valid
+    ///             representation for this type; `false` otherwise.
     static func isValid(_ uintValue: UInt) -> Bool
 
+    /// Creates a new instance with the provided unsigned integer value.
+    ///
+    /// If the provided unsigned integer value is determined to be invalid, this
+    /// initializer stops execution.
+    ///
+    /// The default implementation is sufficient in most cases.
+    ///
+    /// - Parameter uintValue:  The unsigned integer value to use for the new
+    ///                         instance.
     init(_ uintValue: UInt)
 
+    /// Creates a new instance with the provided unsigned integer value.
+    ///
+    /// If the provided unsigned integer value is determined to be invalid, this
+    /// initializer returns `nil`.
+    /// 
+    /// Typically, this initializer can be implemented as follows:
+    ///
+    /// ```swift
+    /// public init?(uintValue: String) {
+    ///     guard Self.isValid(uintValue)
+    ///     else { return nil }
+    ///
+    ///     self.uintValue = uintValue
+    /// }
+    /// ```
+    ///
+    /// - Parameter uintValue:  The unsigned integer value to use for the new
+    ///                         instance.
     init?(uintValue: UInt)
 
+    /// The unsigned integer value that represents this type.
+    ///
+    /// A new instance initialized with `uintValue` will be equivalent to this
+    /// instance.
     var uintValue: UInt { get }
 }
 

@@ -7,13 +7,27 @@ extension FilePath {
 
     // MARK: Public Nested Types
 
+    /// A representation of a file’s kind.
     public enum Kind {
+        /// A block special file.
         case blockSpecial
+
+        /// A character special file.
         case characterSpecial
+
+        /// A directory.
         case directory
+
+        /// A regular file.
         case regular
+
+        /// A socket.
         case socket
+
+        /// A symbolic link.
         case symbolicLink
+
+        /// A file whose kind is unknown.
         case unknown
     }
 }
@@ -22,6 +36,9 @@ extension FilePath.Kind {
 
     // MARK: Public Initializers
 
+    /// Creates a `Kind` instance from the provided file type attribute value.
+    ///
+    /// - Parameter type: The file type attribute value.
     public init(_ type: FileAttributeType) {
         switch type {
         case .typeBlockSpecial:
@@ -49,6 +66,7 @@ extension FilePath.Kind {
 
     // MARK: Public Instance Properties
 
+    /// The corresponding file type attribute value.
     public var type: FileAttributeType {
         switch self {
         case .blockSpecial:

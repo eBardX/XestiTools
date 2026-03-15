@@ -6,6 +6,10 @@ extension URL {
 
     // MARK: Public Type Methods
 
+    /// Creates a new temporary replacement directory appropriate for the
+    /// document directory.
+    ///
+    /// - Returns:  The file URL of the created directory.
     public static func createTemporaryReplacementDirectory() throws -> URL {
         try FileManager.default.url(for: .itemReplacementDirectory,
                                     in: .userDomainMask,

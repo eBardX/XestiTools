@@ -6,12 +6,26 @@ extension String {
 
     // MARK: Public Instance Properties
 
+    /// This string if it is not empty, `nil` otherwise.
     public var nilIfEmpty: String? {
         isEmpty ? nil : self
     }
 
     // MARK: Public Instance Methods
 
+    /// Returns a copy of this string with characters escaped as specified.
+    ///
+    /// If you pass `true` to `unprintableOnly`, the single quote (`'`), double
+    /// quote (`"`), and backslash (`\`) characters will _not_ be escaped.
+    ///
+    /// - Parameter forceASCII:         A Boolean value indicating whether the
+    ///                                 escaped string should use ASCII
+    ///                                 characters only.
+    /// - Parameter unprintableOnly:    A Boolean value indicating whether only
+    ///                                 unprintable characters should be
+    ///                                 escaped.
+    ///
+    /// - Returns:  The escaped string.
     public func escaped(asASCII forceASCII: Bool,
                         unprintableOnly: Bool) -> Self {
         func escape(_ chr: Unicode.Scalar) -> Self {
@@ -25,6 +39,13 @@ extension String {
         return unicodeScalars.map { escape($0) }.joined()
     }
 
+    /// Determines the text location equivalent to the provided index of this
+    /// string and returns it.
+    ///
+    /// - Parameter position:   A valid index of this string.
+    ///
+    /// - Returns:  The text location, or `nil` if an equivalent text location
+    ///             cannot be determined.
     public func location(of position: Self.Index) -> TextLocation? {
         let posRange = NSRange(location: distance(from: startIndex,
                                                   to: position),
@@ -49,6 +70,22 @@ extension String {
                             column: colNum)
     }
 
+    /// Returns a Boolean value indicating whether the provided glob-like
+    /// pattern matches this string.
+    ///
+    /// The following wildcard characters are recognized in the provided
+    /// pattern:
+    ///
+    /// - `*` — Matches zero or more characters.
+    /// - `?` — Matches exactly one character.
+    ///
+    /// - Parameter pattern:            The glob-like pattern with which to
+    ///                                 match.
+    /// - Parameter caseInsensitive:    A Boolean value indicating whether the
+    ///                                 comparison is case-insensitive. Defaults
+    ///                                 to `false`.
+    ///
+    /// - Returns: `true` if the match succeeds, `false` otherwise.
     public func matches(pattern: Self,
                         caseInsensitive: Bool = false) -> Bool {
         if caseInsensitive {

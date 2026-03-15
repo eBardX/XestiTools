@@ -6,10 +6,13 @@ extension CGRect {
 
     // MARK: Public Instance Properties
 
+    /// The center point of this rectangle.
     public var center: CGPoint {
         CGPoint(x: midX, y: midY)
     }
 
+    /// A rectangle with the `minX`, `minY`, `maxX`, and `maxY` values of this
+    /// rectangle rounded to the nearest whole integers.
     public var integerRounded: Self {
         let rminX = _fround(minX)
         let rminY = _fround(minY)

@@ -6,10 +6,15 @@ extension UUID {
 
     // MARK: Public Instance Properties
 
+    /// A Base62 string representation of this UUID.
+    ///
+    /// See this [Wikipedia](https://en.wikipedia.org/wiki/Base62) article for
+    /// more information about Base62 encoding.
     public var base62String: String {
         Octaword(uuid: self).base62String()
     }
 
+    /// A hexadecimal string representation of this UUID.
     public var hexString: String {
         uuidString
             .replacingOccurrences(of: "-",

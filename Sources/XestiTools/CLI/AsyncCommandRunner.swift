@@ -3,10 +3,14 @@
 import ArgumentParser
 import CoreFoundation
 
+/// A generic command runner that can run both asynchronous and synchronous
+/// commands.
 public enum AsyncCommandRunner<Command: AsyncParsableCommand> {
 
     // MARK: Public Type Methods
 
+    /// Parses an instance of the `Command` type, or one of its subcommands,
+    /// from the program’s command-line arguments, and then runs it.
     public static func run() async {
         do {
             var command = try Command.parseAsRoot()

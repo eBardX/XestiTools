@@ -4,6 +4,8 @@ extension Regex {
 
     // MARK: Public Instance Properties
 
+    /// The literal pattern of this regular expression, if available; otherwise,
+    /// `nil`.
     public var safeLiteralPattern: String? {
 #if compiler(>=6)
     #if os(iOS)

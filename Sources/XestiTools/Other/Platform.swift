@@ -1,18 +1,41 @@
 // © 2020–2026 John Gary Pusey (see LICENSE.md)
 
+/// A supported Swift platform.
 public enum Platform: String {
+    /// The Android platform.
     case android = "Android"
-    case cygwin  = "Cygwin"
+
+    /// The FreeBSD platform.
     case freeBSD = "FreeBSD"
-    case haiku   = "Haiku"
+
+    /// The iOS platform.
     case iOS
-    case linux   = "Linux"
+
+    /// The Linux platform.
+    case linux = "Linux"
+
+    /// The macOS platform.
     case macOS
-    case ps4     = "PS4"
+
+    /// The OpenBSD platform.
+    case openBSD = "OpenBSD"
+
+    /// The tvOS platform.
     case tvOS
+
+    /// The platform is unknown.
     case unknown
-    case wasi    = "WASI"
+
+    /// The visionOS platform.
+    case visionOS
+
+    /// The WASI platform.
+    case wasi = "WASI"
+
+    /// The watchOS platform.
     case watchOS
+
+    /// The Windows platform.
     case windows = "Windows"
 }
 
@@ -22,25 +45,24 @@ extension Platform {
 
     // MARK: Public Type Properties
 
+    /// The current Swift platform.
     public static var current: Platform {
 #if os(Android)
         return .android
-#elseif os(Cygwin)
-        return .cygwin
 #elseif os(FreeBSD)
         return .freeBSD
-#elseif os(Haiku)
-        return .haiku
 #elseif os(iOS)
         return .iOS
 #elseif os(Linux)
         return .linux
 #elseif os(macOS) || os(OSX)
         return .macOS
-#elseif os(PS4)
-        return .ps4
+#elseif os(OpenBSD)
+        return .openBSD
 #elseif os(tvOS)
         return .tvOS
+#elseif os(visionOS)
+        return .visionOS
 #elseif os(WASI)
         return .wasi
 #elseif os(watchOS)

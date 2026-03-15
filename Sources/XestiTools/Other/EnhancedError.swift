@@ -2,10 +2,20 @@
 
 import Foundation
 
+/// An error with enhanced information.
 public protocol EnhancedError: Error {
+    /// The category to which this error belongs, or `nil` if this error belongs
+    /// to no category. Defaults to `nil`.
     var category: Category? { get }
+
+    /// The underlying error that caused this error to occur, or `nil` if this
+    /// error has no underlying cause. Defaults to `nil`.
     var cause: (any EnhancedError)? { get }
+
+    /// A dictionary representation of information contained in this message.
     var dictionaryRepresentation: [String: Any] { get }
+
+    /// The human-readable description of this error.
     var message: String { get }
 }
 

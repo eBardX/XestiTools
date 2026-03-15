@@ -3,10 +3,24 @@
 import ArgumentParser
 import XestiText
 
+/// An error with extended information.
+///
+/// An extended error also provides formatting capabilities intended for use by
+/// command-line tools.
 public protocol ExtendedError: EnhancedError, CustomStringConvertible {
+    /// The `ExitCode` value associated with this error. Defaults to `.failure`.
     var exitCode: ExitCode { get }
+
+    /// An array of strings providing hints as to the nature of this error.
+    /// Defaults to an array of messages from the nested causes of this error.
     var hints: [String] { get }
+
+    /// The string with which to prefix each hint in ``hints`` when formatting
+    /// this error for display.
     var hintsPrefix: String { get }
+
+    /// The string with which to prefix `message` when formatting this error for
+    /// display.
     var messagePrefix: String { get }
 }
 
