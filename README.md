@@ -19,5 +19,5 @@ John Gary Pusey (ebardx@gmail.com)
 XestiTools is available under [the MIT license][license].
 
 [docc]:     https://www.swift.org/documentation/docc/
-[license]:  https://github.com/eBardX/XestiTools/blob/master/LICENSE.md
+[license]:  https://github.com/eBardX/XestiTools/blob/main/LICENSE.md
 [refdoc]:   https://eBardX.github.io/XestiTools/documentation/xestitools

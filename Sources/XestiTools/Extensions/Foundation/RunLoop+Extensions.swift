@@ -17,10 +17,12 @@ extension RunLoop {
 
     // MARK: Public Type Properties
 
-    /// The default interval in seconds between action calls when waiting on a thread with its run loop.
+    /// The default interval in seconds between action calls when waiting on a
+    /// thread with its run loop.
     public static let defaultWaitInterval = TimeInterval(0.1)
 
-    /// The default timeout in seconds when waiting on a thread with its run loop.
+    /// The default timeout in seconds when waiting on a thread with its run
+    /// loop.
     public static let defaultWaitTimeout = TimeInterval(60)
 
     /// The default message to include in a timeout error.
@@ -28,25 +30,27 @@ extension RunLoop {
 
     // MARK: Public Type Methods
 
-    /// Waits on the current thread with its run loop
-    /// for the specified number of seconds.
+    /// Waits on the current thread with its run loop for the specified number
+    /// of seconds.
     ///
     /// - Parameter duration:   The number of seconds to wait.
     public static func wait(duration: TimeInterval) {
         current.run(until: Date(timeIntervalSinceNow: duration))
     }
 
-    /// Waits on the current thread with its run loop
-    /// until the provided action either succeeds or times out.
+    /// Waits on the current thread with its run loop until the provided action
+    /// either succeeds or times out.
     ///
-    /// An error is thrown if
-    /// the wait times out before `action` succeeds.
+    /// An error is thrown if the wait times out before `action` succeeds.
     ///
     /// - Parameter action:     A closure that returns a Boolean value
     ///                         indicating whether the action has succeeded.
-    /// - Parameter timeout:    The wait timeout in seconds. Defaults to ``defaultWaitTimeout``.
-    /// - Parameter message:    The message to include in a timeout error. Defaults to ``defaultWaitMessage``.
-    /// - Parameter interval:   The interval in seconds between action calls. Defaults to ``defaultWaitInterval``.
+    /// - Parameter timeout:    The wait timeout in seconds. Defaults to
+    ///                         ``defaultWaitTimeout``.
+    /// - Parameter message:    The message to include in a timeout error.
+    ///                         Defaults to ``defaultWaitMessage``.
+    /// - Parameter interval:   The interval in seconds between action calls.
+    ///                         Defaults to ``defaultWaitInterval``.
     public static func wait(until action: @autoclosure () -> Bool,
                             timeout: TimeInterval = defaultWaitTimeout,
                             message: String = defaultWaitMessage,
@@ -58,20 +62,21 @@ extension RunLoop {
         }
     }
 
-    /// Waits on the current thread with its run loop
-    /// until the provided action either returns a non-`nil` value
-    /// or times out.
+    /// Waits on the current thread with its run loop until the provided action
+    /// either returns a non-`nil` value or times out.
     ///
-    /// An error is thrown if
-    /// the wait times out before `action` returns a non-`nil`
-    /// value.
+    /// An error is thrown if the wait times out before `action` returns a
+    /// non-`nil` value.
     ///
-    /// - Parameter timeout:    The wait timeout in seconds. Defaults to ``defaultWaitTimeout``.
-    /// - Parameter message:    The message to include in a timeout error. Defaults to ``defaultWaitMessage``.
-    /// - Parameter interval:   The interval in seconds between action calls. Defaults to ``defaultWaitInterval``.
-    /// - Parameter action:     A closure that returns
-    ///                         `nil` if the action should be called again;
-    ///                         otherwise, a non-`nil` value.
+    /// - Parameter timeout:    The wait timeout in seconds. Defaults to
+    ///                         ``defaultWaitTimeout``.
+    /// - Parameter message:    The message to include in a timeout error.
+    ///                         Defaults to ``defaultWaitMessage``.
+    /// - Parameter interval:   The interval in seconds between action calls.
+    ///                         Defaults to ``defaultWaitInterval``.
+    /// - Parameter action:     A closure that returns `nil` if the action
+    ///                         should be called again; otherwise, a non-`nil`
+    ///                         value.
     ///
     /// - Returns:  The result of calling `action`.
     @discardableResult
