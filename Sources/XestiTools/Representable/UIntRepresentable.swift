@@ -1,6 +1,6 @@
 // © 2025–2026 John Gary Pusey (see LICENSE.md)
 
-/// A type that can be represented by a unsigned integer value.
+/// A type that can be represented by an unsigned integer value.
 ///
 /// With a `UIntRepresentable` type, you can losslessly convert back and forth
 /// between a custom type and a unsigned integer value.
