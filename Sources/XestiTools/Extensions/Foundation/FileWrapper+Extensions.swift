@@ -193,6 +193,6 @@ private func _makeCocoaError(_ code: CocoaError.Code,
 
     userInfo[NSFilePathErrorKey] = filePath
 
-    return CocoaError(.fileReadNoSuchFile,
+    return CocoaError(code,
                       userInfo: userInfo)
 }
