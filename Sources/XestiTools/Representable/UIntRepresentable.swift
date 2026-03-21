@@ -49,7 +49,7 @@ public protocol UIntRepresentable: Codable,
     /// Typically, this initializer can be implemented as follows:
     ///
     /// ```swift
-    /// public init?(uintValue: String) {
+    /// public init?(uintValue: UInt) {
     ///     guard Self.isValid(uintValue)
     ///     else { return nil }
     ///
