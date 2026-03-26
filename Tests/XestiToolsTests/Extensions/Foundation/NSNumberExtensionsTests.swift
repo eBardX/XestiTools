@@ -11,7 +11,7 @@ struct NSNumberExtensionsTests {
 
 extension NSNumberExtensionsTests {
     @Test
-    func matches() {
+    func test_matches() {
         #expect(NSNumber(value: false).isBoolean)
         #expect(NSNumber(value: true).isBoolean)
         #expect(!NSNumber(value: 0).isBoolean)

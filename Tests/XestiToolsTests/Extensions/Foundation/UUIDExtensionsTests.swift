@@ -11,7 +11,7 @@ struct UUIDExtensionsTests {
 
 extension UUIDExtensionsTests {
     @Test
-    func matches() {
+    func test_matches() {
         #expect(UUID(uuidString: "00000000-0000-0000-0000-000000000000")?.base62String == "0000000000000000000000")
         #expect(UUID(uuidString: "00000000-0000-0000-0000-000000000001")?.base62String == "0000000000000000000001")
         #expect(UUID(uuidString: "00000000-0000-0000-0000-0000000000FF")?.base62String == "0000000000000000000047")
