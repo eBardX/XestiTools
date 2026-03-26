@@ -66,13 +66,13 @@ extension FilePath {
 
     /// Creates a directory with the provided attributes at this file path.
     ///
-    /// - Parameters createIntermediates:   If `true`, this method creates any
+    /// - Parameter createIntermediates:    If `true`, this method creates any
     ///                                     nonexistent parent directories as
     ///                                     part of creating the directory. If
     ///                                     `false`, this method fails if any of
     ///                                     the intermediate parent directories
     ///                                     does not exist.
-    /// - Parameters attributes             The attributes to associate with the
+    /// - Parameter attributes              The attributes to associate with the
     ///                                     new directory.
     public func createDirectory(withIntermediateDirectories createIntermediates: Bool = true,
                                 attributes: Attributes? = nil) throws {
@@ -175,7 +175,7 @@ extension FilePath {
     /// Creates a hard link between the file-system node at this file path and
     /// the file-system node at the provided file path.
     ///
-    /// - Parameters destination:   The file path identifying the location
+    /// - Parameter destination:    The file path identifying the location
     ///                             where the link will be created.
     public func link(to destination: Self) throws {
         try FileManager.default.linkItem(at: fileURL,
@@ -239,7 +239,7 @@ extension FilePath {
         return Self(resultURL.require().path)
     }
 
-    /// Sets some or all od the attributes of the file-system node at this file
+    /// Sets some or all of the attributes of the file-system node at this file
     /// path.
     ///
     /// - Parameter attributes: An ``Attributes`` instance encapsulating the

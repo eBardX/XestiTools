@@ -1,7 +1,6 @@
 // © 2024–2026 John Gary Pusey (see LICENSE.md)
 
 import ArgumentParser
-import CoreFoundation
 
 /// A generic command runner that can run both asynchronous and synchronous
 /// commands.

@@ -46,7 +46,7 @@ public protocol IntRepresentable: Codable,
     /// Typically, this initializer can be implemented as follows:
     ///
     /// ```swift
-    /// public init?(intValue: String) {
+    /// public init?(intValue: Int) {
     ///     guard Self.isValid(intValue)
     ///     else { return nil }
     ///
