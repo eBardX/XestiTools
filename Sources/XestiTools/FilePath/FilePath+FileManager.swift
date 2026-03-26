@@ -1,8 +1,9 @@
 // © 2023–2026 John Gary Pusey (see LICENSE.md)
 
-import Foundation
-import System
-import ZIPFoundation
+public import Foundation
+public import System
+
+private import ZIPFoundation
 
 extension FilePath {
 
@@ -50,7 +51,7 @@ extension FilePath {
         try FileManager.default.contentsOfDirectory(at: fileURL,
                                                     includingPropertiesForKeys: keys,
                                                     options: options).map {
-            Self($0.path)
+            Self($0.path(percentEncoded: false))
         }
     }
 
@@ -101,7 +102,7 @@ extension FilePath {
                                               appropriateFor: fileURL,
                                               create: true)
 
-        return Self(url.path)
+        return Self(url.path(percentEncoded: false))
     }
 
     /// Returns the file path of the file-system node pointed to by the symbolic
@@ -236,7 +237,7 @@ extension FilePath {
                                                               backupItemName: backupName,
                                                               options: options)
 
-        return Self(resultURL.require().path)
+        return Self(resultURL.require().path(percentEncoded: false))
     }
 
     /// Sets some or all of the attributes of the file-system node at this file

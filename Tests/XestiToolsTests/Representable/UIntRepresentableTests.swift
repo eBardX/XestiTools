@@ -31,6 +31,17 @@ extension UIntRepresentableTests {
     }
 
     @Test
+    func test_decodeInvalidValueThrows() throws {
+        let json = "0"
+        let data = Data(json.utf8)
+
+        #expect(throws: DecodingError.self) {
+            try JSONDecoder().decode(TestUIntType.self,
+                                     from: data)
+        }
+    }
+
+    @Test
     func test_description() {
         let value = TestUIntType(42)
 

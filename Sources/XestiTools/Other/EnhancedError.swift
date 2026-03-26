@@ -1,6 +1,6 @@
 // © 2023–2026 John Gary Pusey (see LICENSE.md)
 
-import Foundation
+private import Foundation
 
 /// An error with enhanced information.
 public protocol EnhancedError: Error {
@@ -42,13 +42,27 @@ extension EnhancedError {
 
             dict["code"] = error.code
             dict["domain"] = error.domain
-            dict["helpAnchor"] = error.helpAnchor
-            dict["reason"] = error.localizedFailureReason
-            dict["recoveryOptions"] = error.localizedRecoveryOptions
-            dict["recoverySuggestion"] = error.localizedRecoverySuggestion
+
+            if let value = error.helpAnchor {
+                dict["helpAnchor"] = value
+            }
+
+            if let value = error.localizedFailureReason {
+                dict["reason"] = value
+            }
+
+            if let value = error.localizedRecoveryOptions {
+                dict["recoveryOptions"] = value
+            }
+
+            if let value = error.localizedRecoverySuggestion {
+                dict["recoverySuggestion"] = value
+            }
         }
 
-        dict["cause"] = cause?.dictionaryRepresentation
+        if let causeDict = cause?.dictionaryRepresentation {
+            dict["cause"] = causeDict
+        }
 
         return dict
     }

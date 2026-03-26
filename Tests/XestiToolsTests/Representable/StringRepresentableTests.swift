@@ -32,6 +32,17 @@ extension StringRepresentableTests {
     }
 
     @Test
+    func test_decodeInvalidValueThrows() throws {
+        let json = "\"\""
+        let data = Data(json.utf8)
+
+        #expect(throws: DecodingError.self) {
+            try JSONDecoder().decode(TestStringType.self,
+                                     from: data)
+        }
+    }
+
+    @Test
     func test_description() {
         let category = TestStringType("myCategory")
 

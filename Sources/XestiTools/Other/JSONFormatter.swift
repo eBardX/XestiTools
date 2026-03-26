@@ -1,7 +1,8 @@
 // © 2023–2026 John Gary Pusey (see LICENSE.md)
 
-import CoreGraphics
-import Foundation
+public import CoreGraphics
+
+private import Foundation
 
 /// A namespace for type methods to facilitate formatting values into
 /// JSON-compatible values.

@@ -24,11 +24,6 @@ extension Verbosity: Comparable {
     }
 }
 
-// MARK: - Equatable
-
-extension Verbosity: Equatable {
-}
-
 // MARK: - Sendable
 
 extension Verbosity: Sendable {

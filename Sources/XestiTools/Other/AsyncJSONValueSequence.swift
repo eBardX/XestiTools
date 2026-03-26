@@ -1,6 +1,6 @@
 // © 2024–2026 John Gary Pusey (see LICENSE.md)
 
-import Foundation
+public import Foundation
 
 /// An asynchronous sequence of values decoded from text where each line is a
 /// JSON object.
@@ -27,9 +27,14 @@ public struct AsyncJSONValueSequence<Base: AsyncSequence,
         /// - Returns:  The next element from the sequence, if a next element
         ///             exists; otherwise, `nil`.
         @inlinable
+        @concurrent
         public mutating func next() async rethrows -> T? {
             func yield() throws -> T? {
                 defer { buffer.removeAll(keepingCapacity: true) }
+
+                if buffer.last == 0x0D {
+                    buffer.removeLast()
+                }
 
                 guard !buffer.isEmpty
                 else { return nil }

@@ -1,7 +1,8 @@
 // © 2020–2026 John Gary Pusey (see LICENSE.md)
 
-import ArgumentParser
-import System
+public import System
+
+private import ArgumentParser
 
 // MARK: - ExpressibleByArgument
 

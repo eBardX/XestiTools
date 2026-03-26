@@ -1,7 +1,7 @@
 // © 2024–2026 John Gary Pusey (see LICENSE.md)
 
 #if os(macOS)
-import System
+public import System
 
 /// A subprocess that compresses a directory into a ZIP archive.
 ///

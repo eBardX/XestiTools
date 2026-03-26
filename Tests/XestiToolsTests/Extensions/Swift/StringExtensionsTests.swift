@@ -51,6 +51,17 @@ extension StringExtensionsTests {
     }
 
     @Test
+    func test_locationEmoji() {
+        let value = "🇺🇸abc"
+        let idx = value.index(value.startIndex,
+                              offsetBy: 1)
+        let loc = value.location(of: idx)
+
+        #expect(loc?.line == 1)
+        #expect(loc?.column == 5)
+    }
+
+    @Test
     func test_locationMiddleOfLine() {
         let value = "abc\ndef\nghi"
         let idx = value.index(value.startIndex,

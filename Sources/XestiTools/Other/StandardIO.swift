@@ -1,8 +1,9 @@
 // © 2024–2026 John Gary Pusey (see LICENSE.md)
 
-import Dispatch
-@preconcurrency import Foundation
-import System
+@preconcurrency public import Foundation
+public import System
+
+private import Dispatch
 
 /// Encapsulates standard input, standard output, and standard error into a
 /// single, easy-to-use, immutable structure.
@@ -70,7 +71,7 @@ public struct StandardIO {
     ///             the result is `nil`.
     public func readInput(_ prompt: String?) -> String? {
         if let data = prompt?.data(using: .utf8) {
-            syncQueue.async {
+            syncQueue.sync {
                 do {
                     try standardOutput.fileHandleForWriting.synchronize()
                     try standardOutput.fileHandleForWriting.write(contentsOf: data)

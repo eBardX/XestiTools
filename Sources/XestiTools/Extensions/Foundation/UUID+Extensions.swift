@@ -1,6 +1,6 @@
 // © 2024–2026 John Gary Pusey (see LICENSE.md)
 
-import Foundation
+public import Foundation
 
 extension UUID {
 
@@ -154,7 +154,7 @@ private struct Octaword: Sendable {
         guard shift > 0
         else { return lhs }
 
-        if shift > UInt64.bitWidth {
+        if shift >= UInt64.bitWidth {
             return Self(hiBits: lhs.loBits << (shift - UInt64.bitWidth),
                         loBits: 0)
         }

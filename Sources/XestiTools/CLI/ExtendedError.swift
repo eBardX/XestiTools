@@ -1,7 +1,7 @@
 // © 2018–2026 John Gary Pusey (see LICENSE.md)
 
-import ArgumentParser
-import XestiText
+private import ArgumentParser
+private import XestiText
 
 /// An error with extended information.
 ///

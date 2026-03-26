@@ -1,6 +1,6 @@
 // © 2018–2026 John Gary Pusey (see LICENSE.md)
 
-import Foundation
+private import Foundation
 
 extension String {
 
@@ -47,9 +47,8 @@ extension String {
     /// - Returns:  The text location, or `nil` if an equivalent text location
     ///             cannot be determined.
     public func location(of position: Self.Index) -> TextLocation? {
-        let posRange = NSRange(location: distance(from: startIndex,
-                                                  to: position),
-                               length: 0)
+        let posRange = NSRange(position..<position,
+                               in: self)
         let nsString = self as NSString
         let lineRange = nsString.lineRange(for: posRange)
 

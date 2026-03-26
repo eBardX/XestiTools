@@ -1,7 +1,7 @@
 // © 2020–2026 John Gary Pusey (see LICENSE.md)
 
-import ArgumentParser
-import Darwin.sysexits
+private import ArgumentParser
+private import Darwin.sysexits
 
 extension ExitCode {
 

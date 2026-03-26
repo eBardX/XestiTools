@@ -1,7 +1,8 @@
 // © 2020–2026 John Gary Pusey (see LICENSE.md)
 
-import ArgumentParser
-import Foundation
+public import Foundation
+
+private import ArgumentParser
 
 // MARK: - ExpressibleByArgument
 
@@ -10,7 +11,14 @@ extension URL {
     ///
     /// - Parameter argument:   The command-line argument.
     public init?(argument: String) {
-        self.init(string: argument)
+        guard !argument.isEmpty
+        else { return nil }
+
+        if let url = URL(string: argument) {
+            self = url
+        } else {
+            self.init(fileURLWithPath: argument)
+        }
     }
 }
 

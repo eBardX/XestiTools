@@ -1,7 +1,7 @@
 // © 2023–2026 John Gary Pusey (see LICENSE.md)
 
-import Foundation
-import System
+public import Foundation
+public import System
 
 extension FilePath {
 
@@ -138,6 +138,10 @@ extension FilePath {
     /// - Returns:  The total size in bytes.
     public func totalSize() throws -> UInt64 {
         let attrs = try attributes()
+
+        if attrs.kind == .symbolicLink {
+            return 0
+        }
 
         if attrs.kind != .directory {
             return attrs.size ?? 0

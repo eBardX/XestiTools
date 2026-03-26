@@ -86,7 +86,11 @@ extension StringRepresentable where Self: Codable {
         let container = try decoder.singleValueContainer()
         let stringValue = try container.decode(String.self)
 
-        self.init(stringValue: stringValue)!    // swiftlint:disable:this force_unwrapping
+        guard let value = Self(stringValue: stringValue)
+        else { throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: decoder.codingPath,
+                                                                       debugDescription: "Invalid string value: \(stringValue)")) }
+
+        self = value
     }
 
     public func encode(to encoder: any Encoder) throws {
@@ -109,7 +113,7 @@ extension StringRepresentable where Self: Comparable {
 
 extension StringRepresentable where Self: CustomStringConvertible {
     public var description: String {
-        String(describing: stringValue)
+        stringValue
     }
 }
 

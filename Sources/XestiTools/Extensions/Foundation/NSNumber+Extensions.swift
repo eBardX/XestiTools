@@ -1,12 +1,12 @@
 // © 2023–2026 John Gary Pusey (see LICENSE.md)
 
-import Foundation
+public import Foundation
 
 extension NSNumber {
     /// A Boolean value indicating whether this `NSNumber` instance was created
     /// from a `Bool` value.
     public var isBoolean: Bool {
-        objCType == Self.booleanObjCType
+        strcmp(objCType, Self.booleanObjCType) == 0
     }
 
     // MARK: Private Type Properties

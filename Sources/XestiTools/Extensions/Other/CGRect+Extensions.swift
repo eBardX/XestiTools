@@ -1,6 +1,6 @@
 // © 2023–2026 John Gary Pusey (see LICENSE.md)
 
-import CoreGraphics
+public import CoreGraphics
 
 extension CGRect {
 
@@ -31,7 +31,7 @@ extension CGRect {
 private func _fround(_ value: CGFloat) -> CGFloat {
     let result = round(value)
 
-    if result == -0 {
+    if result.isZero && result.sign == .minus {
         return 0
     }
 

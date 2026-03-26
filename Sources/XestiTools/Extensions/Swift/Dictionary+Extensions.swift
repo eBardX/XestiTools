@@ -7,6 +7,9 @@ extension Dictionary {
     /// Returns a new dictionary containing only the key-value pairs that have
     /// non-`nil` keys as the result of transformation by the given closure.
     ///
+    /// - Note: If the transform produces duplicate keys, later entries silently
+    ///         overwrite earlier ones.
+    ///
     /// - Parameter transform:  A closure that transforms a key. `transform`
     ///                         accepts each key of the dictionary as its
     ///                         parameter and returns an optional transformed
@@ -24,6 +27,9 @@ extension Dictionary {
 
     /// Returns a new dictionary containing the values of this dictionary with
     /// the keys transformed by the given closure.
+    ///
+    /// - Note: If the transform produces duplicate keys, later entries silently
+    ///         overwrite earlier ones.
     ///
     /// - Parameter transform:  A closure that transforms a key. `transform`
     ///                         accepts each key of the dictionary as its

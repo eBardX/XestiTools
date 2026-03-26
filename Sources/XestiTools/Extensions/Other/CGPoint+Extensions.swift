@@ -1,6 +1,6 @@
 // © 2023–2026 John Gary Pusey (see LICENSE.md)
 
-import CoreGraphics
+public import CoreGraphics
 
 extension CGPoint {
     public static func < (lhs: Self,

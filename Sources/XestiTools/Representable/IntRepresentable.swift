@@ -83,7 +83,11 @@ extension IntRepresentable where Self: Codable {
         let container = try decoder.singleValueContainer()
         let intValue = try container.decode(Int.self)
 
-        self.init(intValue: intValue)!  // swiftlint:disable:this force_unwrapping
+        guard let value = Self(intValue: intValue)
+        else { throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: decoder.codingPath,
+                                                                       debugDescription: "Invalid int value: \(intValue)")) }
+
+        self = value
     }
 
     public func encode(to encoder: any Encoder) throws {
@@ -106,7 +110,7 @@ extension IntRepresentable where Self: Comparable {
 
 extension IntRepresentable where Self: CustomStringConvertible {
     public var description: String {
-        String(describing: intValue)
+        String(intValue)
     }
 }
 

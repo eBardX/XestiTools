@@ -1,8 +1,8 @@
 // © 2018–2026 John Gary Pusey (see LICENSE.md)
 
 #if os(macOS)
-import Foundation
-import System
+public import Foundation
+public import System
 
 /// A thin wrapper around the `Process` class.
 ///
@@ -70,7 +70,8 @@ open class Subprocess {
 
     /// Launches the executable as a subprocess and waits until it is finished.
     public func execute() throws {
-        process.launch()
+        try process.run()
+
         process.waitUntilExit()
     }
 
@@ -110,7 +111,8 @@ open class Subprocess {
             }
         }
 
-        process.launch()
+        try process.run()
+
         process.waitUntilExit()
 
         outputPipe.fileHandleForReading.readabilityHandler = nil

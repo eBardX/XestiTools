@@ -1,7 +1,7 @@
 // © 2024–2026 John Gary Pusey (see LICENSE.md)
 
-import Foundation
-import System
+public import Foundation
+public import System
 
 extension FilePath {
 

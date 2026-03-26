@@ -1,7 +1,8 @@
 // © 2025–2026 John Gary Pusey (see LICENSE.md)
 
-import Foundation
-import ZIPFoundation
+public import Foundation
+
+private import ZIPFoundation
 
 extension Data {
 
@@ -21,7 +22,8 @@ extension Data {
             let entryURL = tmpDirectoryURL.appendingPathComponent(entry.path)
 
             guard entryURL.isContained(in: tmpDirectoryURL)
-            else { throw _makeCocoaError(.fileReadInvalidFileName, entryURL.path) }
+            else { throw _makeCocoaError(.fileReadInvalidFileName,
+                                         entryURL.path(percentEncoded: false)) }
 
             guard try archive.extract(entry,
                                       to: entryURL) == entry.checksum

@@ -30,6 +30,17 @@ extension IntRepresentableTests {
     }
 
     @Test
+    func test_decodeInvalidValueThrows() throws {
+        let json = "-1"
+        let data = Data(json.utf8)
+
+        #expect(throws: DecodingError.self) {
+            try JSONDecoder().decode(TestIntType.self,
+                                     from: data)
+        }
+    }
+
+    @Test
     func test_description() {
         let value = TestIntType(42)
 

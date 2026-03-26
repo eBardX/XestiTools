@@ -3,7 +3,7 @@
 /// A type that can be represented by an unsigned integer value.
 ///
 /// With a `UIntRepresentable` type, you can losslessly convert back and forth
-/// between a custom type and a unsigned integer value.
+/// between a custom type and an unsigned integer value.
 ///
 /// In addition, you can restrict the unsigned integer values that are
 /// considered valid representations of your custom type.
@@ -17,7 +17,7 @@ public protocol UIntRepresentable: Codable,
                                    ExpressibleByIntegerLiteral,
                                    Hashable,
                                    Sendable {
-    /// Determines if a unsigned integer value is a valid representation for
+    /// Determines if an unsigned integer value is a valid representation for
     /// this type.
     ///
     /// The default implementation considers _any_ unsigned integer value to be
@@ -87,7 +87,11 @@ extension UIntRepresentable where Self: Codable {
         let container = try decoder.singleValueContainer()
         let uintValue = try container.decode(UInt.self)
 
-        self.init(uintValue: uintValue)!    // swiftlint:disable:this force_unwrapping
+        guard let value = Self(uintValue: uintValue)
+        else { throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: decoder.codingPath,
+                                                                       debugDescription: "Invalid uint value: \(uintValue)")) }
+
+        self = value
     }
 
     public func encode(to encoder: any Encoder) throws {
@@ -110,7 +114,7 @@ extension UIntRepresentable where Self: Comparable {
 
 extension UIntRepresentable where Self: CustomStringConvertible {
     public var description: String {
-        String(describing: uintValue)
+        String(uintValue)
     }
 }
 

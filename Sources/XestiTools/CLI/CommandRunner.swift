@@ -1,7 +1,7 @@
 // © 2020–2026 John Gary Pusey (see LICENSE.md)
 
-import ArgumentParser
-import CoreFoundation
+private import ArgumentParser
+private import CoreFoundation
 
 /// A generic command runner that can run synchronous commands only.
 public enum CommandRunner<Command: ParsableCommand> {

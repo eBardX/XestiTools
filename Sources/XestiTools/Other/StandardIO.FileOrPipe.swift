@@ -1,6 +1,6 @@
 // © 2024–2026 John Gary Pusey (see LICENSE.md)
 
-import Foundation
+public import Foundation
 
 extension StandardIO {
 

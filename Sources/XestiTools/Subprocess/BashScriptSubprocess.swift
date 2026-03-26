@@ -1,7 +1,7 @@
 // © 2020–2026 John Gary Pusey (see LICENSE.md)
 
 #if os(macOS)
-import System
+public import System
 
 /// A subprocess that runs a Bash script.
 open class BashScriptSubprocess: Subprocess {
@@ -45,13 +45,8 @@ open class BashScriptSubprocess: Subprocess {
     // MARK: Private Type Methods
 
     private static func _quote(_ value: String) -> String {
-        var result = ""
-
-        result.append("\"")
-        result.append(value)
-        result.append("\"")
-
-        return result
+        "'" + value.split(separator: "'",
+                          omittingEmptySubsequences: false).joined(separator: "'\\''") + "'"
     }
 }
 #endif

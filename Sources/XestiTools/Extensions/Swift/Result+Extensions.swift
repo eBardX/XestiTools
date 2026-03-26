@@ -6,6 +6,9 @@ extension Result {
 
     /// Creates a new result from the provided success and failure values.
     ///
+    /// If both `success` and `failure` are non-`nil`, `failure` takes
+    /// precedence.
+    ///
     /// - Parameter success:    The success value, or `nil` if the new result
     ///                         does not represent success.
     /// - Parameter failure:    The failure value, or `nil` if the new result

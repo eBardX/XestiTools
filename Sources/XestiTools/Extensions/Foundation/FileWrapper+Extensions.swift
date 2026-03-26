@@ -1,8 +1,9 @@
 // © 2025–2026 John Gary Pusey (see LICENSE.md)
 
-import Foundation
-import System
-import ZIPFoundation
+public import Foundation
+public import System
+
+private import ZIPFoundation
 
 extension FileWrapper {
 
