@@ -1,10 +1,11 @@
 # XestiTools
 
-Miscellaneous tools to ease writing code.
+Tools to ease writing Swift code.
 
 ## <a name="overview">Overview</a>
 
-The XestiTools framework provides a variety of tools to facilitate writing Swift programs.
+The XestiTools framework provides a collection of tools to facilitate writing
+Swift programs.
 
 ## <a name="reference_documentation">Reference Documentation</a>
 
