@@ -73,7 +73,7 @@ extension FilePath {
     ///                                     `false`, this method fails if any of
     ///                                     the intermediate parent directories
     ///                                     does not exist.
-    /// - Parameter attributes              The attributes to associate with the
+    /// - Parameter attributes:             The attributes to associate with the
     ///                                     new directory.
     public func createDirectory(withIntermediateDirectories createIntermediates: Bool = true,
                                 attributes: Attributes? = nil) throws {
