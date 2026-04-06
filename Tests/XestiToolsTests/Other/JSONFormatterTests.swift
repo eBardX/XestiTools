@@ -11,42 +11,42 @@ struct JSONFormatterTests {
 
 extension JSONFormatterTests {
     @Test
-    func test_formatNaNCGFloat() {
+    func test_format_nanCGFloat() {
         let result = JSONFormatter.format(CGFloat.nan)
 
         #expect(result as? Int == 0)
     }
 
     @Test
-    func test_formatNegativeInfinity() {
+    func test_format_negativeInfinity() {
         let result = JSONFormatter.format(-CGFloat.infinity)
 
         #expect(result as? CGFloat == CGFloat.leastNormalMagnitude)
     }
 
     @Test
-    func test_formatNilPoint() {
+    func test_format_nilPoint() {
         let result = JSONFormatter.format(nil as CGPoint?)
 
         #expect(result == nil)
     }
 
     @Test
-    func test_formatNilRect() {
+    func test_format_nilRect() {
         let result = JSONFormatter.format(nil as CGRect?)
 
         #expect(result == nil)
     }
 
     @Test
-    func test_formatNilValue() {
+    func test_format_nilValue() {
         let result = JSONFormatter.format(nil as Any?)
 
         #expect(result == nil)
     }
 
     @Test
-    func test_formatNonJSONSerializableValue() {
+    func test_format_nonJSONSerializableValue() {
         let nonJSON = CGPoint(x: 1, y: 2)
         let result = JSONFormatter.format(nonJSON as Any?)
 
@@ -54,14 +54,14 @@ extension JSONFormatterTests {
     }
 
     @Test
-    func test_formatNormalCGFloat() {
+    func test_format_normalCGFloat() {
         let result = JSONFormatter.format(CGFloat(3.14))
 
         #expect(result as? CGFloat == CGFloat(3.14))
     }
 
     @Test
-    func test_formatPoint() {
+    func test_format_point() {
         let result = JSONFormatter.format(CGPoint(x: 10, y: 20))
 
         #expect(result != nil)
@@ -70,14 +70,14 @@ extension JSONFormatterTests {
     }
 
     @Test
-    func test_formatPositiveInfinity() {
+    func test_format_positiveInfinity() {
         let result = JSONFormatter.format(CGFloat.infinity)
 
         #expect(result as? CGFloat == CGFloat.greatestFiniteMagnitude)
     }
 
     @Test
-    func test_formatRect() {
+    func test_format_rect() {
         let result = JSONFormatter.format(CGRect(x: 1, y: 2, width: 3, height: 4))
 
         #expect(result != nil)
@@ -88,21 +88,21 @@ extension JSONFormatterTests {
     }
 
     @Test
-    func test_formatString() {
+    func test_format_string() {
         let result = JSONFormatter.format("hello" as Any?)
 
         #expect(result as? String == "hello")
     }
 
     @Test
-    func test_formatValidJSONValue() {
+    func test_format_validJSONValue() {
         let result = JSONFormatter.format(42 as Any?)
 
         #expect(result as? Int == 42)
     }
 
     @Test
-    func test_formatZeroCGFloat() {
+    func test_format_zeroCGFloat() {
         let result = JSONFormatter.format(CGFloat.zero)
 
         #expect(result as? CGFloat == 0)

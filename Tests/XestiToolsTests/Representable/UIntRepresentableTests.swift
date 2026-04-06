@@ -10,7 +10,6 @@ struct UIntRepresentableTests {
 // MARK: -
 
 extension UIntRepresentableTests {
-
     @Test
     func test_comparable() {
         let val1 = TestUIntType(1)
@@ -90,25 +89,32 @@ extension UIntRepresentableTests {
     }
 
     @Test
-    func test_initWithInvalidValue() {
+    func test_init_integerLiteral() {
+        let value: TestUIntType = 10
+
+        #expect(value.uintValue == 10)
+    }
+
+    @Test
+    func test_init_invalidValue() {
         let value = TestUIntType(uintValue: 0)
 
         #expect(value == nil)
     }
 
     @Test
-    func test_initWithValidValue() {
+    func test_init_nonFailable() {
+        let value = TestUIntType(5)
+
+        #expect(value.uintValue == 5)
+    }
+
+    @Test
+    func test_init_validValue() {
         let value = TestUIntType(uintValue: 5)
 
         #expect(value != nil)
         #expect(value?.uintValue == 5)
-    }
-
-    @Test
-    func test_integerLiteralInit() {
-        let value: TestUIntType = 10
-
-        #expect(value.uintValue == 10)
     }
 
     @Test
@@ -117,28 +123,4 @@ extension UIntRepresentableTests {
         #expect(TestUIntType.isValid(100))
         #expect(!TestUIntType.isValid(0))
     }
-
-    @Test
-    func test_nonFailableInit() {
-        let value = TestUIntType(5)
-
-        #expect(value.uintValue == 5)
-    }
-}
-
-// MARK: - Test Helpers
-
-private struct TestUIntType: UIntRepresentable {
-    static func isValid(_ uintValue: UInt) -> Bool {
-        uintValue > 0
-    }
-
-    init?(uintValue: UInt) {
-        guard Self.isValid(uintValue)
-        else { return nil }
-
-        self.uintValue = uintValue
-    }
-
-    let uintValue: UInt
 }

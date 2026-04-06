@@ -89,25 +89,32 @@ extension IntRepresentableTests {
     }
 
     @Test
-    func test_initWithInvalidValue() {
+    func test_init_integerLiteral() {
+        let value: TestIntType = 10
+
+        #expect(value.intValue == 10)
+    }
+
+    @Test
+    func test_init_invalidValue() {
         let value = TestIntType(intValue: -1)
 
         #expect(value == nil)
     }
 
     @Test
-    func test_initWithValidValue() {
+    func test_init_nonFailable() {
+        let value = TestIntType(5)
+
+        #expect(value.intValue == 5)
+    }
+
+    @Test
+    func test_init_validValue() {
         let value = TestIntType(intValue: 5)
 
         #expect(value != nil)
         #expect(value?.intValue == 5)
-    }
-
-    @Test
-    func test_integerLiteralInit() {
-        let value: TestIntType = 10
-
-        #expect(value.intValue == 10)
     }
 
     @Test
@@ -117,28 +124,4 @@ extension IntRepresentableTests {
         #expect(!TestIntType.isValid(-1))
         #expect(!TestIntType.isValid(-100))
     }
-
-    @Test
-    func test_nonFailableInit() {
-        let value = TestIntType(5)
-
-        #expect(value.intValue == 5)
-    }
-}
-
-// MARK: - Test Helpers
-
-private struct TestIntType: IntRepresentable {
-    static func isValid(_ intValue: Int) -> Bool {
-        intValue >= 0
-    }
-
-    init?(intValue: Int) {
-        guard Self.isValid(intValue)
-        else { return nil }
-
-        self.intValue = intValue
-    }
-
-    let intValue: Int
 }

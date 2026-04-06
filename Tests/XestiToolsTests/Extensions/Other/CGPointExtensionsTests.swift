@@ -11,7 +11,7 @@ struct CGPointExtensionsTests {
 
 extension CGPointExtensionsTests {
     @Test
-    func test_equalPoints() {
+    func test_comparable_equalPoints() {
         let lhs = CGPoint(x: 1, y: 2)
         let rhs = CGPoint(x: 1, y: 2)
 
@@ -20,7 +20,7 @@ extension CGPointExtensionsTests {
     }
 
     @Test
-    func test_lessThanByX() {
+    func test_comparable_lessThanByX() {
         let lhs = CGPoint(x: 1, y: 5)
         let rhs = CGPoint(x: 2, y: 3)
 
@@ -29,7 +29,7 @@ extension CGPointExtensionsTests {
     }
 
     @Test
-    func test_lessThanByYWhenXEqual() {
+    func test_comparable_lessThanByYWhenXEqual() {
         let lhs = CGPoint(x: 1, y: 2)
         let rhs = CGPoint(x: 1, y: 3)
 
@@ -38,7 +38,7 @@ extension CGPointExtensionsTests {
     }
 
     @Test
-    func test_lessThanGreaterXButLessY() {
+    func test_comparable_lessThanGreaterXButLessY() {
         let lhs = CGPoint(x: 5, y: 1)
         let rhs = CGPoint(x: 3, y: 10)
 
@@ -47,7 +47,7 @@ extension CGPointExtensionsTests {
     }
 
     @Test
-    func test_negativePoints() {
+    func test_comparable_negativePoints() {
         let lhs = CGPoint(x: -2, y: -1)
         let rhs = CGPoint(x: -1, y: -2)
 
@@ -55,7 +55,7 @@ extension CGPointExtensionsTests {
     }
 
     @Test
-    func test_zeroPoint() {
+    func test_comparable_zeroPoint() {
         let zero = CGPoint.zero
         let positive = CGPoint(x: 1, y: 1)
 

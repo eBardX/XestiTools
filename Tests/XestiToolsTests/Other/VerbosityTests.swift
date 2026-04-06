@@ -17,13 +17,13 @@ extension VerbosityTests {
     }
 
     @Test
-    func test_comparableNotLessThanSelf() {
+    func test_comparable_notLessThanSelf() {
         #expect(!(Verbosity.silent < .silent))
         #expect(!(Verbosity.veryVerbose < .veryVerbose))
     }
 
     @Test
-    func test_comparableReverse() {
+    func test_comparable_reverse() {
         #expect(!(Verbosity.quiet < .silent))
         #expect(!(Verbosity.veryVerbose < .verbose))
     }
@@ -37,7 +37,7 @@ extension VerbosityTests {
     }
 
     @Test
-    func test_initFromRawValue() {
+    func test_init_fromRawValue() {
         #expect(Verbosity(rawValue: 0) == .silent)
         #expect(Verbosity(rawValue: 1) == .quiet)
         #expect(Verbosity(rawValue: 2) == .verbose)

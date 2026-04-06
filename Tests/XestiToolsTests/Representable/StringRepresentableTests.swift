@@ -4,8 +4,6 @@ import Foundation
 import Testing
 @testable import XestiTools
 
-private typealias TestStringType = XestiTools.Category
-
 struct StringRepresentableTests {
 }
 
@@ -91,14 +89,28 @@ extension StringRepresentableTests {
     }
 
     @Test
-    func test_initWithEmptyStringReturnsNil() {
+    func test_init_emptyStringReturnsNil() {
         let category = TestStringType(stringValue: "")
 
         #expect(category == nil)
     }
 
     @Test
-    func test_initWithValidString() {
+    func test_init_nonFailable() {
+        let category = TestStringType("test")
+
+        #expect(category.stringValue == "test")
+    }
+
+    @Test
+    func test_init_stringLiteral() {
+        let category: TestStringType = "literal"
+
+        #expect(category.stringValue == "literal")
+    }
+
+    @Test
+    func test_init_validString() {
         let category = TestStringType(stringValue: "test")
 
         #expect(category != nil)
@@ -106,22 +118,8 @@ extension StringRepresentableTests {
     }
 
     @Test
-    func test_isValidDefault() {
+    func test_isValid() {
         #expect(TestStringType.isValid("valid"))
         #expect(!TestStringType.isValid(""))
-    }
-
-    @Test
-    func test_nonFailableInit() {
-        let category = TestStringType("test")
-
-        #expect(category.stringValue == "test")
-    }
-
-    @Test
-    func test_stringLiteralInit() {
-        let category: TestStringType = "literal"
-
-        #expect(category.stringValue == "literal")
     }
 }

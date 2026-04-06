@@ -11,7 +11,7 @@ struct FilePathCLITests {
 
 extension FilePathCLITests {
     @Test
-    func test_initWithAbsolutePath() {
+    func test_init_absolutePath() {
         let path = FilePath(argument: "/usr/local/bin")
 
         #expect(path != nil)
@@ -19,7 +19,7 @@ extension FilePathCLITests {
     }
 
     @Test
-    func test_initWithDotPath() {
+    func test_init_dotPath() {
         let path = FilePath(argument: ".")
 
         #expect(path != nil)
@@ -27,7 +27,7 @@ extension FilePathCLITests {
     }
 
     @Test
-    func test_initWithRelativePath() {
+    func test_init_relativePath() {
         let path = FilePath(argument: "relative/path")
 
         #expect(path != nil)
@@ -35,7 +35,7 @@ extension FilePathCLITests {
     }
 
     @Test
-    func test_initWithTildePath() {
+    func test_init_tildePath() {
         let path = FilePath(argument: "~/Documents")
 
         #expect(path != nil)

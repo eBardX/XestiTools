@@ -29,14 +29,14 @@ extension TextLocationTests {
     }
 
     @Test
-    func test_failableInitWithBothZero() {
+    func test_failableInit_bothZero() {
         let location = TextLocation(line: 0, column: 0)
 
         #expect(location == nil)
     }
 
     @Test
-    func test_failableInitWithValidValues() {
+    func test_failableInit_validValues() {
         let location = TextLocation(line: 3, column: 5)
 
         #expect(location != nil)
@@ -45,14 +45,14 @@ extension TextLocationTests {
     }
 
     @Test
-    func test_failableInitWithZeroColumn() {
+    func test_failableInit_zeroColumn() {
         let location = TextLocation(line: 5, column: 0)
 
         #expect(location == nil)
     }
 
     @Test
-    func test_failableInitWithZeroLine() {
+    func test_failableInit_zeroLine() {
         let location = TextLocation(line: 0, column: 5)
 
         #expect(location == nil)
@@ -82,7 +82,7 @@ extension TextLocationTests {
     }
 
     @Test
-    func test_initWithLargeValues() {
+    func test_init_largeValues() {
         let location = TextLocation(1_000, 500)
 
         #expect(location.line == 1_000)
@@ -90,7 +90,7 @@ extension TextLocationTests {
     }
 
     @Test
-    func test_initWithValidValues() {
+    func test_init_validValues() {
         let location = TextLocation(1, 1)
 
         #expect(location.line == 1)

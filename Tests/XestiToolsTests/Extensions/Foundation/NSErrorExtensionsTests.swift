@@ -11,7 +11,7 @@ struct NSErrorExtensionsTests {
 
 extension NSErrorExtensionsTests {
     @Test
-    func test_causePropertyWhenAbsent() {
+    func test_cause_absent() {
         let error = NSError(domain: "TestDomain",
                             code: 1)
 
@@ -19,19 +19,7 @@ extension NSErrorExtensionsTests {
     }
 
     @Test
-    func test_causePropertyWhenPresent() {
-        let underlyingError = NSError(domain: "InnerDomain",
-                                      code: 1,
-                                      userInfo: [NSLocalizedDescriptionKey: "Inner error"])
-        let error = NSError(domain: "OuterDomain",
-                            code: 2,
-                            userInfo: [NSUnderlyingErrorKey: underlyingError])
-
-        #expect(error.cause?.message == "Inner error")
-    }
-
-    @Test
-    func test_causePropertyWithNonEnhancedUnderlying() {
+    func test_cause_nonEnhancedUnderlying() {
         let underlying = NSError(domain: "PlainDomain",
                                  code: 99,
                                  userInfo: [NSLocalizedDescriptionKey: "plain"])
@@ -43,7 +31,19 @@ extension NSErrorExtensionsTests {
     }
 
     @Test
-    func test_messageProperty() {
+    func test_cause_present() {
+        let underlyingError = NSError(domain: "InnerDomain",
+                                      code: 1,
+                                      userInfo: [NSLocalizedDescriptionKey: "Inner error"])
+        let error = NSError(domain: "OuterDomain",
+                            code: 2,
+                            userInfo: [NSUnderlyingErrorKey: underlyingError])
+
+        #expect(error.cause?.message == "Inner error")
+    }
+
+    @Test
+    func test_message() {
         let error = NSError(domain: "TestDomain",
                             code: 42,
                             userInfo: [NSLocalizedDescriptionKey: "Something went wrong"])

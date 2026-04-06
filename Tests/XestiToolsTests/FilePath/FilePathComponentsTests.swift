@@ -12,7 +12,7 @@ struct FilePathComponentsTests {
 
 extension FilePathComponentsTests {
     @Test
-    func test_appendExtensionMutating() {
+    func test_appendExtension_mutating() {
         var path = FilePath("/tmp/file")
 
         path.appendExtension("log")
@@ -29,21 +29,21 @@ extension FilePathComponentsTests {
     }
 
     @Test
-    func test_baseNameOfRoot() {
+    func test_baseName_root() {
         let path = FilePath("/")
 
         #expect(path.baseName == "/")
     }
 
     @Test
-    func test_baseNameSimple() {
+    func test_baseName_simple() {
         let path = FilePath("/usr/local/bin/tool")
 
         #expect(path.baseName == "tool")
     }
 
     @Test
-    func test_baseNameWithExtension() {
+    func test_baseName_withExtension() {
         let path = FilePath("/home/user/file.txt")
 
         #expect(path.baseName == "file.txt")
@@ -67,7 +67,7 @@ extension FilePathComponentsTests {
     }
 
     @Test
-    func test_removeExtensionMutating() {
+    func test_removeExtension_mutating() {
         var path = FilePath("/tmp/file.log")
 
         path.removeExtension()
@@ -84,7 +84,7 @@ extension FilePathComponentsTests {
     }
 
     @Test
-    func test_removingExtensionNoExtension() {
+    func test_removingExtension_noExtension() {
         let path = FilePath("/tmp/file")
         let result = path.removingExtension()
 
@@ -92,7 +92,7 @@ extension FilePathComponentsTests {
     }
 
     @Test
-    func test_replaceExtensionMutating() {
+    func test_replaceExtension_mutating() {
         var path = FilePath("/tmp/file.txt")
 
         path.replaceExtension(with: "json")
@@ -109,7 +109,7 @@ extension FilePathComponentsTests {
     }
 
     @Test
-    func test_standardizeMutating() {
+    func test_standardize_mutating() {
         var path = FilePath("/tmp/./foo/../bar")
 
         path.standardize()

@@ -10,7 +10,7 @@ struct AtomicFlagTests {
 
 extension AtomicFlagTests {
     @Test
-    func test_clearResetsFlag() {
+    func test_clear_resetsFlag() {
         var flag = AtomicFlag()
 
         _ = flag.testAndSet()
@@ -23,16 +23,7 @@ extension AtomicFlagTests {
     }
 
     @Test
-    func test_initialTestAndSetReturnsFalse() {
-        var flag = AtomicFlag()
-
-        let result = flag.testAndSet()
-
-        #expect(!result)
-    }
-
-    @Test
-    func test_multipleClearAndSet() {
+    func test_clearAndSet_multiple() {
         var flag = AtomicFlag()
         var r1 = flag.testAndSet()
 
@@ -61,7 +52,16 @@ extension AtomicFlagTests {
     }
 
     @Test
-    func test_secondTestAndSetReturnsTrue() {
+    func test_testAndSet_initialReturnsFalse() {
+        var flag = AtomicFlag()
+
+        let result = flag.testAndSet()
+
+        #expect(!result)
+    }
+
+    @Test
+    func test_testAndSet_secondReturnsTrue() {
         var flag = AtomicFlag()
 
         _ = flag.testAndSet()

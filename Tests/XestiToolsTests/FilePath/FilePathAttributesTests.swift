@@ -12,7 +12,7 @@ struct FilePathAttributesTests {
 
 extension FilePathAttributesTests {
     @Test
-    func test_dictionaryRepresentationWithDefaults() {
+    func test_dictionaryRepresentation_defaults() {
         let attrs = FilePath.Attributes()
         let dict = attrs.dictionaryRepresentation
 
@@ -21,7 +21,7 @@ extension FilePathAttributesTests {
     }
 
     @Test
-    func test_dictionaryRepresentationWithValues() {
+    func test_dictionaryRepresentation_withValues() {
         var attrs = FilePath.Attributes()
 
         attrs.kind = .regular
@@ -60,7 +60,7 @@ extension FilePathAttributesTests {
     }
 
     @Test
-    func test_emptyInit() {
+    func test_init_empty() {
         let attrs = FilePath.Attributes()
 
         #expect(attrs.kind == .unknown)
@@ -81,7 +81,7 @@ extension FilePathAttributesTests {
     }
 
     @Test
-    func test_initFromDictionary() {
+    func test_init_fromDictionary() {
         let now = Date()
         let dict: [FileAttributeKey: Any] = [.type: FileAttributeType.typeRegular,
                                              .creationDate: now,
@@ -98,7 +98,7 @@ extension FilePathAttributesTests {
     }
 
     @Test
-    func test_initFromEmptyDictionary() {
+    func test_init_fromEmptyDictionary() {
         let dict: [FileAttributeKey: Any] = [:]
         let attrs = FilePath.Attributes(dict)
 

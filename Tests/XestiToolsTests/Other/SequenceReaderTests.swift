@@ -10,7 +10,7 @@ struct SequenceReaderTests {
 
 extension SequenceReaderTests {
     @Test
-    func test_hasMoreAfterExhausted() {
+    func test_hasMore_afterExhausted() {
         var reader = SequenceReader([1])
 
         _ = reader.read()
@@ -19,14 +19,14 @@ extension SequenceReaderTests {
     }
 
     @Test
-    func test_hasMoreWhenEmpty() {
+    func test_hasMore_empty() {
         let reader = SequenceReader([Int]())
 
         #expect(!reader.hasMore)
     }
 
     @Test
-    func test_hasMoreWithElements() {
+    func test_hasMore_withElements() {
         let reader = SequenceReader([1])
 
         #expect(reader.hasMore)
@@ -50,7 +50,7 @@ extension SequenceReaderTests {
     }
 
     @Test
-    func test_peekAfterRead() {
+    func test_peek_afterRead() {
         var reader = SequenceReader([1, 2, 3])
 
         _ = reader.read()
@@ -59,7 +59,7 @@ extension SequenceReaderTests {
     }
 
     @Test
-    func test_peekDoesNotAdvance() {
+    func test_peek_doesNotAdvance() {
         let reader = SequenceReader([10, 20])
 
         #expect(reader.peek() == 10)
@@ -67,14 +67,14 @@ extension SequenceReaderTests {
     }
 
     @Test
-    func test_peekOnEmptySequence() {
+    func test_peek_emptySequence() {
         let reader = SequenceReader([Int]())
 
         #expect(reader.peek() == nil)
     }
 
     @Test
-    func test_readAllElements() {
+    func test_read_allElements() {
         var reader = SequenceReader([1, 2, 3])
 
         #expect(reader.read() == 1)
@@ -84,7 +84,7 @@ extension SequenceReaderTests {
     }
 
     @Test
-    func test_readStringSequence() {
+    func test_read_stringSequence() {
         var reader = SequenceReader(["a", "b", "c"])
 
         #expect(reader.read() == "a")
@@ -94,7 +94,7 @@ extension SequenceReaderTests {
     }
 
     @Test
-    func test_skipAdvancesWithoutReturningValue() {
+    func test_skip_advancesWithoutReturningValue() {
         var reader = SequenceReader([1, 2, 3])
 
         let didSkip = reader.skip()
@@ -104,7 +104,7 @@ extension SequenceReaderTests {
     }
 
     @Test
-    func test_skipReturnsFalseWhenEmpty() {
+    func test_skip_returnsFalseWhenEmpty() {
         var reader = SequenceReader([Int]())
 
         let didSkip = reader.skip()
@@ -113,7 +113,7 @@ extension SequenceReaderTests {
     }
 
     @Test
-    func test_skipReturnsTrueAndExhausts() {
+    func test_skip_returnsTrueAndExhausts() {
         var reader = SequenceReader([42])
 
         let didSkip = reader.skip()

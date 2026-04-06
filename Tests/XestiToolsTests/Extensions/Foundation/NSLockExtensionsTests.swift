@@ -11,14 +11,14 @@ struct NSLockExtensionsTests {
 
 extension NSLockExtensionsTests {
     @Test
-    func test_namedInitializer() {
+    func test_initNamed() {
         let lock = NSLock(named: "test-lock")
 
         #expect(lock.name == "test-lock")
     }
 
     @Test
-    func test_namedInitializerWithEmptyName() {
+    func test_initNamed_emptyName() {
         let lock = NSLock(named: "")
 
         #expect(lock.name?.isEmpty == true)

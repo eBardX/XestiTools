@@ -11,14 +11,14 @@ struct NSConditionExtensionsTests {
 
 extension NSConditionExtensionsTests {
     @Test
-    func test_namedInitializer() {
+    func test_initNamed() {
         let condition = NSCondition(named: "test-condition")
 
         #expect(condition.name == "test-condition")
     }
 
     @Test
-    func test_namedInitializerWithEmptyName() {
+    func test_initNamed_emptyName() {
         let condition = NSCondition(named: "")
 
         #expect(condition.name?.isEmpty == true)

@@ -10,7 +10,7 @@ struct ArrayExtensionsTests {
 
 extension ArrayExtensionsTests {
     @Test
-    func test_popFromEmptyArray() {
+    func test_pop_emptyArray() {
         var array: [Int] = []
 
         #expect(array.pop() == nil)
@@ -18,7 +18,7 @@ extension ArrayExtensionsTests {
     }
 
     @Test
-    func test_popFromNonEmptyArray() {
+    func test_pop_nonEmptyArray() {
         var array = [1, 2, 3]
 
         #expect(array.pop() == 3)
@@ -26,7 +26,7 @@ extension ArrayExtensionsTests {
     }
 
     @Test
-    func test_popFromSingleElementArray() {
+    func test_pop_singleElementArray() {
         var array = [42]
 
         #expect(array.pop() == 42)
@@ -43,7 +43,16 @@ extension ArrayExtensionsTests {
     }
 
     @Test
-    func test_pushPopSequence() {
+    func test_push_emptyArray() {
+        var array: [Int] = []
+
+        array.push(1)
+
+        #expect(array == [1])
+    }
+
+    @Test
+    func test_pushPop_sequence() {
         var array: [String] = []
 
         array.push("a")
@@ -59,23 +68,14 @@ extension ArrayExtensionsTests {
     }
 
     @Test
-    func test_pushToEmptyArray() {
-        var array: [Int] = []
-
-        array.push(1)
-
-        #expect(array == [1])
-    }
-
-    @Test
-    func test_topFromEmptyArray() {
+    func test_top_emptyArray() {
         let array: [Int] = []
 
         #expect(array.top() == nil)
     }
 
     @Test
-    func test_topFromNonEmptyArray() {
+    func test_top_nonEmptyArray() {
         let array = [1, 2, 3]
 
         #expect(array.top() == 3)
