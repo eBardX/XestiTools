@@ -1,13 +1,12 @@
 // © 2018–2026 John Gary Pusey (see LICENSE.md)
 
 private import ArgumentParser
-private import XestiText
 
 /// An error with extended information.
 ///
-/// An extended error also provides formatting capabilities intended for use by
-/// command-line tools.
-public protocol ExtendedError: EnhancedError, CustomStringConvertible {
+/// An extended error provides additional properties intended for use when
+/// formatting errors for display in command-line tools.
+public protocol ExtendedError: EnhancedError {
     /// The `ExitCode` value associated with this error. Defaults to `.failure`.
     var exitCode: ExitCode { get }
 
@@ -29,25 +28,6 @@ public protocol ExtendedError: EnhancedError, CustomStringConvertible {
 extension ExtendedError {
 
     // MARK: Public Instance Properties
-
-    public var description: String {
-        let totalWidth = Formatter.terminalWidth()
-
-        var text = Formatter.hangIndent(prefix: messagePrefix,
-                                        text: message,
-                                        totalWidth: totalWidth)
-
-        text = String(text.dropFirst(messagePrefix.count))
-
-        for hint in hints {
-            text += "\n"
-            text += Formatter.hangIndent(prefix: hintsPrefix,
-                                         text: hint,
-                                         totalWidth: totalWidth)
-        }
-
-        return text
-    }
 
     public var exitCode: ExitCode {
         .failure
