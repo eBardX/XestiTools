@@ -23,10 +23,10 @@ public struct TextLocation {
 
     /// Creates a new text location from the provided line and column numbers.
     ///
-    /// If either `line` or `column` is zero, this initializer stops execution.
-    ///
     /// - Parameter line:   The line number in the text block.
     /// - Parameter column: The column number in the text block.
+    ///
+    /// - Precondition: Both `line` and `column` must be greater than zero.
     public init(_ line: UInt,
                 _ column: UInt) {
         precondition(line > 0, "line must be greater than zero")

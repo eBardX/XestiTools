@@ -4,13 +4,15 @@ extension UnsignedInteger {
 
     // MARK: Public Type Methods
 
-    /// Returns the greatest common divisor of two values.
+	/// Calculates the greatest common divisor of the two provided unsigned
+	/// integers and returns the result.
     ///
-    /// - Parameter n1: The first value.
-    /// - Parameter n2: The second value.
+    /// - Parameter n1: The first unsigned integer for which to calculate the
+    ///                 greatest common divisor.
+    /// - Parameter n2: The second unsigned integer for which to calculate the
+    ///                 greatest common divisor.
     ///
-    /// - Returns:  The greatest common divisor of `n1` and `n2`, or `n1` if
-    ///             `n2` is zero.
+    /// - Returns:  The result of the greatest common divisor calculation.
     public static func gcd(_ n1: Self,
                            _ n2: Self) -> Self {
         var val1 = n1

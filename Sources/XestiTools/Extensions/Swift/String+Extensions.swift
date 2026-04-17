@@ -46,6 +46,8 @@ extension String {
     ///
     /// - Returns:  The text location, or `nil` if an equivalent text location
     ///             cannot be determined.
+    ///
+    /// - Precondition: `position` must be a valid index of this string.
     public func location(of position: Self.Index) -> TextLocation? {
         let posRange = NSRange(position..<position,
                                in: self)

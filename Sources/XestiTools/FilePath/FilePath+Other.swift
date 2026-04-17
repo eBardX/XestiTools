@@ -127,6 +127,8 @@ extension FilePath {
     ///                         `[]`.
     ///
     /// - Returns:  The data read from the regular file.
+    ///
+    /// - Throws:   An error if the data cannot be read.
     public func readData(options: Data.ReadingOptions = []) throws -> Data {
         try Data(contentsOf: fileURL,
                  options: options)
@@ -136,6 +138,8 @@ extension FilePath {
     /// at this file path, including any descendants.
     ///
     /// - Returns:  The total size in bytes.
+    ///
+    /// - Throws:   An error if the size cannot be determined.
     public func totalSize() throws -> UInt64 {
         let attrs = try attributes()
 
@@ -163,6 +167,8 @@ extension FilePath {
     /// - Parameter data:       The data to write to the regular file.
     /// - Parameter options:    Options for the write operation. Defaults to
     ///                         `[]`.
+    ///
+    /// - Throws:   An error if the data cannot be written.
     public func writeData(_ data: Data,
                           options: Data.WritingOptions = []) throws {
         try data.write(to: fileURL,

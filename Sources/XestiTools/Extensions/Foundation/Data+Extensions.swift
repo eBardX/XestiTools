@@ -12,6 +12,8 @@ extension Data {
     /// temporary destination directory and returns a new file wrapper to it.
     ///
     /// - Returns:  A file wrapper locating the destination directory.
+    ///
+    /// - Throws:   An error if the archive cannot be unzipped.
     public func unzip() throws -> FileWrapper {
         let tmpDirectoryURL = try URL.createTemporaryReplacementDirectory()
 

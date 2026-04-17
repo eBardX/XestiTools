@@ -4,15 +4,14 @@ extension SignedInteger {
 
     // MARK: Public Instance Methods
 
-    /// Returns the mathematical modulo of this value and `m`.
+	/// Calculates the modulo of this integer divided by the provided integer
+	/// and returns the result.
     ///
-    /// Unlike the `%` operator, which returns a remainder with the sign of the
-    /// dividend, this method always returns a non-negative result when `m` is
-    /// positive.
+    /// - Parameter m:  The integer _modulus_ by which to divide this integer.
     ///
-    /// - Parameter m:  The divisor.
+    /// - Returns:  The result of the modulo calculation.
     ///
-    /// - Returns:  The value of `self` modulo `m`.
+    /// - Precondition: `m` must not be zero.
     public func modulo(_ m: Self) -> Self {
         let rem = self % m
 

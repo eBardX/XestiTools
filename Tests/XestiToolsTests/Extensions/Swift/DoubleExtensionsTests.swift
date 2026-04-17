@@ -10,11 +10,11 @@ struct DoubleExtensionsTests {
 
 extension DoubleExtensionsTests {
     @Test
-    func test_asFraction() {
-        #expect((-1.75).asFraction() == (-7, 4))
-        #expect(Double.pi.asFraction() == (355, 113))
-        #expect(Double.zero.asFraction() == (0, 1))
-        #expect(1.03125.asFraction() == (33, 32))
-        #expect((5.0 / 17.0).asFraction() == (5, 17))
+    func test_rationalized() {
+        #expect((-1.75).rationalized() == (-7, 4))
+        #expect(Double.pi.rationalized() == (355, 113))
+        #expect(Double.zero.rationalized() == (0, 1))
+        #expect(1.03125.rationalized() == (33, 32))
+        #expect((5.0 / 17.0).rationalized() == (5, 17))
     }
 }

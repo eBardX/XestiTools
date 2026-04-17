@@ -10,6 +10,8 @@ extension URL {
     /// document directory.
     ///
     /// - Returns:  The file URL of the created directory.
+    ///
+    /// - Throws:   An error if the directory cannot be created.
     public static func createTemporaryReplacementDirectory() throws -> URL {
         try FileManager.default.url(for: .itemReplacementDirectory,
                                     in: .userDomainMask,

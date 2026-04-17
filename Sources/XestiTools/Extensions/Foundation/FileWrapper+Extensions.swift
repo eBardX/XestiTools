@@ -22,10 +22,10 @@ extension FileWrapper {
 
     /// Returns the contents of the directory associated with this file wrapper.
     ///
-    /// An error is thrown if this file wrapper is not associated with a
-    /// directory.
-    ///
     /// - Returns:  The contents of the directory.
+    ///
+    /// - Throws:   An error if this file wrapper is not associated with a
+    ///             directory.
     public func contentsOfDirectory() throws -> [String: FileWrapper] {
         guard isDirectory
         else { throw _makeCocoaError(.fileReadUnknown, preferredFilename) }
@@ -39,10 +39,10 @@ extension FileWrapper {
     /// Returns the contents of the regular-file associated with this file
     /// wrapper.
     ///
-    /// An error is thrown if this file wrapper is not associated with a
-    /// regular-file.
-    ///
     /// - Returns:  The contents of the regular-file.
+    ///
+    /// - Throws:   An error if this file wrapper is not associated with a
+    ///             regular file.
     public func contentsOfRegularFile() throws -> Data {
         guard isRegularFile
         else { throw _makeCocoaError(.fileReadUnknown, preferredFilename) }
@@ -56,15 +56,13 @@ extension FileWrapper {
     /// Finds the child file wrapper in this directory file wrapper by matching
     /// against the provided path component.
     ///
-    /// An error is thrown if either of the following occur:
-    ///
-    /// - This file wrapper is not associated with a directory.
-    /// - The child file wrapper is not found.
-    ///
     /// - Parameter component:  The path component identifying the file wrapper
     ///                         to find.
     ///
     /// - Returns:  The child file wrapper.
+    ///
+    /// - Throws:   An error if this file wrapper is not associated with a
+    ///             directory, or if the child file wrapper is not found.
     public func findFile(_ component: String) throws -> FileWrapper {
         try findFile([component])
     }
@@ -72,17 +70,15 @@ extension FileWrapper {
     /// Finds the nested file wrapper in this directory file wrapper (or its
     /// descendants) by matching against the provided path components.
     ///
-    /// An error is thrown if any of the following occur:
-    ///
-    /// - This file wrapper is not associated with a directory.
-    /// - A path component in the provided array does not refer to a directory
-    ///   file wrapper (unless it is the last path component).
-    /// - The nested file wrapper is not found.
-    ///
     /// - Parameter components: An array of path components identifying the file
     ///                         wrapper to find.
     ///
     /// - Returns:  The nested file wrapper.
+    ///
+    /// - Throws:   An error if this file wrapper is not associated with a
+    ///             directory, if an intermediate path component does not refer
+    ///             to a directory file wrapper, or if the nested file wrapper
+    ///             is not found.
     public func findFile(_ components: [String]) throws -> FileWrapper {
         var child = self
         var path = ""
@@ -110,13 +106,13 @@ extension FileWrapper {
     }
 
     /// Finds the nested file wrapper in this directory file wrapper by matching
-    /// against the provided file path .
-    ///
-    /// An error is thrown if the file-system node is not found.
+    /// against the provided file path.
     ///
     /// - Parameter path:   The file path identifying the file wrapper to find.
     ///
     /// - Returns:  The nested file wrapper.
+    ///
+    /// - Throws:   An error if the file-system node is not found.
     public func findFile(_ path: FilePath) throws -> FileWrapper {
         try findFile(path.components.map { $0.string })
     }
@@ -125,6 +121,8 @@ extension FileWrapper {
     /// temporary directory.
     ///
     /// - Returns:  The file wrapper associated with the temporary directory.
+    ///
+    /// - Throws:   An error if the archive cannot be unzipped.
     public func unzip() throws -> FileWrapper {
         try (regularFileContents ?? Data()).unzip()
     }
@@ -132,15 +130,13 @@ extension FileWrapper {
     /// Updates the contents of the named child file wrapper in this directory
     /// file wrapper.
     ///
-    /// An error is thrown if any of the following occur:
-    ///
-    /// - This file wrapper is not associated with a directory.
-    /// - No child file wrapper matching the specified name is found.
-    /// - The child file wrapper is not associated with a regular-file.
-    ///
     /// - Parameter name:   The name of the child file wrapper to update.
     /// - Parameter data:   The new contents with which to update the found
     ///                     child file wrapper.
+    ///
+    /// - Throws:   An error if this file wrapper is not associated with a
+    ///             directory, if no child file wrapper with the given name is
+    ///             found, or if the child is not associated with a regular file.
     public func updateRegularFile(named name: String,
                                   using data: Data) throws {
         guard isDirectory
@@ -168,6 +164,8 @@ extension FileWrapper {
     /// archive file.
     ///
     /// - Returns:  The file wrapper associated with the archive file.
+    ///
+    /// - Throws:   An error if the archive cannot be created.
     public func zip() throws -> FileWrapper {
         let tmpDirectoryURL = try URL.createTemporaryReplacementDirectory()
 

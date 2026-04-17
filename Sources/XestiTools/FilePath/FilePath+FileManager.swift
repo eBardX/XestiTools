@@ -20,6 +20,8 @@ extension FilePath {
     /// Returns the attributes of the file-system node at this file path.
     ///
     /// - Returns:  An ``Attributes`` instance encapsulating the attributes.
+    ///
+    /// - Throws:   An error if the attributes cannot be retrieved.
     public func attributes() throws -> Attributes {
         try Attributes(FileManager.default.attributesOfItem(atPath: string))
     }
@@ -46,6 +48,8 @@ extension FilePath {
     ///
     /// - Returns:  An array of file paths, each of which identifies a
     ///             file-system node contained in the directory.
+    ///
+    /// - Throws:   An error if the directory contents cannot be read.
     public func contentsOfDirectory(includingPropertiesForKeys keys: [URLResourceKey]? = nil,
                                     options: FileManager.DirectoryEnumerationOptions = []) throws -> [Self] {
         try FileManager.default.contentsOfDirectory(at: fileURL,
@@ -60,6 +64,8 @@ extension FilePath {
     ///
     /// - Parameter destination:    The file path at which to place the copy of
     ///                             this file-system node.
+    ///
+    /// - Throws:   An error if the item cannot be copied.
     public func copy(to destination: Self) throws {
         try FileManager.default.copyItem(at: fileURL,
                                          to: destination.fileURL)
@@ -75,6 +81,8 @@ extension FilePath {
     ///                                     does not exist.
     /// - Parameter attributes:             The attributes to associate with the
     ///                                     new directory.
+    ///
+    /// - Throws:   An error if the directory cannot be created.
     public func createDirectory(withIntermediateDirectories createIntermediates: Bool = true,
                                 attributes: Attributes? = nil) throws {
         try FileManager.default.createDirectory(at: fileURL,
@@ -87,6 +95,8 @@ extension FilePath {
     ///
     /// - Parameter destination:    The file path of the file-system node to be
     ///                             pointed to by the link.
+    ///
+    /// - Throws:   An error if the symbolic link cannot be created.
     public func createSymbolicLink(to destination: Self) throws {
         try FileManager.default.createSymbolicLink(at: fileURL,
                                                    withDestinationURL: destination.fileURL)
@@ -96,6 +106,8 @@ extension FilePath {
     /// path.
     ///
     /// - Returns:  The file path of the created directory.
+    ///
+    /// - Throws:   An error if the directory cannot be created.
     public func createTemporaryReplacementDirectory() throws -> Self {
         let url = try FileManager.default.url(for: .itemReplacementDirectory,
                                               in: .userDomainMask,
@@ -109,6 +121,8 @@ extension FilePath {
     /// link at this file path.
     ///
     /// - Returns:  The file path of the linked file-system node.
+    ///
+    /// - Throws:   An error if the destination cannot be determined.
     public func destinationOfSymbolicLink() throws -> Self {
         let dstPath = try Self(FileManager.default.destinationOfSymbolicLink(atPath: string))
 
@@ -178,6 +192,8 @@ extension FilePath {
     ///
     /// - Parameter destination:    The file path identifying the location
     ///                             where the link will be created.
+    ///
+    /// - Throws:   An error if the hard link cannot be created.
     public func link(to destination: Self) throws {
         try FileManager.default.linkItem(at: fileURL,
                                          to: destination.fileURL)
@@ -188,12 +204,16 @@ extension FilePath {
     ///
     /// - Parameter destination:    The file path at which to place this
     ///                             file-system node.
+    ///
+    /// - Throws:   An error if the item cannot be moved.
     public func move(to destination: Self) throws {
         try FileManager.default.moveItem(at: fileURL,
                                          to: destination.fileURL)
     }
 
     /// Removes the file-system node at this file path.
+    ///
+    /// - Throws:   An error if the item cannot be removed.
     public func remove() throws {
         try FileManager.default.removeItem(at: fileURL)
     }
@@ -217,6 +237,8 @@ extension FilePath {
     ///                                     replacement. Defaults to `false`.
     ///
     /// - Returns:  The file path of the replaced file-system node.
+    ///
+    /// - Throws:   An error if the replacement operation fails.
     @discardableResult
     public func replace(with replacement: Self,
                         backupName: String?,
@@ -245,6 +267,8 @@ extension FilePath {
     ///
     /// - Parameter attributes: An ``Attributes`` instance encapsulating the
     ///                         attributes to change.
+    ///
+    /// - Throws:   An error if the attributes cannot be set.
     public func setAttributes(_ attributes: Attributes) throws {
         try FileManager.default.setAttributes(attributes.dictionaryRepresentation,
                                               ofItemAtPath: string)
@@ -255,6 +279,8 @@ extension FilePath {
     ///
     /// - Parameter destination:    The file path of the destination directory
     ///                             of the unzip operation.
+    ///
+    /// - Throws:   An error if the archive cannot be unzipped.
     public func unzip(to destination: Self) throws {
         try FileManager.default.unzipItem(at: fileURL,
                                           to: destination.fileURL)
@@ -269,6 +295,8 @@ extension FilePath {
     ///                             directory name of a source item should be
     ///                             used as a root element within the archive.
     ///                             Defaults to `true`.
+    ///
+    /// - Throws:   An error if the archive cannot be created.
     public func zip(to destination: Self,
                     keepParent: Bool = true) throws {
         try FileManager.default.zipItem(at: fileURL,

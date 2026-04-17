@@ -4,16 +4,32 @@ extension Double {
 
     // MARK: Public Instance Methods
 
-    /// Returns this value expressed as an approximate rational fraction.
+    /// Determines the rational fraction that is the nearest approximation to
+    /// this value and returns it.
     ///
     /// The result is computed using the continued-fraction algorithm and is
     /// accurate to six decimal places.
     ///
-    /// - Returns:  A tuple containing the `numerator` and `denominator` of
-    ///             the nearest rational approximation to this value.
+    /// - Returns:  A tuple containing the `numerator` and `denominator` of the
+    ///             nearest rational approximation to this value.
     ///
     /// - Precondition: This value must be finite (not `nan` or `infinity`).
+    @available(*, deprecated, renamed: "rationalized()")
     public func asFraction() -> (numerator: Int, denominator: Int) {
+        rationalized()
+    }
+
+    /// Determines the rational fraction that is the nearest approximation to
+    /// this value and returns it.
+    ///
+    /// The result is computed using the continued-fraction algorithm and is
+    /// accurate to six decimal places.
+    ///
+    /// - Returns:  A tuple containing the `numerator` and `denominator` of the
+    ///             nearest rational approximation to this value.
+    ///
+    /// - Precondition: This value must be finite (not `nan` or `infinity`).
+    public func rationalized() -> (numerator: Int, denominator: Int) {
         //
         // Adapted from https://github.com/kevinboone/rationalize
         //

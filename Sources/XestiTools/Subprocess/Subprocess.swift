@@ -69,6 +69,8 @@ open class Subprocess {
     // MARK: Public Instance Methods
 
     /// Launches the executable as a subprocess and waits until it is finished.
+    ///
+    /// - Throws:   An error if the executable cannot be launched.
     public func execute() throws {
         try process.run()
 
@@ -79,6 +81,8 @@ open class Subprocess {
     /// returns the result.
     ///
     /// - Returns:  A ``Result`` tuple.
+    ///
+    /// - Throws:   An error if the executable cannot be launched.
     public func run() throws -> Result {
         let dataQueue = DispatchQueue(label: "com.xesticode.Subprocess.dataQueue",
                                       qos: .userInteractive,
