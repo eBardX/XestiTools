@@ -34,7 +34,7 @@ extension Double {
         // Adapted from https://github.com/kevinboone/rationalize
         //
         precondition(isFinite,
-                     "double value must be finite")
+                     "Double value must be finite")
 
         let (xmag, xneg) = self < 0 ? (-self, true) : (self, false)
         let origValue = Int(xmag * Double(Self.scale))

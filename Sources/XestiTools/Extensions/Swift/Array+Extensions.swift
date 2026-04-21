@@ -14,7 +14,7 @@ extension Array {
 
     /// Adds an element to the end of this array.
     ///
-    /// - Parameter:    The element to add to the end of this array.
+    /// - Parameter elt:    The element to add to the end of this array.
     public mutating func push(_ elt: Element) {
         append(elt)
     }

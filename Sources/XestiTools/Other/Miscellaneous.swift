@@ -20,7 +20,7 @@ public func clamp<T: Comparable>(_ vmin: T,
     vmin > value ? vmin : vmax < value ? vmax : value
 }
 
-/// Returns a “litely” escaped copy of the given string.
+/// Returns a “lightly” escaped copy of the given string.
 ///
 /// - Returns: The escaped string.
 public func liteEscape<S: StringProtocol>(_ value: S) -> String {
