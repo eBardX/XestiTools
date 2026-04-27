@@ -17,6 +17,9 @@
 ///   when `base < 1`)
 /// - ``LogarithmicInterpolator`` — logarithmic deceleration
 /// - ``CosineInterpolator`` — cosine S-curve (slow start, slow finish)
+/// - ``LogisticInterpolator`` — logistic S-curve with configurable steepness
+/// - ``SkewedLogisticInterpolator`` — asymmetric logistic S-curve with
+///   independent steepness on each side of a configurable center point
 public protocol Interpolator: Codable,
                               Equatable,
                               Hashable,
