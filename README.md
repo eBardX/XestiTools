@@ -21,4 +21,4 @@ XestiTools is available under [the MIT license][license].
 
 [docc]:     https://www.swift.org/documentation/docc/
 [license]:  https://github.com/eBardX/XestiTools/blob/main/LICENSE.md
-[refdoc]:   https://eBardX.github.io/XestiTools/documentation/xestitools
+[refdoc]:   https://eBardX.github.io/xesti-packages-docs/documentation/xestitools
