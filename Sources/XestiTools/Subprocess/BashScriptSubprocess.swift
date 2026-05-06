@@ -9,12 +9,12 @@ open class BashScriptSubprocess: Subprocess {
     // MARK: Public Initializers
 
     /// Creates a new `BashScriptSubprocess` instance.
-    /// 
+    ///
     /// - Parameter scriptPath:             The location of the Bash script.
     /// - Parameter arguments:              An array of strings that supplies
     ///                                     the command arguments. Defaults to
     ///                                     an empty array.
-    /// - Parameter currentDirectoryPath:    The location of the current
+    /// - Parameter currentDirectoryPath:   The location of the current
     ///                                     directory. Defaults to `nil`.
     /// - Parameter environment:            A dictionary of environment variable
     ///                                     values whose keys are the variable

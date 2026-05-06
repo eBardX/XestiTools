@@ -128,7 +128,7 @@ extension FilePath {
     /// Returns a new file path made by removing extraneous components from this
     /// file path.
     ///
-    /// - Returns: The new file path.
+    /// - Returns:  The new file path.
     public func standardizing() -> Self {
         Self((string as NSString).standardizingPath)
     }

@@ -17,6 +17,9 @@
 ///   when `base < 1`)
 /// - ``LogarithmicInterpolator`` — logarithmic deceleration
 /// - ``CosineInterpolator`` — cosine S-curve (slow start, slow finish)
+/// - ``LogisticInterpolator`` — logistic S-curve with configurable steepness
+/// - ``SkewedLogisticInterpolator`` — asymmetric logistic S-curve with
+///   independent steepness on each side of a configurable center point
 public protocol Interpolator: Codable,
                               Equatable,
                               Hashable,
@@ -31,7 +34,7 @@ public protocol Interpolator: Codable,
     ///
     /// - Parameter value:  The input fraction — a value in the unit interval
     ///                     `[0, 1]`.
-    /// 
+    ///
     /// - Returns:  The output fraction — the mapped result value in the unit
     ///             interval `[0, 1]`.
     func interpolate(_ value: Double) -> Double
@@ -53,8 +56,8 @@ extension Interpolator {
     ///             interval `[0, 1]`.
     ///
     /// - Precondition: `value` must be a finite `Double` value in the unit
-    ///                 interval `[0, 1]`.`
-    /// 
+    ///                 interval `[0, 1]`.
+    ///
     /// - Postcondition:    `interpolate(_:)` must return a finite `Double`
     ///                     value in the unit interval `[0, 1]`.
     public func checkedInterpolate(_ value: Double) -> Double {

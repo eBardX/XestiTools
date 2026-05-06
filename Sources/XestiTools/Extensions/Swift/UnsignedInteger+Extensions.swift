@@ -4,8 +4,8 @@ extension UnsignedInteger {
 
     // MARK: Public Type Methods
 
-	/// Calculates the greatest common divisor of the two provided unsigned
-	/// integers and returns the result.
+    /// Calculates the greatest common divisor of the two provided unsigned
+    /// integers and returns the result.
     ///
     /// - Parameter n1: The first unsigned integer for which to calculate the
     ///                 greatest common divisor.

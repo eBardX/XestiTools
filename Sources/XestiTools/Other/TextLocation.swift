@@ -9,7 +9,7 @@ public struct TextLocation {
     /// Creates a new text location from the provided line and column numbers.
     ///
     /// If either `line` or `column` is zero, this initializer returns `nil`.
-    /// 
+    ///
     /// - Parameter line:   The line number in the text block.
     /// - Parameter column: The column number in the text block.
     public init?(line: UInt,

@@ -86,7 +86,7 @@ extension String {
     ///                                 comparison is case-insensitive. Defaults
     ///                                 to `false`.
     ///
-    /// - Returns: `true` if the match succeeds, `false` otherwise.
+    /// - Returns:  `true` if the match succeeds, `false` otherwise.
     public func matches(pattern: Self,
                         caseInsensitive: Bool = false) -> Bool {
         if caseInsensitive {

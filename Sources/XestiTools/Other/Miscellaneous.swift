@@ -7,13 +7,13 @@ public import Foundation
 /// Fractions of milliseconds are not supported.
 public typealias Milliseconds = Int
 
-/// Returns the given value to the specified range.
+/// Returns the given value clamped to the specified range.
 ///
 /// - Parameter vmin:  The minimum value allowed.
 /// - Parameter value: The value to clamp.
 /// - Parameter vmax:  The maximum value allowed.
 ///
-/// - Returns: The clamped value.
+/// - Returns:  The clamped value.
 public func clamp<T: Comparable>(_ vmin: T,
                                  _ value: T,
                                  _ vmax: T) -> T {
@@ -22,7 +22,9 @@ public func clamp<T: Comparable>(_ vmin: T,
 
 /// Returns a “lightly” escaped copy of the given string.
 ///
-/// - Returns: The escaped string.
+/// - Parameter value: The string to escape.
+///
+/// - Returns:  The escaped string.
 public func liteEscape<S: StringProtocol>(_ value: S) -> String {
     String(value).escaped(asASCII: true,
                           unprintableOnly: true)
@@ -32,15 +34,15 @@ public func liteEscape<S: StringProtocol>(_ value: S) -> String {
 ///
 /// - Parameter value: The time interval to convert.
 ///
-/// - Returns: The converted value.
+/// - Returns:  The converted value.
 public func milliseconds(_ value: TimeInterval) -> Milliseconds {
     Milliseconds(value * 1_000)
 }
 
-/// Returns the time interval between now and the systems’s absolute
+/// Returns the time interval between now and the system’s absolute
 /// reference date.
 ///
-/// - Returns: The current time as a time interval.
+/// - Returns:  The current time as a time interval.
 public func now() -> TimeInterval {
     Date().timeIntervalSinceReferenceDate
 }
@@ -53,7 +55,7 @@ public func now() -> TimeInterval {
 ///
 /// - Parameter value: The value to convert.
 ///
-/// - Returns: The converted value.
+/// - Returns:  The converted value.
 public func stringify(_ value: Any) -> String {
     switch value {
     case is [Any], is [String: Any]:
@@ -80,7 +82,7 @@ public func stringify(_ value: Any) -> String {
 ///
 /// - Parameter value: The number of milliseconds to convert.
 ///
-/// - Returns: The converted value.
+/// - Returns:  The converted value.
 public func timeInterval(_ value: Milliseconds) -> TimeInterval {
     TimeInterval(value) / TimeInterval(1_000)
 }

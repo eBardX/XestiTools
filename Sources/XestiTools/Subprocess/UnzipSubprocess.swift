@@ -6,7 +6,7 @@ public import System
 /// A subprocess that extracts files from a ZIP archive.
 ///
 /// The `UnzipSubprocess` class performs the equivalent of:
-/// 
+///
 /// ```bash
 /// unzip -q <zip-path> -d <destination-path>
 /// ```

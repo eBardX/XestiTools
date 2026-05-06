@@ -175,7 +175,7 @@ extension FilePath {
                        options: options)
     }
 
-    // Private Instance Methods
+    // MARK: Private Instance Methods
 
     private func _fetchResourceValue<T>(_ key: URLResourceKey) -> T? {
         var value: AnyObject?

@@ -4,7 +4,7 @@
 /// An extra value is identified by its ``name`` and may contain an array of
 /// zero or more associated ``values``. An extra value with no associated values
 /// can act as a boolean flag or tag (for example, a “marker” or “special”
-/// annotation). An extra value with associated values can act as act as a note
+/// annotation). An extra value with associated values can act as a note
 /// or an aside (for example, a “comment” annotation with a string value, or a
 /// “priority” annotation with an integer value).
 ///

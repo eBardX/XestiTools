@@ -12,7 +12,7 @@ public struct SequenceReader<S: Sequence>: Reader {
 
     /// Creates a new, _single-use_ sequence reader.
     ///
-    /// - Parameter sequence:   The sequence from which to read elements. 
+    /// - Parameter sequence:   The sequence from which to read elements.
     public init(_ sequence: S) {
         self.iterator = sequence.makeIterator()
         self.next = iterator.next()

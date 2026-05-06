@@ -4,8 +4,8 @@ extension SignedInteger {
 
     // MARK: Public Instance Methods
 
-	/// Calculates the modulo of this integer divided by the provided integer
-	/// and returns the result.
+    /// Calculates the modulo of this integer divided by the provided integer
+    /// and returns the result.
     ///
     /// - Parameter m:  The integer _modulus_ by which to divide this integer.
     ///

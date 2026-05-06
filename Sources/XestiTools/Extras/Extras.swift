@@ -82,7 +82,7 @@ extension Extras {
     ///
     /// - Parameter extra:  The extra value to insert.
     ///
-    /// - Returns:  A new extras container containing `extra`.
+    /// - Returns:  A new extras collection containing `extra`.
     public func inserting(_ extra: Extra) -> Self {
         var new = self
 
@@ -114,7 +114,7 @@ extension Extras {
     ///
     /// - Parameter extra:  The extra value to remove.
     ///
-    /// - Returns:  A new extras container without `extra`.
+    /// - Returns:  A new extras collection without `extra`.
     public func removing(_ extra: Extra) -> Self {
         var new = self
 

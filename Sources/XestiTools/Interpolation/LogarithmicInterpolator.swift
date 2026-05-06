@@ -12,9 +12,9 @@ public struct LogarithmicInterpolator {
 
     /// Creates a new logarithmic interpolator.
     ///
-    /// - Parameter base:	The base of the logarithm.
+    /// - Parameter base:   The base of the logarithm.
     ///
-    /// - Precondition:	`base` must be a positive finite `Double` value.
+    /// - Precondition: `base` must be a positive finite `Double` value.
     public init(base: Double) {
         precondition(base.isFinite && base > 0,
                      "base must be a positive finite Double value")

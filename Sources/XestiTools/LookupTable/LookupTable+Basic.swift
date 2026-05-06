@@ -86,9 +86,9 @@ extension LookupTable {
         }
     }
 
-    /// Creates and returns a new lookup table with the the provided key and
-    /// value inserted as a new entry, and optionally attaches an extras
-    /// collection to it.
+    /// Creates and returns a new lookup table with the provided key and value
+    /// inserted as a new entry, and optionally attaches an extras collection
+    /// to it.
     ///
     /// - Parameter key:    The key for the entry to insert.
     /// - Parameter value:  The value for the entry to insert.
@@ -130,7 +130,7 @@ extension LookupTable {
         hasExtras = hasExtras || other.hasExtras
     }
 
-    /// Creates and returns a new lookup table containing all entries from the
+    /// Creates and returns a new lookup table by merging all entries from the
     /// provided lookup table into this lookup table.
     ///
     /// - Parameter other:  The lookup table to merge into this lookup table.
@@ -182,7 +182,7 @@ extension LookupTable {
     /// - Parameter extras: The extras collection attached to the entry to
     ///                     remove.
     ///
-    /// - Returns: A new lookup table without the matching entry.
+    /// - Returns:  A new lookup table without the matching entry.
     public func removing(key: Key,
                          value: Value,
                          extras: Extras? = nil) -> Self {

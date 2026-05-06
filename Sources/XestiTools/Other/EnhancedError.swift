@@ -12,7 +12,7 @@ public protocol EnhancedError: Error {
     /// error has no underlying cause. Defaults to `nil`.
     var cause: (any EnhancedError)? { get }
 
-    /// A dictionary representation of information contained in this message.
+    /// A dictionary representation of information contained in this error.
     var dictionaryRepresentation: [String: Any] { get }
 
     /// The human-readable description of this error.

@@ -45,7 +45,7 @@ public protocol UIntRepresentable: Codable,
     ///
     /// If the provided unsigned integer value is determined to be invalid, this
     /// initializer returns `nil`.
-    /// 
+    ///
     /// Typically, this initializer can be implemented as follows:
     ///
     /// ```swift

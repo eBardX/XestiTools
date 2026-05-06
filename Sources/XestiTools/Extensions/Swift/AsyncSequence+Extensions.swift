@@ -4,7 +4,7 @@ public import Foundation
 
 extension AsyncSequence where Self.Element == UInt8 {
     /// Returns a non-blocking sequence of values decoded from text where each
-    /// line is a JSON object. The text is created by decoding the elements of 
+    /// line is a JSON object. The text is created by decoding the elements of
     /// `self` as UTF-8.
     ///
     /// - Parameter decoder:    The `JSONDecoder` instance with which to decode
