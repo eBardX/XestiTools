@@ -197,7 +197,9 @@ extension FilePath {
 }
 
 #if compiler(>=6)
-extension FilePath: @retroactive Comparable {}
+extension FilePath: @retroactive Comparable {
+}
 #else
-extension FilePath: Comparable {}
+extension FilePath: Comparable {
+}
 #endif

@@ -23,7 +23,9 @@ extension URL {
 }
 
 #if compiler(>=6)
-extension URL: @retroactive ExpressibleByArgument {}
+extension URL: @retroactive ExpressibleByArgument {
+}
 #else
-extension URL: ExpressibleByArgument {}
+extension URL: ExpressibleByArgument {
+}
 #endif

@@ -29,7 +29,8 @@ extension String {
     public func escaped(asASCII forceASCII: Bool,
                         unprintableOnly: Bool) -> Self {
         func escape(_ chr: Unicode.Scalar) -> Self {
-            if unprintableOnly && ["\'", "\"", "\\"].contains(chr) {
+            if unprintableOnly,
+               ["\'", "\"", "\\"].contains(chr) {
                 String(chr)
             } else {
                 chr.escaped(asASCII: forceASCII)
@@ -90,7 +91,7 @@ extension String {
     public func matches(pattern: Self,
                         caseInsensitive: Bool = false) -> Bool {
         if caseInsensitive {
-            _matches(Array(self.lowercased()),
+            _matches(Array(lowercased()),
                      Array(pattern.lowercased()))
         } else {
             _matches(Array(self),
@@ -109,10 +110,12 @@ private func _matches(_ sval: [Character],
     var sidx = 0
 
     while sidx < sval.count {
-        if pidx < pval.count && (pval[pidx] == "?" || sval[sidx] == pval[pidx]) {
+        if pidx < pval.count,
+           pval[pidx] == "?" || sval[sidx] == pval[pidx] {
             sidx += 1
             pidx += 1
-        } else if pidx < pval.count && pval[pidx] == "*" {
+        } else if pidx < pval.count,
+                  pval[pidx] == "*" {
             tidx = pidx
             midx = sidx
 
@@ -128,7 +131,8 @@ private func _matches(_ sval: [Character],
         }
     }
 
-    while pidx < pval.count && pval[pidx] == "*" {
+    while pidx < pval.count,
+          pval[pidx] == "*" {
         pidx += 1
     }
 

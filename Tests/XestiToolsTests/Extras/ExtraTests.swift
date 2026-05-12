@@ -2,7 +2,6 @@ import Foundation
 import Testing
 @testable import XestiTools
 
-@Suite
 struct ExtraTests {
 }
 

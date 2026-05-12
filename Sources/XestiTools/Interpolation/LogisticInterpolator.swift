@@ -53,7 +53,7 @@ extension LogisticInterpolator: Interpolator {
         let sigma: (Double) -> Double = { x in 1.0 / (1.0 + exp(-x)) }
         let absSteepness = abs(steepness)
         let atZero = sigma(-absSteepness / 2.0)
-        let atOne  = sigma( absSteepness / 2.0)
+        let atOne = sigma(absSteepness / 2.0)
 
         if steepness > 0 {
             return (sigma(absSteepness * (t - 0.5)) - atZero) / (atOne - atZero)

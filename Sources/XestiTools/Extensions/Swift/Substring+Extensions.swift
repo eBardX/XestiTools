@@ -104,7 +104,6 @@ extension Substring {
     ///
     /// - Returns:  The resulting substring.
     public func dropSuffix(_ predicate: (Character) throws -> Bool) rethrows -> Substring {
-
         var idx = endIndex
 
         while idx > startIndex {

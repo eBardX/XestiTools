@@ -25,7 +25,7 @@ public func clamp<T: Comparable>(_ vmin: T,
 /// - Parameter value: The string to escape.
 ///
 /// - Returns:  The escaped string.
-public func liteEscape<S: StringProtocol>(_ value: S) -> String {
+public func liteEscape(_ value: some StringProtocol) -> String {
     String(value).escaped(asASCII: true,
                           unprintableOnly: true)
 }
@@ -58,7 +58,8 @@ public func now() -> TimeInterval {
 /// - Returns:  The converted value.
 public func stringify(_ value: Any) -> String {
     switch value {
-    case is [Any], is [String: Any]:
+    case is [Any],
+         is [String: Any]:
         guard let data = try? JSONSerialization.data(withJSONObject: value),
               let string = String(data: data,
                                   encoding: .utf8)

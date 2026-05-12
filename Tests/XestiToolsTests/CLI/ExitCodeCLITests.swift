@@ -13,23 +13,21 @@ struct ExitCodeCLITests {
 extension ExitCodeCLITests {
     @Test
     func test_allDistinctValues() {
-        let codes: [ExitCode] = [
-            .configurationError,
-            .dataFormatError,
-            .inputOpenFailure,
-            .internalSoftwareError,
-            .ioError,
-            .missingSystemFile,
-            .outputCreateFailure,
-            .permissionDenied,
-            .remoteProtocolError,
-            .serviceUnavailable,
-            .systemError,
-            .temporaryFailure,
-            .unknownHost,
-            .unknownUser,
-            .usageError
-        ]
+        let codes: [ExitCode] = [.configurationError,
+                                 .dataFormatError,
+                                 .inputOpenFailure,
+                                 .internalSoftwareError,
+                                 .ioError,
+                                 .missingSystemFile,
+                                 .outputCreateFailure,
+                                 .permissionDenied,
+                                 .remoteProtocolError,
+                                 .serviceUnavailable,
+                                 .systemError,
+                                 .temporaryFailure,
+                                 .unknownHost,
+                                 .unknownUser,
+                                 .usageError]
 
         let uniqueRawValues = Set(codes.map(\.rawValue))
 

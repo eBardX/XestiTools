@@ -18,7 +18,9 @@ extension CGPoint {
 }
 
 #if compiler(>=6)
-extension CGPoint: @retroactive Comparable {}
+extension CGPoint: @retroactive Comparable {
+}
 #else
-extension CGPoint: Comparable {}
+extension CGPoint: Comparable {
+}
 #endif

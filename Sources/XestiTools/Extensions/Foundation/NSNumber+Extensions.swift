@@ -11,5 +11,5 @@ extension NSNumber {
 
     // MARK: Private Type Properties
 
-    nonisolated(unsafe) private static let booleanObjCType = NSNumber(value: true).objCType
+    private nonisolated(unsafe) static let booleanObjCType = NSNumber(value: true).objCType
 }

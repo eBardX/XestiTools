@@ -107,7 +107,7 @@ extension RunLoop.Error: EnhancedError {
     public var message: String {
         switch self {
         case let .timedOut(msg):
-            return msg
+            msg
         }
     }
 }

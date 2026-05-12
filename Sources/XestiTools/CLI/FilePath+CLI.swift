@@ -17,7 +17,9 @@ extension FilePath {
 }
 
 #if compiler(>=6)
-extension FilePath: @retroactive ExpressibleByArgument {}
+extension FilePath: @retroactive ExpressibleByArgument {
+}
 #else
-extension FilePath: ExpressibleByArgument {}
+extension FilePath: ExpressibleByArgument {
+}
 #endif

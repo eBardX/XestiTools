@@ -97,9 +97,9 @@ public struct StandardIO {
     public func redirect(standardInput inputPath: FilePath? = nil,
                          standardOutput outputPath: FilePath? = nil,
                          standardError errorPath: FilePath? = nil) throws -> Self {
-        var stderr = self.standardError
-        var stdout = self.standardOutput
-        var stdin = self.standardInput
+        var stderr = standardError
+        var stdout = standardOutput
+        var stdin = standardInput
 
         if let inputPath {
             let fd = try FileDescriptor.open(inputPath,
@@ -237,7 +237,8 @@ public struct StandardIO {
                                   target: .global(qos: .userInteractive))
 
         atexit_b {
-            queue.sync(flags: .barrier) {}
+            queue.sync(flags: .barrier) {
+            }
         }
 
         return queue

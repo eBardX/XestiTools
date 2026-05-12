@@ -51,7 +51,8 @@ extension AtomicFlag {
     private final class Storage: @unchecked Sendable {
         init() {
             self.pointer = .allocate(capacity: 1)
-            self.pointer.initialize(to: atomic_flag())
+
+            pointer.initialize(to: atomic_flag())
         }
 
         deinit {

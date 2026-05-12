@@ -31,7 +31,8 @@ extension CGRect {
 private func _fround(_ value: CGFloat) -> CGFloat {
     let result = round(value)
 
-    if result.isZero && result.sign == .minus {
+    if result.isZero,
+       result.sign == .minus {
         return 0
     }
 

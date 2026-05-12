@@ -42,9 +42,9 @@
 /// Use ``subscript(_:)`` for lookups, and ``insert(key:value:extras:)``,
 /// ``remove(key:value:extras:)``, and ``merge(with:)`` to mutate the lookup
 /// table.
-public struct LookupTable<Key, Value, Interp> where Key: InterpolatableKey,
-                                                    Value: InterpolatableValue,
-                                                    Interp: Interpolator {
+public struct LookupTable<Key: InterpolatableKey,
+                          Value: InterpolatableValue,
+                          Interp: Interpolator> {
 
     // MARK: Public Initializers
 

@@ -54,7 +54,7 @@ extension ExponentialInterpolator: Interpolator {
     // MARK: Public Instance Methods
 
     public func interpolate(_ value: Double) -> Double {
-        ((pow(base, value * power) - 1) /
-         (pow(base, power) - 1))
+        (pow(base, value * power) - 1) /
+         (pow(base, power) - 1)
     }
 }

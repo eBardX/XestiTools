@@ -48,7 +48,7 @@ extension Extra: Codable {
             var tmpValues: [AssociatedValue] = []
 
             while !container.isAtEnd {
-                tmpValues.append(try container.decode(AssociatedValue.self))
+                try tmpValues.append(container.decode(AssociatedValue.self))
             }
 
             self.values = tmpValues
@@ -90,16 +90,16 @@ extension Extra: CustomStringConvertible {
         let tmpStrings = values.map {
             switch $0 {
             case let .bool(val):
-                return "\(val)"
+                "\(val)"
 
             case let .double(val):
-                return "\(val)"
+                "\(val)"
 
             case let .int(val):
-                return "\(val)"
+                "\(val)"
 
             case let .string(val):
-                return val
+                val
             }
         }
 

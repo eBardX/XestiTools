@@ -32,7 +32,7 @@ public struct AsyncJSONValueSequence<Base: AsyncSequence,
             func yield() throws -> T? {
                 defer { buffer.removeAll(keepingCapacity: true) }
 
-                if buffer.last == 0x0D {
+                if buffer.last == 0x0d {
                     buffer.removeLast()
                 }
 
@@ -44,7 +44,7 @@ public struct AsyncJSONValueSequence<Base: AsyncSequence,
             }
 
             while let byte = try await byteSource.next() {
-                if byte != 0x0A {
+                if byte != 0x0a {
                     buffer.append(byte)
                 } else if let result = try yield() {
                     return result

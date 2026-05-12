@@ -38,7 +38,7 @@ extension Extra.AssociatedValue: Codable {
         } else if let val = try? container.decode(Double.self) {
             self = .double(val)
         } else {
-            self = .string(try container.decode(String.self))
+            self = try .string(container.decode(String.self))
         }
     }
 

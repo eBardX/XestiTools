@@ -48,22 +48,24 @@ open class Subprocess {
                 currentDirectoryPath: FilePath? = nil,
                 environment: [String: String]? = nil,
                 standardIO: StandardIO = StandardIO()) {
-        self.process = Process()
+        let tmpProcess = Process()
 
-        self.process.arguments = arguments
+        tmpProcess.arguments = arguments
 
         if let cdPath = currentDirectoryPath {
-            process.currentDirectoryURL = cdPath.absolute().fileURL
+            tmpProcess.currentDirectoryURL = cdPath.absolute().fileURL
         }
 
         if let env = environment {
-            self.process.environment = env
+            tmpProcess.environment = env
         }
 
-        self.process.executableURL = executablePath.absolute().fileURL
-        self.process.standardError = standardIO.standardError.value
-        self.process.standardInput = standardIO.standardInput.value
-        self.process.standardOutput = standardIO.standardOutput.value
+        tmpProcess.executableURL = executablePath.absolute().fileURL
+        tmpProcess.standardError = standardIO.standardError.value
+        tmpProcess.standardInput = standardIO.standardInput.value
+        tmpProcess.standardOutput = standardIO.standardOutput.value
+
+        self.process = tmpProcess
     }
 
     // MARK: Public Instance Methods

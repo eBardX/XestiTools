@@ -45,7 +45,8 @@ extension Double {
 
         var loopCount = 0
 
-        while loopCount < Self.order && (value - (cfCoef * Self.scale)) != 0 {
+        while loopCount < Self.order,
+              (value - (cfCoef * Self.scale)) != 0 {
             value = (Self.scale * Self.scale) / (value - (cfCoef * Self.scale))
             cfCoef = value / Self.scale
 
