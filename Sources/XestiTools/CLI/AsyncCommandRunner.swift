@@ -13,7 +13,7 @@ public enum AsyncCommandRunner<Command: AsyncParsableCommand> {
     /// from the program’s command-line arguments, and then runs it.
     public static func run() async {
         do {
-            var command = try Command.parseAsRoot()
+            var command = try await Command.parseAsRoot()
 
             if var asyncCommand = command as? (any AsyncParsableCommand) {
                 try await asyncCommand.run()
