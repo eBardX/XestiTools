@@ -130,3 +130,11 @@ extension IntRepresentable where Self: ExpressibleByIntegerLiteral {
         self.init(intValue: Int(integerLiteral: value))!    // swiftlint:disable:this force_unwrapping
     }
 }
+
+// MARK: - Hashable
+
+extension IntRepresentable where Self: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        intValue.hash(into: &hasher)
+    }
+}

@@ -133,3 +133,11 @@ extension StringRepresentable where Self: ExpressibleByStringLiteral {
         self.init(stringValue: value)!          // swiftlint:disable:this force_unwrapping
     }
 }
+
+// MARK: - Hashable
+
+extension StringRepresentable where Self: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        stringValue.hash(into: &hasher)
+    }
+}

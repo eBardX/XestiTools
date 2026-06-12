@@ -134,3 +134,11 @@ extension UIntRepresentable where Self: ExpressibleByIntegerLiteral {
         self.init(uintValue: UInt(integerLiteral: value))!  // swiftlint:disable:this force_unwrapping
     }
 }
+
+// MARK: - Hashable
+
+extension UIntRepresentable where Self: Hashable {
+    public func hash(into hasher: inout Hasher) {
+        uintValue.hash(into: &hasher)
+    }
+}
