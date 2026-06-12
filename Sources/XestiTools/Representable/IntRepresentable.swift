@@ -79,6 +79,7 @@ extension IntRepresentable {
 // MARK: - Codable
 
 extension IntRepresentable where Self: Codable {
+    /// Creates an instance by decoding from the provided decoder.
     public init(from decoder: any Decoder) throws {
         let container = try decoder.singleValueContainer()
         let intValue = try container.decode(Int.self)
@@ -90,6 +91,7 @@ extension IntRepresentable where Self: Codable {
         self = value
     }
 
+    /// Encodes this instance into the provided encoder.
     public func encode(to encoder: any Encoder) throws {
         var container = encoder.singleValueContainer()
 

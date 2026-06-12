@@ -10,7 +10,7 @@ struct DictionaryExtensionsTests {
 
 extension DictionaryExtensionsTests {
     @Test
-    func test_compactMapKeys() {
+    func compactMapKeys() {
         let dict = ["1": "a", "two": "b", "3": "c"]
         let result = dict.compactMapKeys { Int($0) }
 
@@ -18,7 +18,7 @@ extension DictionaryExtensionsTests {
     }
 
     @Test
-    func test_compactMapKeys_allNil() {
+    func compactMapKeys_allNil() {
         let dict = ["a": 1, "b": 2]
         let result = dict.compactMapKeys { _ -> Int? in nil }
 
@@ -26,7 +26,7 @@ extension DictionaryExtensionsTests {
     }
 
     @Test
-    func test_compactMapKeys_emptyDictionary() {
+    func compactMapKeys_emptyDictionary() {
         let dict: [String: Int] = [:]
         let result = dict.compactMapKeys { Int($0) }
 
@@ -34,7 +34,7 @@ extension DictionaryExtensionsTests {
     }
 
     @Test
-    func test_compactMapKeys_noneNil() {
+    func compactMapKeys_noneNil() {
         let dict = [1: "x", 2: "y"]
         let result = dict.compactMapKeys { String($0) }
 
@@ -42,7 +42,7 @@ extension DictionaryExtensionsTests {
     }
 
     @Test
-    func test_mapKeys() {
+    func mapKeys() {
         let dict = ["a": 1, "b": 2, "c": 3]
         let result = dict.mapKeys { $0.uppercased() }
 
@@ -50,7 +50,7 @@ extension DictionaryExtensionsTests {
     }
 
     @Test
-    func test_mapKeys_collision() {
+    func mapKeys_collision() {
         let dict = ["a": 1, "A": 2]
         let result = dict.mapKeys { $0.lowercased() }
 
@@ -59,7 +59,7 @@ extension DictionaryExtensionsTests {
     }
 
     @Test
-    func test_mapKeys_emptyDictionary() {
+    func mapKeys_emptyDictionary() {
         let dict: [String: Int] = [:]
         let result = dict.mapKeys { $0.uppercased() }
 
@@ -67,7 +67,7 @@ extension DictionaryExtensionsTests {
     }
 
     @Test
-    func test_mapKeys_toIntKeys() {
+    func mapKeys_toIntKeys() {
         let dict = ["1": "a", "2": "b"]
         let result = dict.mapKeys { Int($0)! }  // swiftlint:disable:this force_unwrapping
 

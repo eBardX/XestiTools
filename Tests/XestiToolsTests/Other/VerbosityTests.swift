@@ -10,26 +10,26 @@ struct VerbosityTests {
 
 extension VerbosityTests {
     @Test
-    func test_comparable() {
+    func comparable() {
         #expect(Verbosity.silent < .quiet)
         #expect(Verbosity.quiet < .verbose)
         #expect(Verbosity.verbose < .veryVerbose)
     }
 
     @Test
-    func test_comparable_notLessThanSelf() {
+    func comparable_notLessThanSelf() {
         #expect(!(Verbosity.silent < .silent))
         #expect(!(Verbosity.veryVerbose < .veryVerbose))
     }
 
     @Test
-    func test_comparable_reverse() {
+    func comparable_reverse() {
         #expect(!(Verbosity.quiet < .silent))
         #expect(!(Verbosity.veryVerbose < .verbose))
     }
 
     @Test
-    func test_equatable() {
+    func equatable() {
         #expect(Verbosity.silent == .silent)
         #expect(Verbosity.quiet == .quiet)
         #expect(Verbosity.verbose == .verbose)
@@ -37,7 +37,7 @@ extension VerbosityTests {
     }
 
     @Test
-    func test_init_fromRawValue() {
+    func init_fromRawValue() {
         #expect(Verbosity(rawValue: 0) == .silent)
         #expect(Verbosity(rawValue: 1) == .quiet)
         #expect(Verbosity(rawValue: 2) == .verbose)
@@ -47,13 +47,13 @@ extension VerbosityTests {
     }
 
     @Test
-    func test_notEqual() {
+    func notEqual() {
         #expect(Verbosity.silent != .quiet)
         #expect(Verbosity.quiet != .verbose)
     }
 
     @Test
-    func test_rawValues() {
+    func rawValues() {
         #expect(Verbosity.silent.rawValue == 0)
         #expect(Verbosity.quiet.rawValue == 1)
         #expect(Verbosity.verbose.rawValue == 2)

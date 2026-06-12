@@ -11,7 +11,7 @@ struct TextLocationTests {
 
 extension TextLocationTests {
     @Test
-    func test_codable() throws {
+    func codable() throws {
         let original = TextLocation(5, 10)
         let data = try JSONEncoder().encode(original)
         let decoded = try JSONDecoder().decode(TextLocation.self,
@@ -21,7 +21,7 @@ extension TextLocationTests {
     }
 
     @Test
-    func test_equality() {
+    func equality() {
         let loc1 = TextLocation(1, 2)
         let loc2 = TextLocation(1, 2)
 
@@ -29,14 +29,14 @@ extension TextLocationTests {
     }
 
     @Test
-    func test_failableInit_bothZero() {
+    func failableInit_bothZero() {
         let location = TextLocation(line: 0, column: 0)
 
         #expect(location == nil)
     }
 
     @Test
-    func test_failableInit_validValues() {
+    func failableInit_validValues() {
         let location = TextLocation(line: 3, column: 5)
 
         #expect(location != nil)
@@ -45,21 +45,21 @@ extension TextLocationTests {
     }
 
     @Test
-    func test_failableInit_zeroColumn() {
+    func failableInit_zeroColumn() {
         let location = TextLocation(line: 5, column: 0)
 
         #expect(location == nil)
     }
 
     @Test
-    func test_failableInit_zeroLine() {
+    func failableInit_zeroLine() {
         let location = TextLocation(line: 0, column: 5)
 
         #expect(location == nil)
     }
 
     @Test
-    func test_hashable() {
+    func hashable() {
         let loc1 = TextLocation(1, 2)
         let loc2 = TextLocation(1, 2)
 
@@ -72,7 +72,7 @@ extension TextLocationTests {
     }
 
     @Test
-    func test_inequality() {
+    func inequality() {
         let loc1 = TextLocation(1, 2)
         let loc2 = TextLocation(1, 3)
         let loc3 = TextLocation(2, 2)
@@ -82,7 +82,7 @@ extension TextLocationTests {
     }
 
     @Test
-    func test_init_largeValues() {
+    func init_largeValues() {
         let location = TextLocation(1_000, 500)
 
         #expect(location.line == 1_000)
@@ -90,7 +90,7 @@ extension TextLocationTests {
     }
 
     @Test
-    func test_init_validValues() {
+    func init_validValues() {
         let location = TextLocation(1, 1)
 
         #expect(location.line == 1)

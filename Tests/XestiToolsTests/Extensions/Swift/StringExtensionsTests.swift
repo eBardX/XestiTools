@@ -10,7 +10,7 @@ struct StringExtensionsTests {
 
 extension StringExtensionsTests {
     @Test
-    func test_escaped_preservesQuotesWhenUnprintableOnly() {
+    func escaped_preservesQuotesWhenUnprintableOnly() {
         let result = "it's \"quoted\" and \\slashed".escaped(asASCII: true,
                                                              unprintableOnly: true)
 
@@ -20,7 +20,7 @@ extension StringExtensionsTests {
     }
 
     @Test
-    func test_escaped_specialChars() {
+    func escaped_specialChars() {
         let result = "a\tb\nc".escaped(asASCII: true,
                                        unprintableOnly: false)
 
@@ -29,7 +29,7 @@ extension StringExtensionsTests {
     }
 
     @Test
-    func test_escaped_unprintableOnly() {
+    func escaped_unprintableOnly() {
         let result = "hello".escaped(asASCII: true,
                                      unprintableOnly: true)
 
@@ -37,7 +37,7 @@ extension StringExtensionsTests {
     }
 
     @Test
-    func test_location() {
+    func location() {
         let value = "Every good boy deserves favor."
         let expectedLocationStart = TextLocation(1, 1)
         let expectedLocationEnd = TextLocation(1, UInt(value.count + 1))
@@ -51,7 +51,7 @@ extension StringExtensionsTests {
     }
 
     @Test
-    func test_location_emoji() {
+    func location_emoji() {
         let value = "🇺🇸abc"
         let idx = value.index(value.startIndex,
                               offsetBy: 1)
@@ -62,7 +62,7 @@ extension StringExtensionsTests {
     }
 
     @Test
-    func test_location_middleOfLine() {
+    func location_middleOfLine() {
         let value = "abc\ndef\nghi"
         let idx = value.index(value.startIndex,
                               offsetBy: 5)
@@ -73,7 +73,7 @@ extension StringExtensionsTests {
     }
 
     @Test
-    func test_location_multiLine() {
+    func location_multiLine() {
         let value = "line1\nline2\nline3"
         let idx = value.index(value.startIndex,
                               offsetBy: 6)
@@ -84,7 +84,7 @@ extension StringExtensionsTests {
     }
 
     @Test
-    func test_matches() {
+    func matches() {
         #expect(!"aa".matches(pattern: "a"))
         #expect("aa".matches(pattern: "aa"))
         #expect(!"aaa".matches(pattern: "aa"))
@@ -95,18 +95,7 @@ extension StringExtensionsTests {
     }
 
     @Test
-    func test_matches_caseSensitive() {
-        #expect(!"aa".matches(pattern: "A"))
-        #expect(!"aa".matches(pattern: "Aa"))
-        #expect(!"aaa".matches(pattern: "Aa"))
-        #expect("aa".matches(pattern: "*"))
-        #expect(!"aa".matches(pattern: "A*"))
-        #expect("ab".matches(pattern: "?*"))
-        #expect(!"aab".matches(pattern: "c*A*b"))
-    }
-
-    @Test
-    func test_matches_caseInsensitive() {
+    func matches_caseInsensitive() {
         #expect(!"aa".matches(pattern: "A",
                               caseInsensitive: true))
         #expect("aa".matches(pattern: "Aa",
@@ -124,7 +113,7 @@ extension StringExtensionsTests {
     }
 
     @Test
-    func test_matches_caseInsensitiveNames() {
+    func matches_caseInsensitiveNames() {
         #expect(!"Jon".matches(pattern: "jo?n",
                                caseInsensitive: false))
         #expect(!"Jon".matches(pattern: "jo*n",
@@ -172,35 +161,46 @@ extension StringExtensionsTests {
     }
 
     @Test
-    func test_matches_emptyPatternAndString() {
+    func matches_caseSensitive() {
+        #expect(!"aa".matches(pattern: "A"))
+        #expect(!"aa".matches(pattern: "Aa"))
+        #expect(!"aaa".matches(pattern: "Aa"))
+        #expect("aa".matches(pattern: "*"))
+        #expect(!"aa".matches(pattern: "A*"))
+        #expect("ab".matches(pattern: "?*"))
+        #expect(!"aab".matches(pattern: "c*A*b"))
+    }
+
+    @Test
+    func matches_emptyPatternAndString() {
         #expect("".matches(pattern: ""))
     }
 
     @Test
-    func test_matches_questionMarkPattern() {
+    func matches_questionMarkPattern() {
         #expect("a".matches(pattern: "?"))
         #expect(!"ab".matches(pattern: "?"))
         #expect(!"".matches(pattern: "?"))
     }
 
     @Test
-    func test_matches_starOnlyPattern() {
+    func matches_starOnlyPattern() {
         #expect("anything".matches(pattern: "*"))
         #expect("".matches(pattern: "*"))
     }
 
     @Test
-    func test_nilIfEmpty_emptyString() {
+    func nilIfEmpty_emptyString() {
         #expect("".nilIfEmpty == nil)
     }
 
     @Test
-    func test_nilIfEmpty_nonEmptyString() {
+    func nilIfEmpty_nonEmptyString() {
         #expect("hello".nilIfEmpty == "hello")
     }
 
     @Test
-    func test_nilIfEmpty_whitespace() {
+    func nilIfEmpty_whitespace() {
         #expect(" ".nilIfEmpty == " ")
     }
 }

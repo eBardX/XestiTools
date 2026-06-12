@@ -41,6 +41,7 @@ extension Extra: Codable {
 
     // MARK: Public Initializers
 
+    /// Creates an `Extra` by decoding from the provided decoder.
     public init(from decoder: any Decoder) throws {
         if var container = try? decoder.unkeyedContainer() {
             self.name = try container.decode(String.self)
@@ -62,6 +63,7 @@ extension Extra: Codable {
 
     // MARK: Public Instance Methods
 
+    /// Encodes this `Extra` into the provided encoder.
     public func encode(to encoder: any Encoder) throws {
         if values.isEmpty {
             var container = encoder.singleValueContainer()

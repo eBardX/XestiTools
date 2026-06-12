@@ -2,7 +2,7 @@ extension LookupTable {
 
     // MARK: Public Instance Properties
 
-    /// A Boolean value that indicates whether this lookup table is empty.
+    /// A Boolean value indicating whether this lookup table is empty.
     public var isEmpty: Bool {
         entries.isEmpty
     }

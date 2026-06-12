@@ -11,7 +11,7 @@ struct CGRectExtensionsTests {
 
 extension CGRectExtensionsTests {
     @Test
-    func test_center() {
+    func center() {
         let rect = CGRect(x: 10, y: 20, width: 100, height: 200)
 
         #expect(rect.center.x == 60)
@@ -19,7 +19,7 @@ extension CGRectExtensionsTests {
     }
 
     @Test
-    func test_center_originRect() {
+    func center_originRect() {
         let rect = CGRect(x: 0, y: 0, width: 50, height: 50)
 
         #expect(rect.center.x == 25)
@@ -27,7 +27,7 @@ extension CGRectExtensionsTests {
     }
 
     @Test
-    func test_center_zeroRect() {
+    func center_zeroRect() {
         let rect = CGRect.zero
 
         #expect(rect.center.x == 0)
@@ -35,7 +35,7 @@ extension CGRectExtensionsTests {
     }
 
     @Test
-    func test_integerRounded() {
+    func integerRounded() {
         let rect = CGRect(x: 1.4, y: 2.6, width: 8.6, height: 7.4)
         let rounded = rect.integerRounded
 
@@ -46,7 +46,7 @@ extension CGRectExtensionsTests {
     }
 
     @Test
-    func test_integerRounded_alreadyInteger() {
+    func integerRounded_alreadyInteger() {
         let rect = CGRect(x: 1, y: 2, width: 3, height: 4)
         let rounded = rect.integerRounded
 
@@ -57,7 +57,7 @@ extension CGRectExtensionsTests {
     }
 
     @Test
-    func test_integerRounded_halfValues() {
+    func integerRounded_halfValues() {
         let rect = CGRect(x: 0.5, y: 1.5, width: 2.5, height: 3.5)
         let rounded = rect.integerRounded
 
@@ -66,7 +66,7 @@ extension CGRectExtensionsTests {
     }
 
     @Test
-    func test_integerRounded_negativeValues() {
+    func integerRounded_negativeValues() {
         let rect = CGRect(x: -1.6, y: -2.4, width: 5.6, height: 5.4)
         let rounded = rect.integerRounded
 

@@ -10,19 +10,19 @@ struct PlatformTests {
 
 extension PlatformTests {
     @Test
-    func test_current_isMacOS() {
+    func current_isMacOS() {
         #expect(Platform.current == .macOS)
     }
 
     @Test
-    func test_init_fromRawValue() {
+    func init_fromRawValue() {
         #expect(Platform(rawValue: "macOS") == .macOS)
         #expect(Platform(rawValue: "Linux") == .linux)
         #expect(Platform(rawValue: "nonexistent") == nil)
     }
 
     @Test
-    func test_rawValues() {
+    func rawValues() {
         #expect(Platform.android.rawValue == "Android")
         #expect(Platform.freeBSD.rawValue == "FreeBSD")
         #expect(Platform.iOS.rawValue == "iOS")

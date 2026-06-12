@@ -10,7 +10,7 @@ struct SignedIntegerExtensionsTests {
 
 extension SignedIntegerExtensionsTests {
     @Test
-    func test_modulo_Int() {
+    func modulo_Int() {
         #expect(7.modulo(3) == 1)
         #expect((-7).modulo(3) == 2)
         #expect(7.modulo(-3) == -2)
@@ -26,7 +26,7 @@ extension SignedIntegerExtensionsTests {
 
     @Test
     @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, *)
-    func test_modulo_Int128() {
+    func modulo_Int128() {
         #expect(Int128(7).modulo(3) == 1)
         #expect(Int128(-7).modulo(3) == 2)
         #expect(Int128(7).modulo(-3) == -2)
@@ -41,7 +41,7 @@ extension SignedIntegerExtensionsTests {
     }
 
     @Test
-    func test_modulo_Int16() {
+    func modulo_Int16() {
         #expect(Int16(7).modulo(3) == 1)
         #expect(Int16(-7).modulo(3) == 2)
         #expect(Int16(7).modulo(-3) == -2)
@@ -56,7 +56,7 @@ extension SignedIntegerExtensionsTests {
     }
 
     @Test
-    func test_modulo_Int32() {
+    func modulo_Int32() {
         #expect(Int32(7).modulo(3) == 1)
         #expect(Int32(-7).modulo(3) == 2)
         #expect(Int32(7).modulo(-3) == -2)
@@ -71,7 +71,7 @@ extension SignedIntegerExtensionsTests {
     }
 
     @Test
-    func test_modulo_Int64() {
+    func modulo_Int64() {
         #expect(Int64(7).modulo(3) == 1)
         #expect(Int64(-7).modulo(3) == 2)
         #expect(Int64(7).modulo(-3) == -2)
@@ -86,7 +86,7 @@ extension SignedIntegerExtensionsTests {
     }
 
     @Test
-    func test_modulo_Int8() {
+    func modulo_Int8() {
         #expect(Int8(7).modulo(3) == 1)
         #expect(Int8(-7).modulo(3) == 2)
         #expect(Int8(7).modulo(-3) == -2)

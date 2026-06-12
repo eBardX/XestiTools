@@ -10,7 +10,7 @@ struct ResultExtensionsTests {
 
 extension ResultExtensionsTests {
     @Test
-    func test_failure() {
+    func failure() {
         let result: Result<String, TestError> = .failure(.someError)
 
         #expect(result.success == nil)
@@ -18,7 +18,7 @@ extension ResultExtensionsTests {
     }
 
     @Test
-    func test_init_bothSuccessAndFailure() {
+    func init_bothSuccessAndFailure() {
         let result = Result<Int, TestError>(success: 42,
                                             failure: .someError,
                                             noResult: .noResult)
@@ -28,7 +28,7 @@ extension ResultExtensionsTests {
     }
 
     @Test
-    func test_init_failure() {
+    func init_failure() {
         let result = Result<Int, TestError>(success: nil,
                                             failure: .someError,
                                             noResult: .noResult)
@@ -38,7 +38,7 @@ extension ResultExtensionsTests {
     }
 
     @Test
-    func test_init_neitherSuccessNorFailure() {
+    func init_neitherSuccessNorFailure() {
         let result = Result<Int, TestError>(success: nil,
                                             failure: nil,
                                             noResult: .noResult)
@@ -48,7 +48,7 @@ extension ResultExtensionsTests {
     }
 
     @Test
-    func test_init_success() {
+    func init_success() {
         let result = Result<Int, TestError>(success: 42,
                                             failure: nil,
                                             noResult: .noResult)
@@ -58,7 +58,7 @@ extension ResultExtensionsTests {
     }
 
     @Test
-    func test_onFailure_calledForFailure() {
+    func onFailure_calledForFailure() {
         let result: Result<Int, TestError> = .failure(.someError)
 
         var called = false
@@ -73,7 +73,7 @@ extension ResultExtensionsTests {
     }
 
     @Test
-    func test_onFailure_notCalledForSuccess() {
+    func onFailure_notCalledForSuccess() {
         let result: Result<Int, TestError> = .success(42)
 
         var called = false
@@ -86,7 +86,7 @@ extension ResultExtensionsTests {
     }
 
     @Test
-    func test_onFailure_returnsOriginalResult() {
+    func onFailure_returnsOriginalResult() {
         let result: Result<Int, TestError> = .failure(.someError)
         let returned = result.onFailure { _ in }
 
@@ -94,7 +94,7 @@ extension ResultExtensionsTests {
     }
 
     @Test
-    func test_onSuccess_calledForSuccess() {
+    func onSuccess_calledForSuccess() {
         let result: Result<Int, TestError> = .success(42)
 
         var called = false
@@ -109,7 +109,7 @@ extension ResultExtensionsTests {
     }
 
     @Test
-    func test_onSuccess_notCalledForFailure() {
+    func onSuccess_notCalledForFailure() {
         let result: Result<Int, TestError> = .failure(.someError)
 
         var called = false
@@ -122,7 +122,7 @@ extension ResultExtensionsTests {
     }
 
     @Test
-    func test_onSuccess_returnsOriginalResult() {
+    func onSuccess_returnsOriginalResult() {
         let result: Result<Int, TestError> = .success(42)
         let returned = result.onSuccess { _ in }
 
@@ -130,7 +130,7 @@ extension ResultExtensionsTests {
     }
 
     @Test
-    func test_success() {
+    func success() {
         let result: Result<String, TestError> = .success("hello")
 
         #expect(result.success == "hello")

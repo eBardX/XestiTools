@@ -72,7 +72,7 @@ public struct LookupTable<Key: InterpolatableKey,
     /// lookup table.
     public let interpolator: Interp
 
-    /// A Boolean value that indicates whether at least one entry in this lookup
+    /// A Boolean value indicating whether at least one entry in this lookup
     /// table has an extras collection attached.
     ///
     /// This property enables you to efficiently determine whether metadata
@@ -106,6 +106,7 @@ extension LookupTable: Codable {
 
     // MARK: Public Initializers
 
+    /// Creates a `LookupTable` by decoding from the provided decoder.
     public init(from decoder: any Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
 
@@ -120,6 +121,7 @@ extension LookupTable: Codable {
 
     // MARK: Public Instance Methods
 
+    /// Encodes this `LookupTable` into the provided encoder.
     public func encode(to encoder: any Encoder) throws {
         var container = encoder.container(keyedBy: CodingKeys.self)
 

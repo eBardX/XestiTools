@@ -11,7 +11,7 @@ struct URLCLITests {
 
 extension URLCLITests {
     @Test
-    func test_init_fileURL() {
+    func init_fileURL() {
         let url = URL(argument: "file:///tmp/test.txt")
 
         #expect(url != nil)
@@ -19,14 +19,14 @@ extension URLCLITests {
     }
 
     @Test
-    func test_init_invalidArgument() {
+    func init_invalidArgument() {
         let url = URL(argument: "")
 
         #expect(url == nil)
     }
 
     @Test
-    func test_init_validHTTPArgument() {
+    func init_validHTTPArgument() {
         let url = URL(argument: "https://example.com")
 
         #expect(url != nil)
@@ -35,7 +35,7 @@ extension URLCLITests {
     }
 
     @Test
-    func test_init_validHTTPArgumentWithPath() {
+    func init_validHTTPArgumentWithPath() {
         let url = URL(argument: "https://example.com/path/to/resource")
 
         #expect(url != nil)

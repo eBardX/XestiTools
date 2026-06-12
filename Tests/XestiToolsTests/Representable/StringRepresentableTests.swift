@@ -11,7 +11,7 @@ struct StringRepresentableTests {
 
 extension StringRepresentableTests {
     @Test
-    func test_comparable() {
+    func comparable() {
         let cat1 = TestStringType("alpha")
         let cat2 = TestStringType("beta")
 
@@ -20,7 +20,7 @@ extension StringRepresentableTests {
     }
 
     @Test
-    func test_decodeFromJSON() throws {
+    func decodeFromJSON() throws {
         let json = "\"fromJSON\""
         let data = Data(json.utf8)
         let decoded = try JSONDecoder().decode(TestStringType.self,
@@ -30,7 +30,7 @@ extension StringRepresentableTests {
     }
 
     @Test
-    func test_decodeInvalidValueThrows() throws {
+    func decodeInvalidValueThrows() throws {
         let json = "\"\""
         let data = Data(json.utf8)
 
@@ -41,14 +41,14 @@ extension StringRepresentableTests {
     }
 
     @Test
-    func test_description() {
+    func description() {
         let category = TestStringType("myCategory")
 
         #expect(category.description == "myCategory")
     }
 
     @Test
-    func test_encodeDecode() throws {
+    func encodeDecode() throws {
         let original = TestStringType("codable-test")
         let data = try JSONEncoder().encode(original)
         let decoded = try JSONDecoder().decode(TestStringType.self,
@@ -58,7 +58,7 @@ extension StringRepresentableTests {
     }
 
     @Test
-    func test_equality() {
+    func equality() {
         let cat1 = TestStringType("abc")
         let cat2 = TestStringType("abc")
 
@@ -66,7 +66,7 @@ extension StringRepresentableTests {
     }
 
     @Test
-    func test_hashable() {
+    func hashable() {
         let cat1 = TestStringType("test")
         let cat2 = TestStringType("test")
         let cat3 = TestStringType("other")
@@ -81,7 +81,7 @@ extension StringRepresentableTests {
     }
 
     @Test
-    func test_inequality() {
+    func inequality() {
         let cat1 = TestStringType("abc")
         let cat2 = TestStringType("xyz")
 
@@ -89,28 +89,28 @@ extension StringRepresentableTests {
     }
 
     @Test
-    func test_init_emptyStringReturnsNil() {
+    func init_emptyStringReturnsNil() {
         let category = TestStringType(stringValue: "")
 
         #expect(category == nil)
     }
 
     @Test
-    func test_init_nonFailable() {
+    func init_nonFailable() {
         let category = TestStringType("test")
 
         #expect(category.stringValue == "test")
     }
 
     @Test
-    func test_init_stringLiteral() {
+    func init_stringLiteral() {
         let category: TestStringType = "literal"
 
         #expect(category.stringValue == "literal")
     }
 
     @Test
-    func test_init_validString() {
+    func init_validString() {
         let category = TestStringType(stringValue: "test")
 
         #expect(category != nil)
@@ -118,7 +118,7 @@ extension StringRepresentableTests {
     }
 
     @Test
-    func test_isValid() {
+    func isValid() {
         #expect(TestStringType.isValid("valid"))
         #expect(!TestStringType.isValid(""))
     }

@@ -51,7 +51,7 @@ extension Extras {
         return tmpElements
     }
 
-    /// A Boolean value that indicates whether this extras collection is empty.
+    /// A Boolean value indicating whether this extras collection is empty.
     public var isEmpty: Bool {
         entries.isEmpty
     }

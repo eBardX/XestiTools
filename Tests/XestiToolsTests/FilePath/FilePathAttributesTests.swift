@@ -12,7 +12,7 @@ struct FilePathAttributesTests {
 
 extension FilePathAttributesTests {
     @Test
-    func test_dictionaryRepresentation_defaults() {
+    func dictionaryRepresentation_defaults() {
         let attrs = FilePath.Attributes()
         let dict = attrs.dictionaryRepresentation
 
@@ -21,7 +21,7 @@ extension FilePathAttributesTests {
     }
 
     @Test
-    func test_dictionaryRepresentation_withValues() {
+    func dictionaryRepresentation_withValues() {
         var attrs = FilePath.Attributes()
 
         attrs.kind = .regular
@@ -38,7 +38,7 @@ extension FilePathAttributesTests {
     }
 
     @Test
-    func test_dictionaryRoundTrip() {
+    func dictionaryRoundTrip() {
         let now = Date()
 
         var original = FilePath.Attributes()
@@ -60,7 +60,7 @@ extension FilePathAttributesTests {
     }
 
     @Test
-    func test_init_empty() {
+    func init_empty() {
         let attrs = FilePath.Attributes()
 
         #expect(attrs.kind == .unknown)
@@ -81,7 +81,7 @@ extension FilePathAttributesTests {
     }
 
     @Test
-    func test_init_fromDictionary() {
+    func init_fromDictionary() {
         let now = Date()
         let dict: [FileAttributeKey: Any] = [.type: FileAttributeType.typeRegular,
                                              .creationDate: now,
@@ -98,7 +98,7 @@ extension FilePathAttributesTests {
     }
 
     @Test
-    func test_init_fromEmptyDictionary() {
+    func init_fromEmptyDictionary() {
         let dict: [FileAttributeKey: Any] = [:]
         let attrs = FilePath.Attributes(dict)
 
@@ -106,7 +106,7 @@ extension FilePathAttributesTests {
     }
 
     @Test
-    func test_mutableProperties() {
+    func mutableProperties() {
         var attrs = FilePath.Attributes()
 
         attrs.isBusy = true

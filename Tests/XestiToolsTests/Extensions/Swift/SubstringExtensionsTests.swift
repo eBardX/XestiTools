@@ -10,7 +10,7 @@ struct SubstringExtensionsTests {
 
 extension SubstringExtensionsTests {
     @Test
-    func test_dropPrefix_allMatchingCharacters() {
+    func dropPrefix_allMatchingCharacters() {
         let example = Substring("###########")
         let expected = Substring("")
 
@@ -18,7 +18,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_dropPrefix_characterSet() {
+    func dropPrefix_characterSet() {
         let example = Substring("***###hello")
         let expected = Substring("hello")
 
@@ -26,7 +26,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_dropPrefix_emptyString() {
+    func dropPrefix_emptyString() {
         let example = Substring("")
         let expected = Substring("")
 
@@ -34,7 +34,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_dropPrefix_leadingMatch() {
+    func dropPrefix_leadingMatch() {
         let example = Substring("***fu*bar***")
         let expected = Substring("fu*bar***")
 
@@ -42,7 +42,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_dropPrefix_leadingMatchDollar() {
+    func dropPrefix_leadingMatchDollar() {
         let example = Substring("$goo$ber$")
         let expected = Substring("goo$ber$")
 
@@ -50,7 +50,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_dropPrefix_noMatch() {
+    func dropPrefix_noMatch() {
         let example = Substring("pris@tine")
         let expected = Substring("pris@tine")
 
@@ -58,7 +58,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_dropPrefix_noMatchSingleChar() {
+    func dropPrefix_noMatchSingleChar() {
         let example = Substring("1")
         let expected = Substring("1")
 
@@ -66,7 +66,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_dropSuffix_allMatchingCharacters() {
+    func dropSuffix_allMatchingCharacters() {
         let example = Substring("###########")
         let expected = Substring("")
 
@@ -74,7 +74,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_dropSuffix_characterSet() {
+    func dropSuffix_characterSet() {
         let example = Substring("hello***###")
         let expected = Substring("hello")
 
@@ -82,7 +82,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_dropSuffix_emptyString() {
+    func dropSuffix_emptyString() {
         let example = Substring("")
         let expected = Substring("")
 
@@ -90,7 +90,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_dropSuffix_noMatch() {
+    func dropSuffix_noMatch() {
         let example = Substring("pris@tine")
         let expected = Substring("pris@tine")
 
@@ -98,7 +98,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_dropSuffix_noMatchSingleChar() {
+    func dropSuffix_noMatchSingleChar() {
         let example = Substring("1")
         let expected = Substring("1")
 
@@ -106,7 +106,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_dropSuffix_trailingMatch() {
+    func dropSuffix_trailingMatch() {
         let example = Substring("***fu*bar***")
         let expected = Substring("***fu*bar")
 
@@ -114,7 +114,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_dropSuffix_trailingMatchDollar() {
+    func dropSuffix_trailingMatchDollar() {
         let example = Substring("$goo$ber$")
         let expected = Substring("$goo$ber")
 
@@ -122,7 +122,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_location_atStart() {
+    func location_atStart() {
         let str = "hello world"
         let sub = str[str.startIndex...]
 
@@ -131,7 +131,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_location_inMiddle() {
+    func location_inMiddle() {
         let str = "hello world"
         let idx = str.index(str.startIndex, offsetBy: 6)
         let sub = str[idx...]
@@ -141,7 +141,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_splitBeforeFirst_atEnd() {
+    func splitBeforeFirst_atEnd() {
         let example = Substring("hello:")
         let result = example.splitBeforeFirst(":")
 
@@ -150,7 +150,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_splitBeforeFirst_atStart() {
+    func splitBeforeFirst_atStart() {
         let example = Substring(":hello")
         let result = example.splitBeforeFirst(":")
 
@@ -159,7 +159,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_splitBeforeFirst_characterSet() {
+    func splitBeforeFirst_characterSet() {
         let example = Substring("hello=world")
         let result = example.splitBeforeFirst(Set<Character>([":", "="]))
 
@@ -168,7 +168,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_splitBeforeFirst_emptyString() {
+    func splitBeforeFirst_emptyString() {
         let example = Substring("")
         let result = example.splitBeforeFirst(":")
 
@@ -177,7 +177,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_splitBeforeFirst_found() {
+    func splitBeforeFirst_found() {
         let example = Substring("hello:world")
         let result = example.splitBeforeFirst(":")
 
@@ -186,7 +186,7 @@ extension SubstringExtensionsTests {
     }
 
     @Test
-    func test_splitBeforeFirst_notFound() {
+    func splitBeforeFirst_notFound() {
         let example = Substring("helloworld")
         let result = example.splitBeforeFirst(":")
 

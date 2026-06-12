@@ -11,7 +11,7 @@ struct IntRepresentableTests {
 
 extension IntRepresentableTests {
     @Test
-    func test_comparable() {
+    func comparable() {
         let val1 = TestIntType(1)
         let val2 = TestIntType(2)
 
@@ -20,7 +20,7 @@ extension IntRepresentableTests {
     }
 
     @Test
-    func test_decodeFromJSON() throws {
+    func decodeFromJSON() throws {
         let json = "99"
         let data = Data(json.utf8)
         let decoded = try JSONDecoder().decode(TestIntType.self,
@@ -30,7 +30,7 @@ extension IntRepresentableTests {
     }
 
     @Test
-    func test_decodeInvalidValueThrows() throws {
+    func decodeInvalidValueThrows() throws {
         let json = "-1"
         let data = Data(json.utf8)
 
@@ -41,14 +41,14 @@ extension IntRepresentableTests {
     }
 
     @Test
-    func test_description() {
+    func description() {
         let value = TestIntType(42)
 
         #expect(value.description == "42")
     }
 
     @Test
-    func test_encodeDecode() throws {
+    func encodeDecode() throws {
         let original = TestIntType(7)
         let data = try JSONEncoder().encode(original)
         let decoded = try JSONDecoder().decode(TestIntType.self,
@@ -58,7 +58,7 @@ extension IntRepresentableTests {
     }
 
     @Test
-    func test_equality() {
+    func equality() {
         let val1 = TestIntType(5)
         let val2 = TestIntType(5)
 
@@ -66,7 +66,7 @@ extension IntRepresentableTests {
     }
 
     @Test
-    func test_hashable() {
+    func hashable() {
         let val1 = TestIntType(1)
         let val2 = TestIntType(1)
         let val3 = TestIntType(2)
@@ -81,7 +81,7 @@ extension IntRepresentableTests {
     }
 
     @Test
-    func test_inequality() {
+    func inequality() {
         let val1 = TestIntType(5)
         let val2 = TestIntType(10)
 
@@ -89,28 +89,28 @@ extension IntRepresentableTests {
     }
 
     @Test
-    func test_init_integerLiteral() {
+    func init_integerLiteral() {
         let value: TestIntType = 10
 
         #expect(value.intValue == 10)
     }
 
     @Test
-    func test_init_invalidValue() {
+    func init_invalidValue() {
         let value = TestIntType(intValue: -1)
 
         #expect(value == nil)
     }
 
     @Test
-    func test_init_nonFailable() {
+    func init_nonFailable() {
         let value = TestIntType(5)
 
         #expect(value.intValue == 5)
     }
 
     @Test
-    func test_init_validValue() {
+    func init_validValue() {
         let value = TestIntType(intValue: 5)
 
         #expect(value != nil)
@@ -118,7 +118,7 @@ extension IntRepresentableTests {
     }
 
     @Test
-    func test_isValid() {
+    func isValid() {
         #expect(TestIntType.isValid(0))
         #expect(TestIntType.isValid(100))
         #expect(!TestIntType.isValid(-1))

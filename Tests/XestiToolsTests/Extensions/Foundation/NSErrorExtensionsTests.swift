@@ -11,7 +11,7 @@ struct NSErrorExtensionsTests {
 
 extension NSErrorExtensionsTests {
     @Test
-    func test_cause_absent() {
+    func cause_absent() {
         let error = NSError(domain: "TestDomain",
                             code: 1)
 
@@ -19,7 +19,7 @@ extension NSErrorExtensionsTests {
     }
 
     @Test
-    func test_cause_nonEnhancedUnderlying() {
+    func cause_nonEnhancedUnderlying() {
         let underlying = NSError(domain: "PlainDomain",
                                  code: 99,
                                  userInfo: [NSLocalizedDescriptionKey: "plain"])
@@ -31,7 +31,7 @@ extension NSErrorExtensionsTests {
     }
 
     @Test
-    func test_cause_present() {
+    func cause_present() {
         let underlyingError = NSError(domain: "InnerDomain",
                                       code: 1,
                                       userInfo: [NSLocalizedDescriptionKey: "Inner error"])
@@ -43,7 +43,7 @@ extension NSErrorExtensionsTests {
     }
 
     @Test
-    func test_message() {
+    func message() {
         let error = NSError(domain: "TestDomain",
                             code: 42,
                             userInfo: [NSLocalizedDescriptionKey: "Something went wrong"])

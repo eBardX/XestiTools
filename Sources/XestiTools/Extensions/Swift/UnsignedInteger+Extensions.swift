@@ -24,4 +24,13 @@ extension UnsignedInteger {
 
         return val1
     }
+
+    // MARK: Public Instance Properties
+
+    /// A Boolean value indicating whether this unsigned integer is a power of 2.
+    ///
+    /// Returns `false` for `0`, which is not a power of 2.
+    public var isPowerOf2: Bool {
+        self != 0 && (self & (self - 1)) == 0
+    }
 }

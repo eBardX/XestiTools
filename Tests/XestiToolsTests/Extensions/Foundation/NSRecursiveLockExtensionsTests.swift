@@ -11,14 +11,14 @@ struct NSRecursiveLockExtensionsTests {
 
 extension NSRecursiveLockExtensionsTests {
     @Test
-    func test_initNamed() {
+    func initNamed() {
         let lock = NSRecursiveLock(named: "test-recursive-lock")
 
         #expect(lock.name == "test-recursive-lock")
     }
 
     @Test
-    func test_initNamed_emptyName() {
+    func initNamed_emptyName() {
         let lock = NSRecursiveLock(named: "")
 
         #expect(lock.name?.isEmpty == true)

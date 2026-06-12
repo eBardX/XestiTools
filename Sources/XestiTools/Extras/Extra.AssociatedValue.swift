@@ -28,6 +28,7 @@ extension Extra.AssociatedValue: Codable {
 
     // MARK: Public Initializers
 
+    /// Creates an `AssociatedValue` by decoding from the provided decoder.
     public init(from decoder: any Decoder) throws {
         let container = try decoder.singleValueContainer()
 
@@ -44,6 +45,7 @@ extension Extra.AssociatedValue: Codable {
 
     // MARK: Public Instance Methods
 
+    /// Encodes this `AssociatedValue` into the provided encoder.
     public func encode(to encoder: any Encoder) throws {
         var container = encoder.singleValueContainer()
 

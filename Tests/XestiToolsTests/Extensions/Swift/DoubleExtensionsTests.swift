@@ -10,7 +10,7 @@ struct DoubleExtensionsTests {
 
 extension DoubleExtensionsTests {
     @Test
-    func test_rationalized() {
+    func rationalized() {
         #expect((-1.75).rationalized() == (-7, 4))
         #expect(Double.pi.rationalized() == (355, 113))
         #expect(Double.zero.rationalized() == (0, 1))

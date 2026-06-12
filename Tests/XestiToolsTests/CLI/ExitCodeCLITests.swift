@@ -12,7 +12,7 @@ struct ExitCodeCLITests {
 
 extension ExitCodeCLITests {
     @Test
-    func test_allDistinctValues() {
+    func allDistinctValues() {
         let codes: [ExitCode] = [.configurationError,
                                  .dataFormatError,
                                  .inputOpenFailure,
@@ -35,77 +35,77 @@ extension ExitCodeCLITests {
     }
 
     @Test
-    func test_configurationError() {
+    func configurationError() {
         #expect(ExitCode.configurationError.rawValue == EX_CONFIG)
     }
 
     @Test
-    func test_dataFormatError() {
+    func dataFormatError() {
         #expect(ExitCode.dataFormatError.rawValue == EX_DATAERR)
     }
 
     @Test
-    func test_inputOpenFailure() {
+    func inputOpenFailure() {
         #expect(ExitCode.inputOpenFailure.rawValue == EX_NOINPUT)
     }
 
     @Test
-    func test_internalSoftwareError() {
+    func internalSoftwareError() {
         #expect(ExitCode.internalSoftwareError.rawValue == EX_SOFTWARE)
     }
 
     @Test
-    func test_ioError() {
+    func ioError() {
         #expect(ExitCode.ioError.rawValue == EX_IOERR)
     }
 
     @Test
-    func test_missingSystemFile() {
+    func missingSystemFile() {
         #expect(ExitCode.missingSystemFile.rawValue == EX_OSFILE)
     }
 
     @Test
-    func test_outputCreateFailure() {
+    func outputCreateFailure() {
         #expect(ExitCode.outputCreateFailure.rawValue == EX_CANTCREAT)
     }
 
     @Test
-    func test_permissionDenied() {
+    func permissionDenied() {
         #expect(ExitCode.permissionDenied.rawValue == EX_NOPERM)
     }
 
     @Test
-    func test_remoteProtocolError() {
+    func remoteProtocolError() {
         #expect(ExitCode.remoteProtocolError.rawValue == EX_PROTOCOL)
     }
 
     @Test
-    func test_serviceUnavailable() {
+    func serviceUnavailable() {
         #expect(ExitCode.serviceUnavailable.rawValue == EX_UNAVAILABLE)
     }
 
     @Test
-    func test_systemError() {
+    func systemError() {
         #expect(ExitCode.systemError.rawValue == EX_OSERR)
     }
 
     @Test
-    func test_temporaryFailure() {
+    func temporaryFailure() {
         #expect(ExitCode.temporaryFailure.rawValue == EX_TEMPFAIL)
     }
 
     @Test
-    func test_unknownHost() {
+    func unknownHost() {
         #expect(ExitCode.unknownHost.rawValue == EX_NOHOST)
     }
 
     @Test
-    func test_unknownUser() {
+    func unknownUser() {
         #expect(ExitCode.unknownUser.rawValue == EX_NOUSER)
     }
 
     @Test
-    func test_usageError() {
+    func usageError() {
         #expect(ExitCode.usageError.rawValue == EX_USAGE)
     }
 }

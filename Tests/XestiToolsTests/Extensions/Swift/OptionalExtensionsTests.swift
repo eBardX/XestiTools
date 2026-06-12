@@ -10,7 +10,7 @@ struct OptionalExtensionsTests {
 
 extension OptionalExtensionsTests {
     @Test
-    func test_nilIfEqual_emptyString() {
+    func nilIfEqual_emptyString() {
         let value: String? = ""
 
         #expect(value.nilIfEqual(to: "") == nil)
@@ -21,28 +21,28 @@ extension OptionalExtensionsTests {
     }
 
     @Test
-    func test_nilIfEqual_matchingValue() {
+    func nilIfEqual_matchingValue() {
         let value: Int? = 5
 
         #expect(value.nilIfEqual(to: 5) == nil)
     }
 
     @Test
-    func test_nilIfEqual_nilOptional() {
+    func nilIfEqual_nilOptional() {
         let value: Int? = nil
 
         #expect(value.nilIfEqual(to: 5) == nil)
     }
 
     @Test
-    func test_nilIfEqual_nonMatchingValue() {
+    func nilIfEqual_nonMatchingValue() {
         let value: Int? = 5
 
         #expect(value.nilIfEqual(to: 10) == 5)
     }
 
     @Test
-    func test_nilIfEqual_stringValues() {
+    func nilIfEqual_stringValues() {
         let value: String? = "hello"
 
         #expect(value.nilIfEqual(to: "hello") == nil)
@@ -50,14 +50,14 @@ extension OptionalExtensionsTests {
     }
 
     @Test
-    func test_require_stringValue() {
+    func require_stringValue() {
         let value: String? = "hello"
 
         #expect(value.require() == "hello")
     }
 
     @Test
-    func test_require_value() {
+    func require_value() {
         let value: Int? = 42
 
         #expect(value.require() == 42)
