@@ -1,7 +1,8 @@
 // © 2025–2026 John Gary Pusey (see LICENSE.md)
 
 public import Foundation
-public import System
+
+private import System
 
 extension FileWrapper {
 

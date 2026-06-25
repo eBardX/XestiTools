@@ -1,7 +1,8 @@
 // © 2023–2026 John Gary Pusey (see LICENSE.md)
 
-private import Foundation
 public import System
+
+private import Foundation
 
 private import ZIPFoundation
 
