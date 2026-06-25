@@ -8,5 +8,5 @@ Tools to ease writing Swift code.
 
 ## Overview
 
-The XestiTools library builds on ``XestiToolsCore``, adding command-line
-interface support and ZIP archive handling.
+The XestiTools framework provides a collection of tools to facilitate writing
+Swift programs.
