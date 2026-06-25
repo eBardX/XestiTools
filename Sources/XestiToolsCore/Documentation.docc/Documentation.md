@@ -1,4 +1,4 @@
-# ``XestiTools``
+# ``XestiToolsCore``
 
 @Metadata {
     @PageColor(blue)

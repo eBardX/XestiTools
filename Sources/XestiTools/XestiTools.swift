@@ -1,0 +1,3 @@
+// © 2018–2026 John Gary Pusey (see LICENSE.md)
+
+@_exported import XestiToolsCore
