@@ -32,7 +32,7 @@ extension FileWrapper {
                   options: .atomic,
                   originalContentsURL: nil)
 
-        let tmpDirectoryPath = FilePath(tmpDirectoryURL)!   // swiftlint:disable:this force_unwrapping
+        let tmpDirectoryPath = FilePath(tmpDirectoryURL).require()
         let tmpArchivePath = try tmpDirectoryPath.createTemporaryReplacementDirectory().appending("tmp.zip")
 
         try tmpDirectoryPath.zip(to: tmpArchivePath,

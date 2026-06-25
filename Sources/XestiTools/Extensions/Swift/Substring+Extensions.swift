@@ -20,7 +20,7 @@ extension Substring {
 
     /// The text location of this substring relative to its base string.
     @inlinable public var location: TextLocation {
-        base.location(of: startIndex)!  // swiftlint:disable:this force_unwrapping
+        base.location(of: startIndex).require()
     }
 
     // MARK: Public Instance Methods

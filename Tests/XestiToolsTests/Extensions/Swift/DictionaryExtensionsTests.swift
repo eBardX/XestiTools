@@ -69,7 +69,7 @@ extension DictionaryExtensionsTests {
     @Test
     func mapKeys_toIntKeys() {
         let dict = ["1": "a", "2": "b"]
-        let result = dict.mapKeys { Int($0)! }  // swiftlint:disable:this force_unwrapping
+        let result = dict.mapKeys { Int($0).require() }
 
         #expect(result == [1: "a", 2: "b"])
     }
