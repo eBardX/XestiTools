@@ -94,6 +94,9 @@ public struct StandardIO {
     ///                         standard error. Defaults to `nil`.
     ///
     /// - Returns:  The redirected `StandardIO` instance.
+    ///
+    /// - Throws:   An error if a file at any of the provided paths cannot be
+    ///             opened.
     public func redirect(standardInput inputPath: FilePath? = nil,
                          standardOutput outputPath: FilePath? = nil,
                          standardError errorPath: FilePath? = nil) throws -> Self {

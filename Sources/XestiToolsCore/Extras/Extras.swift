@@ -58,9 +58,9 @@ extension Extras {
 
     // MARK: Public Instance Methods
 
-    /// Returns `true` if this extras collection contains an extra that
-    /// _exactly_ matches the provided extra value (same name and same
-    /// associated values).
+    /// Returns a Boolean value indicating whether this extras collection
+    /// contains an extra that _exactly_ matches the provided extra value
+    /// (same name and same associated values).
     ///
     /// - Parameter extra:  The extra value to match.
     ///

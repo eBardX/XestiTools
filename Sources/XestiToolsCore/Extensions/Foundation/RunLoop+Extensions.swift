@@ -51,6 +51,8 @@ extension RunLoop {
     ///                         Defaults to ``defaultWaitMessage``.
     /// - Parameter interval:   The interval in seconds between action calls.
     ///                         Defaults to ``defaultWaitInterval``.
+    ///
+    /// - Throws:   `RunLoop.Error.timedOut(_:)` if the wait times out.
     public static func wait(until action: @autoclosure () -> Bool,
                             timeout: TimeInterval = defaultWaitTimeout,
                             message: String = defaultWaitMessage,
@@ -79,6 +81,8 @@ extension RunLoop {
     ///                         value.
     ///
     /// - Returns:  The result of calling `action`.
+    ///
+    /// - Throws:   `RunLoop.Error.timedOut(_:)` if the wait times out.
     @discardableResult
     public static func waitForValue<T>(timeout: TimeInterval = defaultWaitTimeout,
                                        message: String = defaultWaitMessage,

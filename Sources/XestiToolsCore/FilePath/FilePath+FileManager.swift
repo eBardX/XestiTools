@@ -24,7 +24,7 @@ extension FilePath {
         try Attributes(FileManager.default.attributesOfItem(atPath: string))
     }
 
-    /// Returns a Boolean value that indicates whether the file-system nodes in
+    /// Returns a Boolean value indicating whether the file-system nodes in
     /// this file path and the provided file path have the same contents.
     ///
     /// - Parameter other:  The file path of a file-system node to compare

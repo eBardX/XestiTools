@@ -22,8 +22,8 @@ extension StandardIO.FileOrPipe {
 
     // MARK: Public Instance Properties
 
-    /// If this value holds a `Pipe` instance, returns the pipe’s read file
-    /// handle; otherwise, returns the `FileHandle` instance.
+    /// The file handle for reading: the held `FileHandle`, or the read end
+    /// of the held `Pipe`.
     public var fileHandleForReading: FileHandle {
         switch self {
         case let .file(fh):
@@ -34,8 +34,8 @@ extension StandardIO.FileOrPipe {
         }
     }
 
-    /// If this value holds a `Pipe` instance, returns the pipe’s write file
-    /// handle; otherwise, returns the `FileHandle` instance.
+    /// The file handle for writing: the held `FileHandle`, or the write end
+    /// of the held `Pipe`.
     public var fileHandleForWriting: FileHandle {
         switch self {
         case let .file(fh):
@@ -46,7 +46,7 @@ extension StandardIO.FileOrPipe {
         }
     }
 
-    /// Returns the held `FileHandle` or `Pipe` instance as an `Any` type.
+    /// The held `FileHandle` or `Pipe` instance as an `Any` value.
     public var value: Any {
         switch self {
         case let .file(fh):
