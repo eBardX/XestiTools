@@ -45,7 +45,7 @@ extension AtomicFlag {
     // MARK: Private Nested Types
 
     private final class Storage: @unchecked Sendable {
-        init() {
+        fileprivate init() {
             self.pointer = .allocate(capacity: 1)
 
             pointer.initialize(to: atomic_flag())
@@ -56,7 +56,7 @@ extension AtomicFlag {
             pointer.deallocate()
         }
 
-        let pointer: UnsafeMutablePointer<atomic_flag>
+        fileprivate let pointer: UnsafeMutablePointer<atomic_flag>
     }
 }
 

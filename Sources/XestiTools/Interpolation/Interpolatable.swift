@@ -45,7 +45,7 @@ public protocol InterpolatableValue: Codable, Equatable, Sendable {
                       through endValue: Self) -> Self
 }
 
-// MARK: - (defaults)
+// MARK: - InterpolatableKey
 
 extension Double: InterpolatableKey {
     public func fraction(from startValue: Double,
@@ -53,6 +53,8 @@ extension Double: InterpolatableKey {
         (self - startValue) / (endValue - startValue)
     }
 }
+
+// MARK: - InterpolatableValue
 
 extension Double: InterpolatableValue {
     public static func value(of fraction: Double,

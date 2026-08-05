@@ -58,17 +58,17 @@ extension FilePath {
         return Self(result)
     }
 
+    /// Expands the initial component of this file path to its full path value.
+    public mutating func expandTilde() {
+        self = expandingTilde()
+    }
+
     /// Returns a new file path made by expanding the initial component of this
     /// file path to its full path value.
     ///
     /// - Returns:  The new file path.
     public func expandingTilde() -> Self {
         Self((string as NSString).expandingTildeInPath)
-    }
-
-    /// Expands the initial component of this file path to its full path value.
-    public mutating func expandTilde() {
-        self = expandingTilde()
     }
 
     /// Removes the extension from this file path.

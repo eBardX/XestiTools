@@ -33,19 +33,19 @@ extension ExtrasTests {
     }
 
     @Test
-    func init_empty() {
-        let extras = Extras()
-
-        #expect(extras.isEmpty)
-        #expect(extras.elements.isEmpty)
-    }
-
-    @Test
     func init_elements() {
         let extras = Extras(elements: [.marker, .special])
 
         #expect(!extras.isEmpty)
         #expect(extras.elements.count == 2)
+    }
+
+    @Test
+    func init_empty() {
+        let extras = Extras()
+
+        #expect(extras.isEmpty)
+        #expect(extras.elements.isEmpty)
     }
 
     @Test

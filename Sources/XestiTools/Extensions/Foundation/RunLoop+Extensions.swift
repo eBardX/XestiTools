@@ -21,12 +21,12 @@ extension RunLoop {
     /// thread with its run loop.
     public static let defaultWaitInterval = TimeInterval(0.1)
 
+    /// The default message to include in a timeout error.
+    public static let defaultWaitMessage = "Timed out waiting"
+
     /// The default timeout in seconds when waiting on a thread with its run
     /// loop.
     public static let defaultWaitTimeout = TimeInterval(60)
-
-    /// The default message to include in a timeout error.
-    public static let defaultWaitMessage = "Timed out waiting"
 
     // MARK: Public Type Methods
 

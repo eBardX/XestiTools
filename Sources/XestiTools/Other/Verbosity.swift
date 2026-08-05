@@ -2,11 +2,11 @@
 
 /// A verbosity level (for example, to indicate tracing detail).
 public enum Verbosity: Int {
-    /// Silent — nothing or nearly so.
-    case silent = 0
-
     /// Quiet — only essential information.
     case quiet = 1
+
+    /// Silent — nothing or nearly so.
+    case silent = 0
 
     /// Verbose — loquacious but tolerable.
     case verbose = 2

@@ -2,6 +2,8 @@
 
 public import Foundation
 
+// MARK: - EnhancedError
+
 extension NSError: EnhancedError {
     public var cause: (any EnhancedError)? {
         userInfo[NSUnderlyingErrorKey] as? (any EnhancedError)

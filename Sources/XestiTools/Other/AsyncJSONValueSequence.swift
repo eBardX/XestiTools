@@ -9,12 +9,6 @@ public struct AsyncJSONValueSequence<Base: AsyncSequence,
 
     // MARK: Public Nested Types
 
-    /// The type of element produced by this asynchronous sequence.
-    ///
-    /// This is the type into which the underlying decoder will decode each JSON
-    /// object.
-    public typealias Element = T
-
     /// An asynchronous iterator that produces the elements of this asynchronous
     /// sequence.
     public struct AsyncIterator: AsyncIteratorProtocol {
@@ -70,6 +64,12 @@ public struct AsyncJSONValueSequence<Base: AsyncSequence,
         @usableFromInline internal var buffer: [UInt8]
         @usableFromInline internal var byteSource: Base.AsyncIterator
     }
+
+    /// The type of element produced by this asynchronous sequence.
+    ///
+    /// This is the type into which the underlying decoder will decode each JSON
+    /// object.
+    public typealias Element = T
 
     // MARK: Public Instance Methods
 

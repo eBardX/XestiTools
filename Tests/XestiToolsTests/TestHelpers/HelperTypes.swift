@@ -2,9 +2,38 @@
 
 import XestiTools
 
+struct TestEnhancedError: EnhancedError {
+    init(message: String,
+         category: Category? = nil,
+         cause: (any EnhancedError)? = nil) {
+        self.category = category
+        self.cause = cause
+        self.message = message
+    }
+
+    let category: Category?
+    let cause: (any EnhancedError)?
+    let message: String
+}
+
 enum TestError: Error, Equatable {
-    case someError
     case noResult
+    case someError
+}
+
+struct TestFloatType: FloatRepresentable {
+    static func isValid(_ doubleValue: Double) -> Bool {
+        doubleValue >= 0
+    }
+
+    init?(doubleValue: Double) {
+        guard Self.isValid(doubleValue)
+        else { return nil }
+
+        self.doubleValue = doubleValue
+    }
+
+    let doubleValue: Double
 }
 
 struct TestIntType: IntRepresentable {

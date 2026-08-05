@@ -8,21 +8,6 @@ public struct TextLocation {
 
     /// Creates a new text location from the provided line and column numbers.
     ///
-    /// If either `line` or `column` is zero, this initializer returns `nil`.
-    ///
-    /// - Parameter line:   The line number in the text block.
-    /// - Parameter column: The column number in the text block.
-    public init?(line: UInt,
-                 column: UInt) {
-        guard line > 0,
-              column > 0
-        else { return nil }
-
-        self.init(line, column)
-    }
-
-    /// Creates a new text location from the provided line and column numbers.
-    ///
     /// - Parameter line:   The line number in the text block.
     /// - Parameter column: The column number in the text block.
     ///
@@ -34,6 +19,21 @@ public struct TextLocation {
 
         self.column = column
         self.line = line
+    }
+
+    /// Creates a new text location from the provided line and column numbers.
+    ///
+    /// If either `line` or `column` is zero, this initializer returns `nil`.
+    ///
+    /// - Parameter line:   The line number in the text block.
+    /// - Parameter column: The column number in the text block.
+    public init?(line: UInt,
+                 column: UInt) {
+        guard line > 0,
+              column > 0
+        else { return nil }
+
+        self.init(line, column)
     }
 
     // MARK: Public Instance Properties
