@@ -2,7 +2,7 @@
 
 extension Substring {
 
-    // MARK: Public Nested Types
+    // MARK: Public Type Aliases
 
     /// The result of a split operation.
     ///

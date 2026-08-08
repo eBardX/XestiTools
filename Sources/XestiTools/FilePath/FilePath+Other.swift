@@ -189,12 +189,9 @@ extension FilePath {
 
 // MARK: - Comparable
 
-extension FilePath {
+extension FilePath: @retroactive Comparable {
     public static func < (lhs: Self,
                           rhs: Self) -> Bool {
         lhs.string < rhs.string
     }
-}
-
-extension FilePath: @retroactive Comparable {
 }

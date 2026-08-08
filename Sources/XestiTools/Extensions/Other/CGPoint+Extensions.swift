@@ -4,7 +4,7 @@ public import CoreGraphics
 
 // MARK: - Comparable
 
-extension CGPoint {
+extension CGPoint: @retroactive Comparable {
     public static func < (lhs: Self,
                           rhs: Self) -> Bool {
         if lhs.x < rhs.x {
@@ -17,7 +17,4 @@ extension CGPoint {
 
         return lhs.y < rhs.y
     }
-}
-
-extension CGPoint: @retroactive Comparable {
 }

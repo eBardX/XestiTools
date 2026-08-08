@@ -17,6 +17,30 @@ public struct AtomicFlag {
         self.storage = Storage()
     }
 
+    // MARK: Private Nested Types
+
+    private final class Storage: @unchecked Sendable {
+
+        // MARK: Fileprivate Initializers
+
+        fileprivate init() {
+            self.pointer = .allocate(capacity: 1)
+
+            pointer.initialize(to: atomic_flag())
+        }
+
+        // MARK: Deinitializer
+
+        deinit {
+            pointer.deinitialize(count: 1)
+            pointer.deallocate()
+        }
+
+        // MARK: Fileprivate Instance Properties
+
+        fileprivate let pointer: UnsafeMutablePointer<atomic_flag>
+    }
+
     // MARK: Private Instance Properties
 
     private let storage: Storage
@@ -40,28 +64,6 @@ extension AtomicFlag {
     ///             `false` if this flag was previously in the _clear_ state.
     public mutating func testAndSet() -> Bool {
         atomic_flag_test_and_set(storage.pointer)
-    }
-}
-
-// MARK: -
-
-extension AtomicFlag {
-
-    // MARK: Private Nested Types
-
-    private final class Storage: @unchecked Sendable {
-        fileprivate init() {
-            self.pointer = .allocate(capacity: 1)
-
-            pointer.initialize(to: atomic_flag())
-        }
-
-        deinit {
-            pointer.deinitialize(count: 1)
-            pointer.deallocate()
-        }
-
-        fileprivate let pointer: UnsafeMutablePointer<atomic_flag>
     }
 }
 
