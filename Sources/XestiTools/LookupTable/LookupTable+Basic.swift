@@ -9,43 +9,6 @@ extension LookupTable {
         entries.isEmpty
     }
 
-    // MARK: Public Instance Subscripts
-
-    /// Calculates the interpolated value for the provided key:
-    ///
-    /// - If this lookup table is empty, the result is ``defaultValue``.
-    /// - If the provided key is at or beyond the key of last entry in this
-    ///   lookup table, the result is the value of the last entry.
-    /// - If the provided key is before the key of the first entry in this
-    ///   lookup table, the result is the value of the first entry.
-    /// - Otherwise, the result is the value calculated by interpolating between
-    ///   the two bracketing entries with ``interpolator``.
-    ///
-    /// - Parameter key:    The key to look up.
-    ///
-    /// - Returns:  The interpolated value.
-    public subscript(_ key: Key) -> Value {
-        guard !entries.isEmpty
-        else { return defaultValue }
-
-        guard let idx = entries.firstIndex(where: { key < $0.key })
-        else { return entries[entries.endIndex - 1].value }
-
-        guard idx > 0
-        else { return entries[0].value }
-
-        let startEntry = entries[idx - 1]
-        let endEntry = entries[idx]
-
-        let inFraction = key.fraction(from: startEntry.key,
-                                      through: endEntry.key)
-        let outFraction = interpolator.checkedInterpolate(inFraction)
-
-        return Value.value(of: outFraction,
-                           from: startEntry.value,
-                           through: endEntry.value)
-    }
-
     // MARK: Public Instance Methods
 
     /// Calls the provided closure on each entry in the lookup table in key
@@ -195,5 +158,42 @@ extension LookupTable {
                    extras: extras)
 
         return new
+    }
+
+    // MARK: Public Subscripts
+
+    /// Calculates the interpolated value for the provided key:
+    ///
+    /// - If this lookup table is empty, the result is ``defaultValue``.
+    /// - If the provided key is at or beyond the key of last entry in this
+    ///   lookup table, the result is the value of the last entry.
+    /// - If the provided key is before the key of the first entry in this
+    ///   lookup table, the result is the value of the first entry.
+    /// - Otherwise, the result is the value calculated by interpolating between
+    ///   the two bracketing entries with ``interpolator``.
+    ///
+    /// - Parameter key:    The key to look up.
+    ///
+    /// - Returns:  The interpolated value.
+    public subscript(_ key: Key) -> Value {
+        guard !entries.isEmpty
+        else { return defaultValue }
+
+        guard let idx = entries.firstIndex(where: { key < $0.key })
+        else { return entries[entries.endIndex - 1].value }
+
+        guard idx > 0
+        else { return entries[0].value }
+
+        let startEntry = entries[idx - 1]
+        let endEntry = entries[idx]
+
+        let inFraction = key.fraction(from: startEntry.key,
+                                      through: endEntry.key)
+        let outFraction = interpolator.checkedInterpolate(inFraction)
+
+        return Value.value(of: outFraction,
+                           from: startEntry.value,
+                           through: endEntry.value)
     }
 }

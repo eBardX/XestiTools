@@ -1,7 +1,7 @@
 // © 2023–2026 John Gary Pusey (see LICENSE.md)
 
 /// A logging or tracing category.
-public struct Category: StringRepresentable {
+public struct Category {
 
     // MARK: Public Initializers
 
@@ -26,4 +26,9 @@ public struct Category: StringRepresentable {
     /// A new category instance initialized with `stringValue` will be
     /// equivalent to this instance.
     public let stringValue: String
+}
+
+// MARK: - StringRepresentable
+
+extension Category: StringRepresentable {
 }

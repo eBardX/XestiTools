@@ -11,7 +11,7 @@ extension UUID {
     /// See this [Wikipedia](https://en.wikipedia.org/wiki/Base62) article for
     /// more information about Base62 encoding.
     public var base62String: String {
-        Octaword(uuid: self).base62String()
+        Octaword(uuid: self)._base62String()
     }
 
     /// A hexadecimal string representation of this UUID.
@@ -58,9 +58,46 @@ private struct Octaword: Sendable {
                   loBits: loBits)
     }
 
+    // MARK: Private Initializers
+
+    private init(bit: Int) {
+        precondition(bit >= 0 && bit < Self.bitWidth)
+
+        if bit < UInt64.bitWidth {
+            self.hiBits = 0
+            self.loBits = UInt64(1) << bit
+        } else {
+            self.hiBits = UInt64(1) << (bit - UInt64.bitWidth)
+            self.loBits = 0
+        }
+    }
+
+    private init(hiBits: UInt64,
+                 loBits: UInt64) {
+        self.hiBits = hiBits
+        self.loBits = loBits
+    }
+
+    private init(value: Int) {
+        precondition(value >= 0)
+
+        self.hiBits = 0
+        self.loBits = UInt64(value)
+    }
+
+    // MARK: Private Instance Properties
+
+    private let hiBits: UInt64
+    private let loBits: UInt64
+}
+
+// MARK: -
+
+extension Octaword {
+
     // MARK: Fileprivate Instance Methods
 
-    fileprivate func base62String() -> String {
+    fileprivate func _base62String() -> String {
         var result = ""
 
         result.reserveCapacity(22)
@@ -258,37 +295,7 @@ private struct Octaword: Sendable {
                     loBits: newLoBits)
     }
 
-    // MARK: Private Initializers
-
-    private init(bit: Int) {
-        precondition(bit >= 0 && bit < Self.bitWidth)
-
-        if bit < UInt64.bitWidth {
-            self.hiBits = 0
-            self.loBits = UInt64(1) << bit
-        } else {
-            self.hiBits = UInt64(1) << (bit - UInt64.bitWidth)
-            self.loBits = 0
-        }
-    }
-
-    private init(hiBits: UInt64,
-                 loBits: UInt64) {
-        self.hiBits = hiBits
-        self.loBits = loBits
-    }
-
-    private init(value: Int) {
-        precondition(value >= 0)
-
-        self.hiBits = 0
-        self.loBits = UInt64(value)
-    }
-
     // MARK: Private Instance Properties
-
-    private let hiBits: UInt64
-    private let loBits: UInt64
 
     private var leadingZeroBitCount: Int {
         if hiBits == 0 {

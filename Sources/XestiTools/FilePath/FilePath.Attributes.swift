@@ -103,6 +103,8 @@ extension FilePath {
     }
 }
 
+// MARK: -
+
 extension FilePath.Attributes {
 
     // MARK: Public Instance Properties

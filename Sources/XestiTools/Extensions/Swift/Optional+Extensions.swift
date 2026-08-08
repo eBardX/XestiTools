@@ -1,6 +1,9 @@
 // © 2023–2026 John Gary Pusey (see LICENSE.md)
 
 extension Optional {
+
+    // MARK: Public Instance Methods
+
     /// Unconditionally unwraps this instance and returns the wrapped value.
     ///
     /// If this instance is `nil`, this method prints the provided hint and
@@ -30,6 +33,9 @@ extension Optional {
 }
 
 extension Optional where Wrapped: Equatable {
+
+    // MARK: Public Instance Methods
+
     /// Returns `nil` if the wrapped value of this instance is equal to the
     /// provided value.
     ///

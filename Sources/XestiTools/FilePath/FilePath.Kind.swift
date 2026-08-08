@@ -32,6 +32,8 @@ extension FilePath {
     }
 }
 
+// MARK: -
+
 extension FilePath.Kind {
 
     // MARK: Public Initializers

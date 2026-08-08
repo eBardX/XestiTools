@@ -26,7 +26,7 @@ extension CGRect {
     }
 }
 
-// MARK: Private Functions
+// MARK: - Private Functions
 
 private func _fround(_ value: CGFloat) -> CGFloat {
     let result = round(value)

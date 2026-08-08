@@ -2,6 +2,8 @@
 
 public import CoreGraphics
 
+// MARK: - Comparable
+
 extension CGPoint {
     public static func < (lhs: Self,
                           rhs: Self) -> Bool {

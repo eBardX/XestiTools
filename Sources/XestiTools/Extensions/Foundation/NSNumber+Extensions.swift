@@ -3,6 +3,9 @@
 public import Foundation
 
 extension NSNumber {
+
+    // MARK: Public Instance Properties
+
     /// A Boolean value indicating whether this `NSNumber` instance was created
     /// from a `Bool` value.
     public var isBoolean: Bool {

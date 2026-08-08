@@ -2,6 +2,8 @@
 
 import XestiTools
 
+typealias TestStringType = XestiTools.Category
+
 struct TestEnhancedError: EnhancedError {
     init(message: String,
          category: Category? = nil,
@@ -50,8 +52,6 @@ struct TestIntType: IntRepresentable {
 
     let intValue: Int
 }
-
-typealias TestStringType = XestiTools.Category
 
 struct TestUIntType: UIntRepresentable {
     static func isValid(_ uintValue: UInt) -> Bool {

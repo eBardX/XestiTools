@@ -1,6 +1,9 @@
 // © 2023–2026 John Gary Pusey (see LICENSE.md)
 
 extension Array {
+
+    // MARK: Public Instance Methods
+
     /// Removes and returns the last element of this array.
     ///
     /// - Returns:  The last element of this array, or `nil` if this array is

@@ -3,7 +3,7 @@
 /// A reader that traverses the elements of the provided sequence.
 public struct SequenceReader<S: Sequence>: Reader {
 
-    // MARK: Public Nested Types
+    // MARK: Public Type Aliases
 
     /// The type of element traversed by the sequence reader.
     public typealias Element = S.Element
@@ -17,6 +17,16 @@ public struct SequenceReader<S: Sequence>: Reader {
         self.iterator = sequence.makeIterator()
         self.next = iterator.next()
     }
+
+    // MARK: Private Instance Properties
+
+    private var iterator: S.Iterator
+    private var next: Element?
+}
+
+// MARK: -
+
+extension SequenceReader {
 
     // MARK: Public Instance Properties
 
@@ -61,9 +71,4 @@ public struct SequenceReader<S: Sequence>: Reader {
 
         return true
     }
-
-    // MARK: Private Instance Properties
-
-    private var iterator: S.Iterator
-    private var next: Element?
 }

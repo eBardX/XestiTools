@@ -55,6 +55,15 @@ public struct StandardIO {
     /// ``writeError(_:_:)`` behave differently.
     public let timestampFormatter: Formatter?
 
+    // MARK: Private Instance Properties
+
+    private let syncQueue: DispatchQueue
+}
+
+// MARK: -
+
+extension StandardIO {
+
     // MARK: Public Instance Methods
 
     /// Returns a string read from standard input through the end of the current
@@ -246,10 +255,6 @@ public struct StandardIO {
 
         return queue
     }
-
-    // MARK: Private Instance Properties
-
-    private let syncQueue: DispatchQueue
 
     // MARK: Private Instance Methods
 

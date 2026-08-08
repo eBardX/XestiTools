@@ -17,6 +17,15 @@ public struct AtomicFlag {
         self.storage = Storage()
     }
 
+    // MARK: Private Instance Properties
+
+    private let storage: Storage
+}
+
+// MARK: -
+
+extension AtomicFlag {
+
     // MARK: Public Instance Methods
 
     /// Atomically places this flag into the _clear_ state.
@@ -32,10 +41,6 @@ public struct AtomicFlag {
     public mutating func testAndSet() -> Bool {
         atomic_flag_test_and_set(storage.pointer)
     }
-
-    // MARK: Private Instance Properties
-
-    private let storage: Storage
 }
 
 // MARK: -

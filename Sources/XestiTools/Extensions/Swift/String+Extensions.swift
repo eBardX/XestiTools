@@ -100,7 +100,7 @@ extension String {
     }
 }
 
-// MARK: Private Functions
+// MARK: - Private Functions
 
 private func _matches(_ sval: [Character],
                       _ pval: [Character]) -> Bool {

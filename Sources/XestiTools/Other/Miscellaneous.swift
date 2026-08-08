@@ -2,10 +2,14 @@
 
 public import Foundation
 
+// MARK: Public Type Aliases
+
 /// A number of milliseconds.
 ///
 /// Fractions of milliseconds are not supported.
 public typealias Milliseconds = Int
+
+// MARK: Public Functions
 
 /// Returns the given value clamped to the specified range.
 ///
