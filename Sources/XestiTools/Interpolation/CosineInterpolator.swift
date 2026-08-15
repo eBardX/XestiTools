@@ -19,11 +19,11 @@ public struct CosineInterpolator {
 
 // MARK: - CustomStringConvertible
 
- extension CosineInterpolator: CustomStringConvertible {
+extension CosineInterpolator: CustomStringConvertible {
     public var description: String {
         "‹cosine›"
     }
- }
+}
 
 // MARK: - Interpolator
 

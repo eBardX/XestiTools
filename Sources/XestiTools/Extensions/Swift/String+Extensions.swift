@@ -6,7 +6,7 @@ extension String {
 
     // MARK: Public Instance Properties
 
-    /// This string if it is not empty, `nil` otherwise.
+    /// The value of this string, or `nil` if this string is empty.
     public var nilIfEmpty: String? {
         isEmpty ? nil : self
     }

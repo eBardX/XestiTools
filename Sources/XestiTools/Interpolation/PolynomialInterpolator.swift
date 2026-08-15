@@ -34,11 +34,11 @@ public struct PolynomialInterpolator {
 
 // MARK: - CustomStringConvertible
 
- extension PolynomialInterpolator: CustomStringConvertible {
+extension PolynomialInterpolator: CustomStringConvertible {
     public var description: String {
         "‹polynomial(power: \(power))›"
     }
- }
+}
 
 // MARK: - Interpolator
 

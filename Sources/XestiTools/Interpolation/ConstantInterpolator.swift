@@ -17,11 +17,11 @@ public struct ConstantInterpolator {
 
 // MARK: - CustomStringConvertible
 
- extension ConstantInterpolator: CustomStringConvertible {
+extension ConstantInterpolator: CustomStringConvertible {
     public var description: String {
         "‹constant›"
     }
- }
+}
 
 // MARK: - Interpolator
 

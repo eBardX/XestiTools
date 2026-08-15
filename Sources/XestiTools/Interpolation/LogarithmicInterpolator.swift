@@ -32,11 +32,11 @@ public struct LogarithmicInterpolator {
 
 // MARK: - CustomStringConvertible
 
- extension LogarithmicInterpolator: CustomStringConvertible {
+extension LogarithmicInterpolator: CustomStringConvertible {
     public var description: String {
         "‹logarithmic(base: \(base))›"
     }
- }
+}
 
 // MARK: - Interpolator
 

@@ -1,7 +1,7 @@
 // © 2025–2026 John Gary Pusey (see LICENSE.md)
 
 import Testing
- import XestiTools
+import XestiTools
 
 struct AtomicFlagTests {
 }

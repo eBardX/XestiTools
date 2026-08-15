@@ -39,6 +39,8 @@ extension AsyncJSONValueSequence.AsyncIterator {
     ///
     /// - Returns:  The next element from the sequence, if a next element
     ///             exists; otherwise, `nil`.
+    ///
+    /// - Throws:   Rethrows any error thrown while decoding an element.
     @inlinable
     @concurrent
     public mutating func next() async rethrows -> T? {

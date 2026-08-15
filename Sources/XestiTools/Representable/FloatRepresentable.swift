@@ -2,7 +2,7 @@
 
 /// A type that can be represented by a floating-point value.
 ///
-/// With an `FloatRepresentable` type, you can losslessly convert back and forth
+/// With a `FloatRepresentable` type, you can losslessly convert back and forth
 /// between a custom type and a floating-point value.
 ///
 /// In addition, you can restrict the floating-point values that are considered

@@ -16,11 +16,11 @@ public struct LinearInterpolator {
 
 // MARK: - CustomStringConvertible
 
- extension LinearInterpolator: CustomStringConvertible {
+extension LinearInterpolator: CustomStringConvertible {
     public var description: String {
         "‹linear›"
     }
- }
+}
 
 // MARK: - Interpolator
 
