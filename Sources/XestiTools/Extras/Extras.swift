@@ -20,7 +20,7 @@ public struct Extras {
     ///                         new extras collection. Defaults to an empty
     ///                         array.
     public init(elements: [Extra] = []) {
-        self.init(entries: Dictionary(uniqueKeysWithValues: elements.map { ($0.name, $0) }))
+        self.init(entries: Dictionary(elements.map { ($0.name, $0) }) { _, last in last })
     }
 
     // MARK: Private Initializers

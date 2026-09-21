@@ -41,6 +41,15 @@ extension ExtrasTests {
     }
 
     @Test
+    func init_elements_duplicateNames() {
+        let extras = Extras(elements: [.comment("first"), .marker, .comment("last")])
+
+        #expect(extras.elements.count == 2)
+        #expect(extras.contains(.comment("last")))
+        #expect(!extras.contains(.comment("first")))
+    }
+
+    @Test
     func init_empty() {
         let extras = Extras()
 
