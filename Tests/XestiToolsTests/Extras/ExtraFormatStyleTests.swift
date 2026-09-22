@@ -20,33 +20,6 @@ extension ExtraFormatStyleTests {
     }
 
     @Test
-    func format_intValueUsesLocaleGroupSeparator_deDE() {
-        let style = Extra.FormatStyle(locale: Locale(identifier: "de_DE"))
-        let extra = Extra(name: "count",
-                          values: [.int(1_234_567)])
-
-        #expect(style.format(extra) == AttributedString("count(1.234.567)"))
-    }
-
-    @Test
-    func format_intValueUsesLocaleGroupSeparator_enUS() {
-        let style = Extra.FormatStyle(locale: Locale(identifier: "en_US"))
-        let extra = Extra(name: "count",
-                          values: [.int(1_234_567)])
-
-        #expect(style.format(extra) == AttributedString("count(1,234,567)"))
-    }
-
-    @Test
-    func format_intValueUsesLocaleGroupSeparator_frFR() {
-        let style = Extra.FormatStyle(locale: Locale(identifier: "fr_FR"))
-        let extra = Extra(name: "count",
-                          values: [.int(1_234_567)])
-
-        #expect(style.format(extra) == AttributedString("count(1\u{202f}234\u{202f}567)"))
-    }
-
-    @Test
     func format_doubleValueUsesLocaleDecimalSeparator_deDE() {
         let style = Extra.FormatStyle(locale: Locale(identifier: "de_DE"))
         let extra = Extra(name: "average",
@@ -71,6 +44,33 @@ extension ExtraFormatStyleTests {
                           values: [.double(1_234.5)])
 
         #expect(style.format(extra) == AttributedString("average(1\u{202f}234,5)"))
+    }
+
+    @Test
+    func format_intValueUsesLocaleGroupSeparator_deDE() {
+        let style = Extra.FormatStyle(locale: Locale(identifier: "de_DE"))
+        let extra = Extra(name: "count",
+                          values: [.int(1_234_567)])
+
+        #expect(style.format(extra) == AttributedString("count(1.234.567)"))
+    }
+
+    @Test
+    func format_intValueUsesLocaleGroupSeparator_enUS() {
+        let style = Extra.FormatStyle(locale: Locale(identifier: "en_US"))
+        let extra = Extra(name: "count",
+                          values: [.int(1_234_567)])
+
+        #expect(style.format(extra) == AttributedString("count(1,234,567)"))
+    }
+
+    @Test
+    func format_intValueUsesLocaleGroupSeparator_frFR() {
+        let style = Extra.FormatStyle(locale: Locale(identifier: "fr_FR"))
+        let extra = Extra(name: "count",
+                          values: [.int(1_234_567)])
+
+        #expect(style.format(extra) == AttributedString("count(1\u{202f}234\u{202f}567)"))
     }
 
     @Test

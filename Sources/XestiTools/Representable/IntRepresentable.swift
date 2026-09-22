@@ -17,6 +17,9 @@ public protocol IntRepresentable: Codable,
                                   ExpressibleByIntegerLiteral,
                                   Hashable,
                                   Sendable {
+
+    // MARK: Public Type Methods
+
     /// Determines if the provided integer value is a valid representation for
     /// this type.
     ///
@@ -27,6 +30,8 @@ public protocol IntRepresentable: Codable,
     /// - Returns:  `true` if the provided integer value is a valid
     ///             representation for this type; `false` otherwise.
     static func isValid(_ intValue: Int) -> Bool
+
+    // MARK: Public Initializers
 
     /// Creates a new instance with the provided integer value.
     ///
@@ -57,6 +62,8 @@ public protocol IntRepresentable: Codable,
     /// - Parameter intValue:   The integer value to use for the new instance.
     init?(intValue: Int)
 
+    // MARK: Public Instance Properties
+
     /// The integer value that represents this type.
     ///
     /// A new instance initialized with `intValue` will be equivalent to this
@@ -64,7 +71,7 @@ public protocol IntRepresentable: Codable,
     var intValue: Int { get }
 }
 
-// MARK: - (defaults)
+// MARK: -
 
 extension IntRepresentable {
     public static func isValid(_ intValue: Int) -> Bool {

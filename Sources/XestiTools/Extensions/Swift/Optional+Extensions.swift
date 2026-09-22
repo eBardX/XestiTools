@@ -32,6 +32,8 @@ extension Optional {
     }
 }
 
+// MARK: -
+
 extension Optional where Wrapped: Equatable {
 
     // MARK: Public Instance Methods

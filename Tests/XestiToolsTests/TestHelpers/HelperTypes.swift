@@ -18,9 +18,19 @@ struct TestEnhancedError: EnhancedError {
     let message: String
 }
 
-enum TestError: Error, Equatable {
+enum TestError {
     case noResult
     case someError
+}
+
+// MARK: - Equatable
+
+extension TestError: Equatable {
+}
+
+// MARK: - Error
+
+extension TestError: Error {
 }
 
 struct TestFloatType: FloatRepresentable {

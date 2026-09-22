@@ -17,6 +17,9 @@ public protocol StringRepresentable: Codable,
                                      ExpressibleByStringLiteral,
                                      Hashable,
                                      Sendable {
+
+    // MARK: Public Type Methods
+
     /// Determines if the provided string value is a valid representation for
     /// this type.
     ///
@@ -28,6 +31,8 @@ public protocol StringRepresentable: Codable,
     /// - Returns:  `true` if the provided string value is a valid
     ///             representation for this type; `false` otherwise.
     static func isValid(_ stringValue: String) -> Bool
+
+    // MARK: Public Initializers
 
     /// Creates a new instance with the provided string value.
     ///
@@ -60,6 +65,8 @@ public protocol StringRepresentable: Codable,
     ///                             instance.
     init?(stringValue: String)
 
+    // MARK: Public Instance Properties
+
     /// The string value that represents this type.
     ///
     /// A new instance initialized with `stringValue` will be equivalent to this
@@ -67,7 +74,7 @@ public protocol StringRepresentable: Codable,
     var stringValue: String { get }
 }
 
-// MARK: - (defaults)
+// MARK: -
 
 extension StringRepresentable {
     public static func isValid(_ stringValue: String) -> Bool {

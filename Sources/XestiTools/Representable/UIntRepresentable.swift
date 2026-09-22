@@ -17,6 +17,9 @@ public protocol UIntRepresentable: Codable,
                                    ExpressibleByIntegerLiteral,
                                    Hashable,
                                    Sendable {
+
+    // MARK: Public Type Methods
+
     /// Determines if an unsigned integer value is a valid representation for
     /// this type.
     ///
@@ -29,6 +32,8 @@ public protocol UIntRepresentable: Codable,
     /// - Returns:  `true` if the provided unsigned integer value is a valid
     ///             representation for this type; `false` otherwise.
     static func isValid(_ uintValue: UInt) -> Bool
+
+    // MARK: Public Initializers
 
     /// Creates a new instance with the provided unsigned integer value.
     ///
@@ -61,6 +66,8 @@ public protocol UIntRepresentable: Codable,
     ///                         instance.
     init?(uintValue: UInt)
 
+    // MARK: Public Instance Properties
+
     /// The unsigned integer value that represents this type.
     ///
     /// A new instance initialized with `uintValue` will be equivalent to this
@@ -68,7 +75,7 @@ public protocol UIntRepresentable: Codable,
     var uintValue: UInt { get }
 }
 
-// MARK: - (defaults)
+// MARK: -
 
 extension UIntRepresentable {
     public static func isValid(_ uintValue: UInt) -> Bool {

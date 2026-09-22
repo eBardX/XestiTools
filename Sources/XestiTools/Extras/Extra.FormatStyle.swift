@@ -10,7 +10,7 @@ extension Extra {
     ///
     /// Instances of ``FormatStyle`` create localized, human-readable text from
     /// ``Extra`` values. Any numeric associated values are formatted using
-    /// the style's locale (for example, with locale-appropriate group
+    /// the style’s locale (for example, with locale-appropriate group
     /// separators).
     public struct FormatStyle {
 

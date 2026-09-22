@@ -18,6 +18,9 @@ public protocol FloatRepresentable: Codable,
                                     ExpressibleByIntegerLiteral,
                                     Hashable,
                                     Sendable {
+
+    // MARK: Public Type Methods
+
     /// Determines if the provided floating-point value is a valid
     /// representation for this type.
     ///
@@ -30,6 +33,8 @@ public protocol FloatRepresentable: Codable,
     /// - Returns:  `true` if the provided floating-point value is a valid
     ///             representation for this type; `false` otherwise.
     static func isValid(_ doubleValue: Double) -> Bool
+
+    // MARK: Public Initializers
 
     /// Creates a new instance with the provided floating-point value.
     ///
@@ -62,6 +67,8 @@ public protocol FloatRepresentable: Codable,
     ///                             instance.
     init?(doubleValue: Double)
 
+    // MARK: Public Instance Properties
+
     /// The floating-point value that represents this type.
     ///
     /// A new instance initialized with `doubleValue` will be equivalent to this
@@ -69,7 +76,7 @@ public protocol FloatRepresentable: Codable,
     var doubleValue: Double { get }
 }
 
-// MARK: - (defaults)
+// MARK: -
 
 extension FloatRepresentable {
     public static func isValid(_ doubleValue: Double) -> Bool {

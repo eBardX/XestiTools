@@ -43,6 +43,15 @@ extension ArrayExtensionsTests {
     }
 
     @Test
+    func push_emptyArray() {
+        var array: [Int] = []
+
+        array.push(1)
+
+        #expect(array == [1])
+    }
+
+    @Test
     func pushPop_sequence() {
         var array: [String] = []
 
@@ -56,15 +65,6 @@ extension ArrayExtensionsTests {
         #expect(array.top() == "a")
         #expect(array.pop() == "a")
         #expect(array.pop() == nil)
-    }
-
-    @Test
-    func push_emptyArray() {
-        var array: [Int] = []
-
-        array.push(1)
-
-        #expect(array == [1])
     }
 
     @Test

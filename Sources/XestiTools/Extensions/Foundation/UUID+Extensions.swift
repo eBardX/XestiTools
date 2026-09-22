@@ -25,7 +25,7 @@ extension UUID {
 
 // MARK: -
 
-private struct Octaword: Sendable {
+private struct Octaword {
 
     // MARK: Fileprivate Initializers
 
@@ -304,4 +304,9 @@ extension Octaword {
             hiBits.leadingZeroBitCount
         }
     }
+}
+
+// MARK: - Sendable
+
+extension Octaword: Sendable {
 }
