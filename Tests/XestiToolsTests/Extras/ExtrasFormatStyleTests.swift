@@ -26,6 +26,30 @@ extension ExtrasFormatStyleTests {
     }
 
     @Test
+    func format_propagatesLocaleToAssociatedValues_deDE() {
+        let style = Extras.FormatStyle(locale: Locale(identifier: "de_DE"))
+        let extras = Extras(elements: [.fubar(1_234_567, "hi")])
+
+        #expect(style.format(extras) == AttributedString("fubar(1.234.567, hi)"))
+    }
+
+    @Test
+    func format_propagatesLocaleToAssociatedValues_enUS() {
+        let style = Extras.FormatStyle(locale: Locale(identifier: "en_US"))
+        let extras = Extras(elements: [.fubar(1_234_567, "hi")])
+
+        #expect(style.format(extras) == AttributedString("fubar(1,234,567, hi)"))
+    }
+
+    @Test
+    func format_propagatesLocaleToAssociatedValues_frFR() {
+        let style = Extras.FormatStyle(locale: Locale(identifier: "fr_FR"))
+        let extras = Extras(elements: [.fubar(1_234_567, "hi")])
+
+        #expect(style.format(extras) == AttributedString("fubar(1\u{202f}234\u{202f}567, hi)"))
+    }
+
+    @Test
     func formatted_usesDefaultStyle() {
         let extras = Extras(elements: [.marker])
 

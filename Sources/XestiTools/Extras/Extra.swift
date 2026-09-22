@@ -22,16 +22,16 @@ public struct Extra {
     /// - Parameter name:   The name that identifies this extra value.
     /// - Parameter values: An optional array of associated values for the new
     ///                     extra value. Defaults to an empty array.
-    public init(name: String,
+    public init(name: Name,
                 values: [AssociatedValue] = []) {
-        self.name   = name
+        self.name = name
         self.values = values
     }
 
     // MARK: Public Instance Properties
 
     /// The name that identifies this extra value.
-    public let name: String
+    public let name: Name
 
     /// The optional array of associated values for this extra value.
     public let values: [AssociatedValue]
@@ -48,7 +48,7 @@ extension Extra: Codable {
     /// - Throws:   A `DecodingError` if decoding fails.
     public init(from decoder: any Decoder) throws {
         if var container = try? decoder.unkeyedContainer() {
-            self.name = try container.decode(String.self)
+            self.name = try container.decode(Name.self)
 
             var tmpValues: [AssociatedValue] = []
 
@@ -60,7 +60,7 @@ extension Extra: Codable {
         } else {
             let container = try decoder.singleValueContainer()
 
-            self.name = try container.decode(String.self)
+            self.name = try container.decode(Name.self)
             self.values = []
         }
     }
@@ -92,7 +92,7 @@ extension Extra: Codable {
 extension Extra: CustomStringConvertible {
     public var description: String {
         if values.isEmpty {
-            return name
+            return name.description
         }
 
         let tmpStrings = values.map {

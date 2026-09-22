@@ -25,13 +25,13 @@ public struct Extras {
 
     // MARK: Private Initializers
 
-    private init(entries: [String: Extra]) {
+    private init(entries: [Extra.Name: Extra]) {
         self.entries = entries
     }
 
     // MARK: Private Instance Properties
 
-    private var entries: [String: Extra]
+    private var entries: [Extra.Name: Extra]
 }
 
 // MARK: -

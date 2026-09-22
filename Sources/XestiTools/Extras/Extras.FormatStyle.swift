@@ -46,7 +46,8 @@ extension Extras.FormatStyle: FormatStyle {
     /// - Returns:  An attributed string representation of the extras
     ///             collection, formatted according to this style.
     public func format(_ value: Extras) -> AttributedString {
-        AttributedString(Self._combine(value.elements))
+        AttributedString(Self._combine(value.elements,
+                                       locale))
     }
 
     /// Modifies this format style to use the provided locale.
@@ -67,8 +68,11 @@ extension Extras.FormatStyle: FormatStyle {
 
     // MARK: Private Type Methods
 
-    private static func _combine(_ elements: [Extra]) -> String {
-        elements.map { $0.description }.joined(separator: ", ")
+    private static func _combine(_ elements: [Extra],
+                                 _ locale: Locale) -> String {
+        let style = Extra.FormatStyle(locale: locale)
+
+        return elements.map { String(style.format($0).characters) }.joined(separator: ", ")
     }
 }
 
