@@ -11,11 +11,11 @@ public protocol InterpolatableValue: Codable, Equatable, Sendable {
     /// The result must equal `startValue` when `fraction == 0` and `endValue`
     /// when `fraction == 1`.
     ///
-    /// - Parameter fraction:   A position in the unit interval `[0, 1]`, where
-    ///                         `0` corresponds to `startValue` and `1` to
-    ///                         `endValue`.
-    /// - Parameter startValue: The value that maps to a fraction of `0`.
-    /// - Parameter endValue:   The value that maps to a fraction of `1`.
+    /// - Parameter fraction:       A position in the unit interval `[0, 1]`,
+    ///                             where `0` corresponds to `startValue` and
+    ///                             `1` to `endValue`.
+    /// - Parameter startValue:     The value that maps to a fraction of `0`.
+    /// - Parameter endValue:       The value that maps to a fraction of `1`.
     ///
     /// - Returns:  The interpolated value at `fraction`.
     static func value(of fraction: Double,

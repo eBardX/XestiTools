@@ -11,8 +11,8 @@ extension Extra {
 
         /// Creates a new name with the provided string value.
         ///
-        /// If the provided string value is empty, this initializer
-        /// returns `nil`.
+        /// If the provided string value is not a valid name, this initializer
+        /// returns `nil`. See ``isValid(_:)``.
         ///
         /// - Parameter stringValue:    The string value to use for the new
         ///                             name.
@@ -39,8 +39,8 @@ extension Extra.Name {
 
     // MARK: Public Type Methods
 
-    /// Determines if the provided string value is a valid representation
-    /// for this type.
+    /// Returns a Boolean value indicating whether the provided string value
+    /// is a valid representation for this type.
     ///
     /// A valid name begins with an ASCII letter, followed by zero or more
     /// ASCII letters or digits.

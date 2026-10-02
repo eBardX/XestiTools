@@ -2,12 +2,19 @@
 
 /// A type that traverses the elements of an arbitrary source.
 public protocol Reader<Element> {
+
+    // MARK: Public Associated Types
+
     /// The type of element traversed by the reader.
     associatedtype Element
+
+    // MARK: Public Instance Properties
 
     /// A Boolean value indicating whether there are more elements available in
     /// the source.
     var hasMore: Bool { get }
+
+    // MARK: Public Instance Methods
 
     /// Returns the next element from the source without removing it.
     ///

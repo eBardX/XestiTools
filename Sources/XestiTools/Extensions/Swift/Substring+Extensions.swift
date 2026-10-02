@@ -40,7 +40,8 @@ extension Substring {
     /// given set of characters and returns the remaining characters in a new
     /// substring.
     ///
-    /// - Parameter characters: The set of characters that should be dropped.
+    /// - Parameter characters:     The set of characters that should be
+    ///                             dropped.
     ///
     /// - Returns:  The resulting substring.
     @inlinable
@@ -89,7 +90,8 @@ extension Substring {
     /// given set of characters and returns the remaining characters in a new
     /// substring.
     ///
-    /// - Parameter characters: The set of characters that should be dropped.
+    /// - Parameter characters:     The set of characters that should be
+    ///                             dropped.
     ///
     /// - Returns:  The resulting substring.
     @inlinable
@@ -139,7 +141,7 @@ extension Substring {
     /// Splits this substring before the first occurrence of a character
     /// contained in the given set of characters.
     ///
-    /// - Parameter characters: The set of characters on which to split.
+    /// - Parameter characters:     The set of characters on which to split.
     ///
     /// - Returns:  The result of the split. See ``SplitResult``.
     @inlinable

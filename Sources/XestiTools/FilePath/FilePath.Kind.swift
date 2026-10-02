@@ -40,7 +40,7 @@ extension FilePath.Kind {
 
     /// Creates a `Kind` instance from the provided file type attribute value.
     ///
-    /// - Parameter type: The file type attribute value.
+    /// - Parameter type:   The file type attribute value.
     public init(_ type: FileAttributeType) {
         switch type {
         case .typeBlockSpecial:

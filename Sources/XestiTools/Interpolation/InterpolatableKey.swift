@@ -13,8 +13,8 @@ public protocol InterpolatableKey: Codable, Comparable, Equatable, Sendable {
     /// The result must be `0` when `self == startValue` and `1` when `self ==
     /// endValue`.
     ///
-    /// - Parameter startValue: The reference value that maps to `0`.
-    /// - Parameter endValue:   The reference value that maps to `1`.
+    /// - Parameter startValue:     The reference value that maps to `0`.
+    /// - Parameter endValue:       The reference value that maps to `1`.
     ///
     /// - Returns:  The normalized position of `self` relative to `startValue`
     ///             and `endValue`.

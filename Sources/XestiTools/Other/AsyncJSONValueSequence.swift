@@ -5,15 +5,7 @@ internal import Foundation
 /// An asynchronous sequence of values decoded from text where each line is a
 /// JSON object.
 public struct AsyncJSONValueSequence<Base: AsyncSequence,
-                                     T: Decodable>: AsyncSequence where Base.Element == UInt8 {
-
-    // MARK: Public Type Aliases
-
-    /// The type of element produced by this asynchronous sequence.
-    ///
-    /// This is the type into which the underlying decoder will decode each JSON
-    /// object.
-    public typealias Element = T
+                                     T: Decodable> where Base.Element == UInt8 {
 
     // MARK: Internal Initializers
 
@@ -30,9 +22,17 @@ public struct AsyncJSONValueSequence<Base: AsyncSequence,
     private var base: Base
 }
 
-// MARK: -
+// MARK: - AsyncSequence
 
-extension AsyncJSONValueSequence {
+extension AsyncJSONValueSequence: AsyncSequence {
+
+    // MARK: Public Type Aliases
+
+    /// The type of element produced by this asynchronous sequence.
+    ///
+    /// This is the type into which the underlying decoder will decode each JSON
+    /// object.
+    public typealias Element = T
 
     // MARK: Public Instance Methods
 

@@ -23,7 +23,7 @@ public enum Platform: String {
     /// The tvOS platform.
     case tvOS
 
-    /// The platform is unknown.
+    /// An unknown platform.
     case unknown
 
     /// The visionOS platform.

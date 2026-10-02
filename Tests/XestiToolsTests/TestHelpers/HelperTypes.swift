@@ -2,6 +2,8 @@
 
 import XestiTools
 
+typealias TestLookupTable = LookupTable<Double, Double, LinearInterpolator>
+
 typealias TestStringType = XestiTools.Category
 
 struct TestEnhancedError: EnhancedError {

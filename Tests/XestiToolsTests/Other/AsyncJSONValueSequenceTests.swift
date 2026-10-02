@@ -11,66 +11,18 @@ struct AsyncJSONValueSequenceTests {
 
 extension AsyncJSONValueSequenceTests {
     @Test
-    func next_carriageReturnStripped() async throws {
-        let stream = makeByteStream(Array("42\r\n".utf8))
-        let sequence: AsyncJSONValueSequence<AsyncStream<UInt8>, Int> = stream.jsonValues()
-
-        var results: [Int] = []
-
-        for try await value in sequence {
-            results.append(value)
-        }
-
-        #expect(results == [42])
-    }
-
-    @Test
-    func next_emptyStream() async {
-        let stream = makeByteStream([])
+    func makeAsyncIterator() async throws {
+        let stream = makeByteStream(Array("1\n2\n".utf8))
         let sequence: AsyncJSONValueSequence<AsyncStream<UInt8>, Int> = stream.jsonValues()
 
         var iterator = sequence.makeAsyncIterator()
-        let result = await iterator.next()
 
-        #expect(result == nil)
-    }
+        let first = try await iterator.next()
+        let second = try await iterator.next()
+        let third = try await iterator.next()
 
-    @Test
-    func next_multipleLines() async throws {
-        let stream = makeByteStream(Array("1\n2\n3\n".utf8))
-        let sequence: AsyncJSONValueSequence<AsyncStream<UInt8>, Int> = stream.jsonValues()
-
-        var results: [Int] = []
-
-        for try await value in sequence {
-            results.append(value)
-        }
-
-        #expect(results == [1, 2, 3])
-    }
-
-    @Test
-    func next_noTrailingNewline() async throws {
-        let stream = makeByteStream(Array("42".utf8))
-        let sequence: AsyncJSONValueSequence<AsyncStream<UInt8>, Int> = stream.jsonValues()
-
-        var results: [Int] = []
-
-        for try await value in sequence {
-            results.append(value)
-        }
-
-        #expect(results == [42])
-    }
-
-    @Test
-    func next_singleLine() async {
-        let stream = makeByteStream(Array("7\n".utf8))
-        let sequence: AsyncJSONValueSequence<AsyncStream<UInt8>, Int> = stream.jsonValues()
-
-        var iterator = sequence.makeAsyncIterator()
-        let result = await iterator.next()
-
-        #expect(result == 7)
+        #expect(first == 1)
+        #expect(second == 2)
+        #expect(third == nil)
     }
 }

@@ -55,8 +55,8 @@ extension Result {
 
     /// Performs an action if this result represents a failure.
     ///
-    /// - Parameter action: A closure that accepts a failure value as its
-    ///                     argument.
+    /// - Parameter action:     A closure that accepts a failure value as its
+    ///                         argument.
     ///
     /// - Returns:  This result.
     @discardableResult
@@ -74,8 +74,8 @@ extension Result {
 
     /// Performs an action if this result represents a success.
     ///
-    /// - Parameter action: A closure that accepts a success value as its
-    ///                     argument.
+    /// - Parameter action:     A closure that accepts a success value as its
+    ///                         argument.
     ///
     /// - Returns:  This result.
     @discardableResult

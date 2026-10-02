@@ -5,7 +5,7 @@
 ///
 /// An extra value is identified by its ``name`` and may contain an array of
 /// zero or more associated ``values``. An extra value with no associated values
-/// can act as a boolean flag or tag (for example, a “marker” or “special”
+/// can act as a Boolean flag or tag (for example, a “marker” or “special”
 /// annotation). An extra value with associated values can act as a note
 /// or an aside (for example, a “comment” annotation with a string value, or a
 /// “priority” annotation with an integer value).
@@ -19,9 +19,9 @@ public struct Extra {
     /// Creates an extra value with the provided name and optional associated
     /// values.
     ///
-    /// - Parameter name:   The name that identifies this extra value.
-    /// - Parameter values: An optional array of associated values for the new
-    ///                     extra value. Defaults to an empty array.
+    /// - Parameter name:       The name that identifies this extra value.
+    /// - Parameter values:     An optional array of associated values for the
+    ///                         new extra value. Defaults to an empty array.
     public init(name: Name,
                 values: [AssociatedValue] = []) {
         self.name = name

@@ -13,9 +13,9 @@ public typealias Milliseconds = Int
 
 /// Returns the given value clamped to the specified range.
 ///
-/// - Parameter vmin:  The minimum value allowed.
-/// - Parameter value: The value to clamp.
-/// - Parameter vmax:  The maximum value allowed.
+/// - Parameter vmin:   The minimum value allowed.
+/// - Parameter value:  The value to clamp.
+/// - Parameter vmax:   The maximum value allowed.
 ///
 /// - Returns:  The clamped value.
 public func clamp<T: Comparable>(_ vmin: T,
@@ -26,7 +26,7 @@ public func clamp<T: Comparable>(_ vmin: T,
 
 /// Returns a “lightly” escaped copy of the given string.
 ///
-/// - Parameter value: The string to escape.
+/// - Parameter value:  The string to escape.
 ///
 /// - Returns:  The escaped string.
 public func liteEscape(_ value: some StringProtocol) -> String {
@@ -36,7 +36,7 @@ public func liteEscape(_ value: some StringProtocol) -> String {
 
 /// Converts the given time interval to milliseconds.
 ///
-/// - Parameter value: The time interval to convert.
+/// - Parameter value:  The time interval to convert.
 ///
 /// - Returns:  The converted value.
 public func milliseconds(_ value: TimeInterval) -> Milliseconds {
@@ -57,7 +57,7 @@ public func now() -> TimeInterval {
 /// representation. If that fails, it falls back to calling
 /// `String(describing:)` on the given value.
 ///
-/// - Parameter value: The value to convert.
+/// - Parameter value:  The value to convert.
 ///
 /// - Returns:  The converted value.
 public func stringify(_ value: Any) -> String {
@@ -85,7 +85,7 @@ public func stringify(_ value: Any) -> String {
 
 /// Converts the given number of milliseconds to the equivalent time interval.
 ///
-/// - Parameter value: The number of milliseconds to convert.
+/// - Parameter value:  The number of milliseconds to convert.
 ///
 /// - Returns:  The converted value.
 public func timeInterval(_ value: Milliseconds) -> TimeInterval {

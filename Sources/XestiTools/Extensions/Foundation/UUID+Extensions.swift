@@ -23,7 +23,7 @@ extension UUID {
     }
 }
 
-// MARK: -
+// MARK: - Private Types
 
 private struct Octaword {
 

@@ -58,8 +58,8 @@ extension FilePath {
     /// Making a file path absolute requires up to three steps:
     ///
     /// 1. Expand the initial tilde (`~`), if any, with ``expandingTilde()``.
-    /// 2. If resulting file path is relative, resolve it against the current
-    ///    directory.
+    /// 2. If the resulting file path is relative, resolve it against the
+    ///    current directory.
     /// 3. Clean up the resulting file path with ``standardizing()``.
     ///
     /// - Returns:  The new file path.

@@ -42,7 +42,8 @@ extension FilePath {
     /// - Parameter keys:       An array of `URLResourceKey` instances that
     ///                         identify the file properties to pre-fetch for
     ///                         each file-system node in the directory.
-    /// - Parameter options:    Options for the enumeration.
+    ///                         Defaults to `nil`.
+    /// - Parameter options:    Options for the enumeration. Defaults to `[]`.
     ///
     /// - Returns:  An array of file paths, each of which identifies a
     ///             file-system node contained in the directory.
@@ -76,9 +77,9 @@ extension FilePath {
     ///                                     part of creating the directory. If
     ///                                     `false`, this method fails if any of
     ///                                     the intermediate parent directories
-    ///                                     does not exist.
+    ///                                     does not exist. Defaults to `true`.
     /// - Parameter attributes:             The attributes to associate with the
-    ///                                     new directory.
+    ///                                     new directory. Defaults to `nil`.
     ///
     /// - Throws:   An error if the directory cannot be created.
     public func createDirectory(withIntermediateDirectories createIntermediates: Bool = true,
@@ -263,8 +264,8 @@ extension FilePath {
     /// Sets some or all of the attributes of the file-system node at this file
     /// path.
     ///
-    /// - Parameter attributes: An ``Attributes`` instance encapsulating the
-    ///                         attributes to change.
+    /// - Parameter attributes:     An ``Attributes`` instance encapsulating the
+    ///                             attributes to change.
     ///
     /// - Throws:   An error if the attributes cannot be set.
     public func setAttributes(_ attributes: Attributes) throws {

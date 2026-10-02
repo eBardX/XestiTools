@@ -34,10 +34,10 @@ extension FileWrapper {
         return entries
     }
 
-    /// Returns the contents of the regular-file associated with this file
+    /// Returns the contents of the regular file associated with this file
     /// wrapper.
     ///
-    /// - Returns:  The contents of the regular-file.
+    /// - Returns:  The contents of the regular file.
     ///
     /// - Throws:   An error if this file wrapper is not associated with a
     ///             regular file.
@@ -68,8 +68,8 @@ extension FileWrapper {
     /// Finds the nested file wrapper in this directory file wrapper (or its
     /// descendants) by matching against the provided path components.
     ///
-    /// - Parameter components: An array of path components identifying the file
-    ///                         wrapper to find.
+    /// - Parameter components:     An array of path components identifying the
+    ///                             file wrapper to find.
     ///
     /// - Returns:  The nested file wrapper.
     ///
@@ -118,13 +118,16 @@ extension FileWrapper {
     /// Updates the contents of the named child file wrapper in this directory
     /// file wrapper.
     ///
+    /// If no child file wrapper with the given name exists, a new child file
+    /// wrapper for a regular file is added with the provided contents.
+    ///
     /// - Parameter name:   The name of the child file wrapper to update.
     /// - Parameter data:   The new contents with which to update the found
     ///                     child file wrapper.
     ///
     /// - Throws:   An error if this file wrapper is not associated with a
-    ///             directory, if no child file wrapper with the given name is
-    ///             found, or if the child is not associated with a regular file.
+    ///             directory, or if the named child file wrapper is not
+    ///             associated with a regular file.
     public func updateRegularFile(named name: String,
                                   using data: Data) throws {
         guard isDirectory

@@ -20,8 +20,8 @@ public protocol StringRepresentable: Codable,
 
     // MARK: Public Type Methods
 
-    /// Determines if the provided string value is a valid representation for
-    /// this type.
+    /// Returns a Boolean value indicating whether the provided string value
+    /// is a valid representation for this type.
     ///
     /// The default implementation considers any _non-empty_ string value to be
     /// valid.
@@ -77,9 +77,14 @@ public protocol StringRepresentable: Codable,
 // MARK: -
 
 extension StringRepresentable {
+
+    // MARK: Public Type Methods
+
     public static func isValid(_ stringValue: String) -> Bool {
         !stringValue.isEmpty
     }
+
+    // MARK: Public Initializers
 
     public init(_ stringValue: String) {
         self.init(stringValue: stringValue)!    // swiftlint:disable:this force_unwrapping
@@ -89,6 +94,9 @@ extension StringRepresentable {
 // MARK: - Codable
 
 extension StringRepresentable where Self: Codable {
+
+    // MARK: Public Initializers
+
     /// Creates an instance by decoding from the provided decoder.
     ///
     /// - Throws:   A `DecodingError` if decoding fails.
@@ -102,6 +110,8 @@ extension StringRepresentable where Self: Codable {
 
         self = value
     }
+
+    // MARK: Public Instance Methods
 
     /// Encodes this instance into the provided encoder.
     ///

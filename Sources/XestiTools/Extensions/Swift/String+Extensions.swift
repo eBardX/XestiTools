@@ -98,6 +98,86 @@ extension String {
                      Array(pattern))
         }
     }
+
+    /// Returns a new string created by normalizing the whitespace in this
+    /// string.
+    ///
+    /// By default, leading and trailing whitespace is removed, and every
+    /// internal run of whitespace, including line breaks, is replaced by a
+    /// single space:
+    ///
+    /// ```swift
+    /// print("\tHello,   world!\r\n".normalizingWhitespace())
+    /// // Prints "Hello, world!"
+    /// ```
+    ///
+    /// If `lineByLine` is `true`, the string is instead normalized one line at
+    /// a time. Leading and trailing whitespace is removed from each line, and
+    /// internal runs of whitespace within a line are replaced by a single
+    /// space. The lines are then rejoined, with these rules:
+    ///
+    /// - Every line break is written as `"\n"`, whatever its original form
+    ///   (`"\r\n"`, `"\r"`, U+2028, and so on).
+    /// - A run of blank lines, including lines that held only whitespace, is
+    ///   collapsed to a single blank line.
+    /// - Leading and trailing blank lines are removed. The result never begins
+    ///   or ends with a line break, even if this string ends with one.
+    ///
+    /// ```swift
+    /// print("  Line  1 \r\n\n\n  Line 2\n".normalizingWhitespace(lineByLine: true))
+    /// // Prints "Line 1\n\nLine 2"
+    /// ```
+    ///
+    /// Whitespace is as defined by `Character.isWhitespace`, and line breaks by
+    /// `Character.isNewline`.
+    ///
+    /// - Parameter lineByLine:     A Boolean value indicating whether to
+    ///                             normalize each line separately and keep the
+    ///                             line structure. Defaults to `false`.
+    ///
+    /// - Returns:  The normalized string.
+    public func normalizingWhitespace(lineByLine: Bool = false) -> Self {
+        var result = ""
+        var lineBreaks = 0
+        var inRun = false
+
+        result.reserveCapacity(utf8.count)
+
+        for chr in self {
+            if chr.isWhitespace {
+                if lineByLine, chr.isNewline {
+                    lineBreaks += 1
+                }
+
+                inRun = true
+            } else {
+                //
+                // A separator is written only when a run of whitespace ends
+                // between two non-whitespace characters, so leading and
+                // trailing whitespace is never written:
+                //
+                if inRun, !result.isEmpty {
+                    switch lineBreaks {
+                    case 0:
+                        result.append(" ")
+
+                    case 1:
+                        result.append("\n")
+
+                    default:
+                        result.append("\n\n")
+                    }
+                }
+
+                result.append(chr)
+
+                inRun = false
+                lineBreaks = 0
+            }
+        }
+
+        return result
+    }
 }
 
 // MARK: - Private Functions

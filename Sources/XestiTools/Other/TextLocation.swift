@@ -8,8 +8,8 @@ public struct TextLocation {
 
     /// Creates a new text location from the provided line and column numbers.
     ///
-    /// - Parameter line:   The line number in the text block.
-    /// - Parameter column: The column number in the text block.
+    /// - Parameter line:       The line number in the text block.
+    /// - Parameter column:     The column number in the text block.
     ///
     /// - Precondition: Both `line` and `column` must be greater than zero.
     public init(_ line: UInt,
@@ -25,8 +25,8 @@ public struct TextLocation {
     ///
     /// If either `line` or `column` is zero, this initializer returns `nil`.
     ///
-    /// - Parameter line:   The line number in the text block.
-    /// - Parameter column: The column number in the text block.
+    /// - Parameter line:       The line number in the text block.
+    /// - Parameter column:     The column number in the text block.
     public init?(line: UInt,
                  column: UInt) {
         guard line > 0,

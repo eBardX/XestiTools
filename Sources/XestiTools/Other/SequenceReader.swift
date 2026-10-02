@@ -1,12 +1,7 @@
 // © 2025–2026 John Gary Pusey (see LICENSE.md)
 
 /// A reader that traverses the elements of the provided sequence.
-public struct SequenceReader<S: Sequence>: Reader {
-
-    // MARK: Public Type Aliases
-
-    /// The type of element traversed by the sequence reader.
-    public typealias Element = S.Element
+public struct SequenceReader<S: Sequence> {
 
     // MARK: Public Initializers
 
@@ -24,9 +19,14 @@ public struct SequenceReader<S: Sequence>: Reader {
     private var next: Element?
 }
 
-// MARK: -
+// MARK: - Reader
 
-extension SequenceReader {
+extension SequenceReader: Reader {
+
+    // MARK: Public Type Aliases
+
+    /// The type of element traversed by the sequence reader.
+    public typealias Element = S.Element
 
     // MARK: Public Instance Properties
 

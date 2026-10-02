@@ -7,10 +7,10 @@ extension UnsignedInteger {
     /// Calculates the greatest common divisor of the two provided unsigned
     /// integers and returns the result.
     ///
-    /// - Parameter n1: The first unsigned integer for which to calculate the
-    ///                 greatest common divisor.
-    /// - Parameter n2: The second unsigned integer for which to calculate the
-    ///                 greatest common divisor.
+    /// - Parameter n1:     The first unsigned integer for which to calculate
+    ///                     the greatest common divisor.
+    /// - Parameter n2:     The second unsigned integer for which to calculate
+    ///                     the greatest common divisor.
     ///
     /// - Returns:  The result of the greatest common divisor calculation.
     public static func gcd(_ n1: Self,

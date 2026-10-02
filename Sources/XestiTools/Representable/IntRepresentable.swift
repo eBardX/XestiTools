@@ -20,8 +20,8 @@ public protocol IntRepresentable: Codable,
 
     // MARK: Public Type Methods
 
-    /// Determines if the provided integer value is a valid representation for
-    /// this type.
+    /// Returns a Boolean value indicating whether the provided integer value
+    /// is a valid representation for this type.
     ///
     /// The default implementation considers _any_ integer value to be valid.
     ///
@@ -74,9 +74,14 @@ public protocol IntRepresentable: Codable,
 // MARK: -
 
 extension IntRepresentable {
+
+    // MARK: Public Type Methods
+
     public static func isValid(_ intValue: Int) -> Bool {
         true
     }
+
+    // MARK: Public Initializers
 
     public init(_ intValue: Int) {
         self.init(intValue: intValue)!  // swiftlint:disable:this force_unwrapping
@@ -86,6 +91,9 @@ extension IntRepresentable {
 // MARK: - Codable
 
 extension IntRepresentable where Self: Codable {
+
+    // MARK: Public Initializers
+
     /// Creates an instance by decoding from the provided decoder.
     ///
     /// - Throws:   A `DecodingError` if decoding fails.
@@ -99,6 +107,8 @@ extension IntRepresentable where Self: Codable {
 
         self = value
     }
+
+    // MARK: Public Instance Methods
 
     /// Encodes this instance into the provided encoder.
     ///

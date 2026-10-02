@@ -89,7 +89,7 @@ extension FilePath {
         /// no value has been set.
         public var ownerAccountName: String?
 
-        /// An integer value indicating the file’s Posix permissions, or `nil`
+        /// An integer value indicating the file’s POSIX permissions, or `nil`
         /// if no value has been set.
         public var posixPermissions: Int16?
 

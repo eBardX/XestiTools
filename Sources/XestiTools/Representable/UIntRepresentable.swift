@@ -20,8 +20,8 @@ public protocol UIntRepresentable: Codable,
 
     // MARK: Public Type Methods
 
-    /// Determines if an unsigned integer value is a valid representation for
-    /// this type.
+    /// Returns a Boolean value indicating whether the provided unsigned
+    /// integer value is a valid representation for this type.
     ///
     /// The default implementation considers _any_ unsigned integer value to be
     /// valid.
@@ -78,9 +78,14 @@ public protocol UIntRepresentable: Codable,
 // MARK: -
 
 extension UIntRepresentable {
+
+    // MARK: Public Type Methods
+
     public static func isValid(_ uintValue: UInt) -> Bool {
         true
     }
+
+    // MARK: Public Initializers
 
     public init(_ uintValue: UInt) {
         self.init(uintValue: uintValue)!    // swiftlint:disable:this force_unwrapping
@@ -90,6 +95,9 @@ extension UIntRepresentable {
 // MARK: - Codable
 
 extension UIntRepresentable where Self: Codable {
+
+    // MARK: Public Initializers
+
     /// Creates an instance by decoding from the provided decoder.
     ///
     /// - Throws:   A `DecodingError` if decoding fails.
@@ -103,6 +111,8 @@ extension UIntRepresentable where Self: Codable {
 
         self = value
     }
+
+    // MARK: Public Instance Methods
 
     /// Encodes this instance into the provided encoder.
     ///

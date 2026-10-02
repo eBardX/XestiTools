@@ -203,4 +203,99 @@ extension StringExtensionsTests {
     func nilIfEmpty_whitespace() {
         #expect(" ".nilIfEmpty == " ")
     }
+
+    @Test
+    func normalizingWhitespace_alreadyNormalized() {
+        #expect("Hello, world!".normalizingWhitespace() == "Hello, world!")
+    }
+
+    @Test
+    func normalizingWhitespace_collapsesInternalRuns() {
+        #expect("J. S.  \t Bach".normalizingWhitespace() == "J. S. Bach")
+    }
+
+    @Test
+    func normalizingWhitespace_emptyString() {
+        #expect("".normalizingWhitespace().isEmpty)
+    }
+
+    @Test
+    func normalizingWhitespace_joinsLines() {
+        #expect("Line 1\r\nLine 2\n\nLine 3".normalizingWhitespace() == "Line 1 Line 2 Line 3")
+    }
+
+    @Test
+    func normalizingWhitespace_lineByLine_alreadyNormalized() {
+        #expect("Line 1\n\nLine 2".normalizingWhitespace(lineByLine: true) == "Line 1\n\nLine 2")
+    }
+
+    @Test
+    func normalizingWhitespace_lineByLine_collapsesBlankLines() {
+        #expect("Line 1\n\n\n\nLine 2".normalizingWhitespace(lineByLine: true) == "Line 1\n\nLine 2")
+    }
+
+    @Test
+    func normalizingWhitespace_lineByLine_collapsesWhitespaceOnlyLines() {
+        #expect("Line 1\n \t\n  \nLine 2".normalizingWhitespace(lineByLine: true) == "Line 1\n\nLine 2")
+    }
+
+    @Test
+    func normalizingWhitespace_lineByLine_dropsLeadingAndTrailingLineBreaks() {
+        #expect("\n\n  Line 1\nLine 2  \n\n".normalizingWhitespace(lineByLine: true) == "Line 1\nLine 2")
+    }
+
+    @Test
+    func normalizingWhitespace_lineByLine_emptyString() {
+        #expect("".normalizingWhitespace(lineByLine: true).isEmpty)
+    }
+
+    @Test
+    func normalizingWhitespace_lineByLine_example() {
+        #expect("  Line  1 \r\n\n\n  Line 2\n".normalizingWhitespace(lineByLine: true) == "Line 1\n\nLine 2")
+    }
+
+    @Test
+    func normalizingWhitespace_lineByLine_normalizesEachLine() {
+        #expect(" a \t b \n  c   d ".normalizingWhitespace(lineByLine: true) == "a b\nc d")
+    }
+
+    @Test
+    func normalizingWhitespace_lineByLine_normalizesLineBreaks() {
+        #expect("a\r\nb\rc\u{2028}d\u{0085}e".normalizingWhitespace(lineByLine: true) == "a\nb\nc\nd\ne")
+    }
+
+    @Test
+    func normalizingWhitespace_lineByLine_singleLine() {
+        #expect("  Hello,   world!  ".normalizingWhitespace(lineByLine: true) == "Hello, world!")
+    }
+
+    @Test
+    func normalizingWhitespace_lineByLine_whitespaceOnly() {
+        #expect(" \n\t\r\n ".normalizingWhitespace(lineByLine: true).isEmpty)
+    }
+
+    @Test
+    func normalizingWhitespace_nonBreakingSpace() {
+        #expect("Op.\u{00A0}27\u{00A0}\u{00A0}No. 2".normalizingWhitespace() == "Op. 27 No. 2")
+    }
+
+    @Test
+    func normalizingWhitespace_preservesCase() {
+        #expect(" TRAD. ".normalizingWhitespace() == "TRAD.")
+    }
+
+    @Test
+    func normalizingWhitespace_preservesCombiningMarks() {
+        #expect("e\u{0301}  te\u{0301}".normalizingWhitespace() == "e\u{0301} te\u{0301}")
+    }
+
+    @Test
+    func normalizingWhitespace_trimsLeadingAndTrailing() {
+        #expect("\tHello,   world!\r\n".normalizingWhitespace() == "Hello, world!")
+    }
+
+    @Test
+    func normalizingWhitespace_whitespaceOnly() {
+        #expect(" \t\n ".normalizingWhitespace().isEmpty)
+    }
 }

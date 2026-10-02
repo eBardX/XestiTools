@@ -5,28 +5,28 @@ public import System
 
 private import Dispatch
 
-/// Encapsulates standard input, standard output, and standard error into a
-/// single, easy-to-use, immutable structure.
+/// A single, easy-to-use, immutable structure that encapsulates standard
+/// input, standard output, and standard error.
 public struct StandardIO {
 
     // MARK: Public Initializers
 
     /// Creates a new `StandardIO` instance.
     ///
-    /// - Parameter standardInput:      The file handle or pipe to use for
-    ///                                 standard input. Defaults to the shared
-    ///                                 file handle associated with the standard
-    ///                                 input file.
-    /// - Parameter standardOutput:     The file handle or pipe to use for
-    ///                                 standard output. Defaults to the shared
-    ///                                 file handle associated with the standard
-    ///                                 output file.
-    /// - Parameter standardError:      The file handle or pipe to use for
-    ///                                 standard error. Defaults to the shared
-    ///                                 file handle associated with the standard
-    ///                                 error file.
-    /// - Parameter timestampFormatter: An optional timestamp formatter.
-    ///                                 Defaults to `nil`.
+    /// - Parameter standardInput:          The file handle or pipe to use for
+    ///                                     standard input. Defaults to the
+    ///                                     shared file handle associated with
+    ///                                     the standard input file.
+    /// - Parameter standardOutput:         The file handle or pipe to use for
+    ///                                     standard output. Defaults to the
+    ///                                     shared file handle associated with
+    ///                                     the standard output file.
+    /// - Parameter standardError:          The file handle or pipe to use for
+    ///                                     standard error. Defaults to the
+    ///                                     shared file handle associated with
+    ///                                     the standard error file.
+    /// - Parameter timestampFormatter:     An optional timestamp formatter.
+    ///                                     Defaults to `nil`.
     public init(standardInput: FileOrPipe = .file(.standardInput),
                 standardOutput: FileOrPipe = .file(.standardOutput),
                 standardError: FileOrPipe = .file(.standardError),
@@ -72,8 +72,9 @@ extension StandardIO {
     /// Standard input is interpreted as UTF-8. Invalid bytes are replaced by
     /// Unicode replacement characters.
     ///
-    /// - Parameter prompt: An optional string to write to standard output as a
-    ///                     prompt. The prompt string is typically unterminated.
+    /// - Parameter prompt:     An optional string to write to standard output
+    ///                         as a prompt. The prompt string is typically
+    ///                         unterminated.
     ///
     /// - Returns:  The string of characters read from standard input. If EOF
     ///             has already been reached when ``readInput(_:)`` is called,
@@ -95,12 +96,12 @@ extension StandardIO {
     /// Creates a new `StandardIO` instance that redirects the original instance
     /// as provided.
     ///
-    /// - Parameter inputPath:  An optional file location from which to redirect
-    ///                         standard input. Defaults to `nil`.
-    /// - Parameter outputPath: An optional file location to which to redirect
-    ///                         standard output. Defaults to `nil`.
-    /// - Parameter errorPath:  An optional file location to which to redirect
-    ///                         standard error. Defaults to `nil`.
+    /// - Parameter inputPath:      An optional file location from which to
+    ///                             redirect standard input. Defaults to `nil`.
+    /// - Parameter outputPath:     An optional file location to which to
+    ///                             redirect standard output. Defaults to `nil`.
+    /// - Parameter errorPath:      An optional file location to which to
+    ///                             redirect standard error. Defaults to `nil`.
     ///
     /// - Returns:  The redirected `StandardIO` instance.
     ///
@@ -175,10 +176,11 @@ extension StandardIO {
     /// "\(message)\(terminator)"
     /// ```
     ///
-    /// - Parameter message:    The message string to write to standard error.
-    /// - Parameter terminator: The terminator string to write to standard error
-    ///                         after the message string. The default is a
-    ///                         newline (`"\n"`).
+    /// - Parameter message:        The message string to write to standard
+    ///                             error.
+    /// - Parameter terminator:     The terminator string to write to standard
+    ///                             error after the message string. The default
+    ///                             is a newline (`"\n"`).
     public func writeError(_ message: String,
                            _ terminator: String = "\n") {
         let data = _format(message, terminator)
@@ -220,10 +222,11 @@ extension StandardIO {
     /// "\(message)\(terminator)"
     /// ```
     ///
-    /// - Parameter message:    The message string to write to standard output.
-    /// - Parameter terminator: The terminator string to write to standard
-    ///                         output after the message string. The default is
-    ///                         a newline (`"\n"`).
+    /// - Parameter message:        The message string to write to standard
+    ///                             output.
+    /// - Parameter terminator:     The terminator string to write to standard
+    ///                             output after the message string. The default
+    ///                             is a newline (`"\n"`).
     public func writeOutput(_ message: String,
                             _ terminator: String = "\n") {
         let data = _format(message, terminator)

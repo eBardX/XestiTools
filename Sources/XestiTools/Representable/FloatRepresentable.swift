@@ -21,8 +21,8 @@ public protocol FloatRepresentable: Codable,
 
     // MARK: Public Type Methods
 
-    /// Determines if the provided floating-point value is a valid
-    /// representation for this type.
+    /// Returns a Boolean value indicating whether the provided floating-point
+    /// value is a valid representation for this type.
     ///
     /// The default implementation considers _any_ floating-point value to be
     /// valid.
@@ -79,9 +79,14 @@ public protocol FloatRepresentable: Codable,
 // MARK: -
 
 extension FloatRepresentable {
+
+    // MARK: Public Type Methods
+
     public static func isValid(_ doubleValue: Double) -> Bool {
         true
     }
+
+    // MARK: Public Initializers
 
     public init(_ doubleValue: Double) {
         self.init(doubleValue: doubleValue)!    // swiftlint:disable:this force_unwrapping
@@ -91,6 +96,9 @@ extension FloatRepresentable {
 // MARK: - Codable
 
 extension FloatRepresentable where Self: Codable {
+
+    // MARK: Public Initializers
+
     /// Creates an instance by decoding from the provided decoder.
     ///
     /// - Throws:   A `DecodingError` if decoding fails.
@@ -104,6 +112,8 @@ extension FloatRepresentable where Self: Codable {
 
         self = value
     }
+
+    // MARK: Public Instance Methods
 
     /// Encodes this instance into the provided encoder.
     ///

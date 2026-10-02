@@ -14,7 +14,7 @@ extension LookupTable {
     /// Calculates the interpolated value for the provided key:
     ///
     /// - If this lookup table is empty, the result is ``defaultValue``.
-    /// - If the provided key is at or beyond the key of last entry in this
+    /// - If the provided key is at or beyond the key of the last entry in this
     ///   lookup table, the result is the value of the last entry.
     /// - If the provided key is before the key of the first entry in this
     ///   lookup table, the result is the value of the first entry.
@@ -69,10 +69,10 @@ extension LookupTable {
     /// new entry is added immediately after the last entry with that key. Use
     /// ``remove(key:value:extras:)`` to remove a specific entry.
     ///
-    /// - Parameter key:    The key for the entry to insert.
-    /// - Parameter value:  The value for the entry to insert.
-    /// - Parameter extras: The optional extras collection to attach to the
-    ///                     entry.
+    /// - Parameter key:        The key for the entry to insert.
+    /// - Parameter value:      The value for the entry to insert.
+    /// - Parameter extras:     The optional extras collection to attach to the
+    ///                         entry.
     public mutating func insert(key: Key,
                                 value: Value,
                                 extras: Extras? = nil) {
@@ -92,10 +92,10 @@ extension LookupTable {
     /// inserted as a new entry, and optionally attaches an extras collection
     /// to it.
     ///
-    /// - Parameter key:    The key for the entry to insert.
-    /// - Parameter value:  The value for the entry to insert.
-    /// - Parameter extras: The optional extras collection to attach to the
-    ///                     entry.
+    /// - Parameter key:        The key for the entry to insert.
+    /// - Parameter value:      The value for the entry to insert.
+    /// - Parameter extras:     The optional extras collection to attach to the
+    ///                         entry.
     ///
     /// - Returns:  A new lookup table containing the inserted entry.
     public func inserting(key: Key,
@@ -152,10 +152,10 @@ extension LookupTable {
     /// This method does nothing if the lookup table does not contain an exact
     /// match for the provided key, value, and attached extras collection.
     ///
-    /// - Parameter key:    The key of the entry to remove.
-    /// - Parameter value:  The value of the entry to remove.
-    /// - Parameter extras: The extras collection attached to the entry to
-    ///                     remove.
+    /// - Parameter key:        The key of the entry to remove.
+    /// - Parameter value:      The value of the entry to remove.
+    /// - Parameter extras:     The extras collection attached to the entry to
+    ///                         remove.
     public mutating func remove(key: Key,
                                 value: Value,
                                 extras: Extras? = nil) {
@@ -179,10 +179,10 @@ extension LookupTable {
     /// contain an exact match for the provided key, value, and attached extras
     /// collection.
     ///
-    /// - Parameter key:    The key of the entry to remove.
-    /// - Parameter value:  The value of the entry to remove.
-    /// - Parameter extras: The extras collection attached to the entry to
-    ///                     remove.
+    /// - Parameter key:        The key of the entry to remove.
+    /// - Parameter value:      The value of the entry to remove.
+    /// - Parameter extras:     The extras collection attached to the entry to
+    ///                         remove.
     ///
     /// - Returns:  A new lookup table without the matching entry.
     public func removing(key: Key,

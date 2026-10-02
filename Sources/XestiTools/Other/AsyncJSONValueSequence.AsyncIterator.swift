@@ -8,7 +8,7 @@ extension AsyncJSONValueSequence {
 
     /// An asynchronous iterator that produces the elements of this asynchronous
     /// sequence.
-    public struct AsyncIterator: AsyncIteratorProtocol {
+    public struct AsyncIterator {
 
         // MARK: Internal Initializers
 
@@ -28,9 +28,9 @@ extension AsyncJSONValueSequence {
     }
 }
 
-// MARK: -
+// MARK: - AsyncIteratorProtocol
 
-extension AsyncJSONValueSequence.AsyncIterator {
+extension AsyncJSONValueSequence.AsyncIterator: AsyncIteratorProtocol {
 
     // MARK: Public Instance Methods
 

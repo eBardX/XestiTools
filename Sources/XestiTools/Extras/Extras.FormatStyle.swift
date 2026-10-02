@@ -17,8 +17,9 @@ extension Extras {
 
         /// Creates a format style that uses the provided locale.
         ///
-        /// - Parameter locale: The locale to use when formatting extras
-        ///                     collections. Defaults to `.autoupdatingCurrent`.
+        /// - Parameter locale:     The locale to use when formatting extras
+        ///                         collections. Defaults to
+        ///                         `.autoupdatingCurrent`.
         public init(locale: Locale = .autoupdatingCurrent) {
             self.locale = locale
         }
@@ -52,10 +53,10 @@ extension Extras.FormatStyle: FormatStyle {
 
     /// Modifies this format style to use the provided locale.
     ///
-    /// Use this format style to change the locale used by an existing extras
+    /// Use this method to change the locale used by an existing extras
     /// format style.
     ///
-    /// - Parameter locale: The locale to apply to the format style.
+    /// - Parameter locale:     The locale to apply to the format style.
     ///
     /// - Returns:  An extras format style modified to use the provided locale.
     public func locale(_ locale: Locale) -> Self {

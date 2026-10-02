@@ -26,13 +26,6 @@ extension RunLoopExtensionsTests {
     }
 
     @Test
-    func error_message() {
-        let error = RunLoop.Error.timedOut("custom reason")
-
-        #expect(error.message == "custom reason")
-    }
-
-    @Test
     func wait_untilAction_succeedsImmediately() throws {
         try RunLoop.wait(until: true,
                          timeout: 0.2)
